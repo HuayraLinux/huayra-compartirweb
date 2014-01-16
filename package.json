@@ -21,6 +21,7 @@
     "grunt-node-webkit-builder": "~0.1.14",
     "grunt-shell": "~0.6.1",
     "shelljs": "~0.2.6",
-    "bower": "~1.2.8"
+    "bower": "~1.2.8",
+    "gaze": "~0.4.3"
   }
 }
