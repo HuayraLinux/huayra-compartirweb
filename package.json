@@ -1,0 +1,26 @@
+{
+  "name": "huayra-compartirweb",
+  "version": "0.0.1",
+  "description": "Una herramienta para compatir archivos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HuayraLinux/huayra-compartirweb.git"
+  },
+  "author": "Hugo Ruscitti",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/HuayraLinux/huayra-compartirweb/issues"
+  },
+  "dependencies": {
+    "grunt-cli": "~0.1.11",
+    "grunt": "~0.4.2",
+    "grunt-node-webkit-builder": "~0.1.14",
+    "grunt-shell": "~0.6.1",
+    "shelljs": "~0.2.6",
+    "bower": "~1.2.8"
+  }
+}
