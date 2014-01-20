@@ -4,6 +4,7 @@ VERSION=`git name-rev --name-only --tags HEAD | sed 's/\^.*//'`
 
 all:
 	@echo ""
+	@echo " $(V)init$(N)         Instala todas las bibliotecas necesarias para comenzar."
 	@echo " $(V)test_mac$(N)     Prueba la aplicacion usando nodewebkit en mac osx."
 	@echo " $(V)build$(N)        Genera las versiones compiladas."
 	@echo " $(V)version$(N)      Informa el numero de version."
@@ -17,6 +18,10 @@ build:
 	@echo "Borrando archivos de releases anteriores."
 	rm -f -r webkitbuilds/releases/
 	grunt nodewebkit
+
+init:
+	npm install
+	cd ./src/; bower install
 
 test_mac:
 	@echo "Cuidado - se está usando la version de nodewebkit del sistema."
