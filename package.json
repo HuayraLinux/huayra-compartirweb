@@ -22,10 +22,7 @@
     "grunt-shell": "~0.6.1",
     "shelljs": "~0.2.6",
     "bower": "~1.2.8",
-    "gaze": "~0.4.3",
     "express": "~3.4.8",
-    "socket.io": "~0.9.16",
-    "socket.io-client": "~0.9.16",
     "mime": "~1.2.11"
   }
 }
