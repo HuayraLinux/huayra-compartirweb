@@ -1,5 +1,16 @@
+var gui = require('nw.gui');
+
 var app = angular.module('app', ['ngRoute']);
 
+/* Botón en la barra superior para recargar toda la aplicación. */
+window.actualizar = function() {
+	document.location.reload();
+}
+	
+	/* Botón en la barra superior para mostrar las herramientas de desarrollo. */
+window.mostrar_herramientas_de_desarrollo = function() {
+	gui.Window.get().showDevTools();
+}
 
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.
           when('/principal', {
