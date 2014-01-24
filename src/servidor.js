@@ -6,6 +6,8 @@ module.exports = function() {
 	var mime = require('mime');
 	var url = '';
 	
+	var directorio_mis_archivos = '/Users/hugoruscitti/Downloads/';
+	
 	var app = express();
 	
 	app.all('/', function(req, res, next) {
@@ -14,21 +16,47 @@ module.exports = function() {
 		next();
 	});
 	
+	
+	function obtener_tipo(stat) {
+		if (stat.isDirectory())
+			return 'folder';
+		
+		return "file";
+	}
+	
 	app.get('/', function(req, res) {
-    res.send({
-			archivos: [
-				{type: 'folder',
-				 name: 'peliculas',
-				 size: '50'
-				},
-				{type: 'text',
-				 name: 'holamundo.txt',
-				 size: '123'
-				},
-			]
+			
+		fs.readdir(directorio_mis_archivos, function(error, files) {
+			var archivos = [];
+			
+			for (i=0; i<files.length; i++) {
+				var stat = fs.statSync(path.join(directorio_mis_archivos, files[i]));
+				
+				archivos.push({
+					name: files[i],
+					type: obtener_tipo(stat),
+					size: stat.size,
+				});
+			}
+		
+			/* El resultado es de la forma:
+			 *
+			 * {
+			 *    archivos: [
+			 *                 {name: 'un nombre',
+			 *                  size: 1231,
+			 *                  type: 'folder',
+			 *                 },
+			 *                  ...
+			 *              ];
+			 * }
+			 *
+			 */
+			res.send({archivos: archivos});
 		});
 	});
-	
+		
+		
 	function iniciar() {
 		var server = require('http').createServer(app);
 		var puerto = obtener_puerto_aleatorio();

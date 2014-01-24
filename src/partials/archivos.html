@@ -5,10 +5,14 @@
 		
 <div class="container">
 	<p ng-hide='archivos'>sin archivos...</p>
-	
+
+	<ul class='archivos' ng-show='archivos'>
+		<li ng-repeat='a in archivos'>
 			
-	<ul ng-show='archivos'>
-		<li ng-repeat='a in archivos'>{{a.type}} - {{a.name}} ({{a.size}}) <button class='btn btn-success btn-xs' ng-click='descargar(a)'>Descargar</button></li>
+			<i ng-show="a.type === 'folder'" class='icon-folder-open'></i>
+			<i ng-show="a.type === 'file'" class='icon-file'></i>
+			
+			{{a.name}} ({{a.size}}) <button class='btn btn-success btn-xs' ng-click='descargar(a)'>Descargar</button></li>
 	</ul>
 
 </div>

@@ -70,3 +70,18 @@ header a.hasnotifications {
 .mini-icono:hover {
 	opacity: 1;
 }
+
+
+ul.archivos {
+	list-style: none;
+	padding: 0;
+	margin-left: 1em;
+}
+
+ul.archivos li {
+	padding-bottom: 5px;
+}
+	
+ul.archivos li:hover {
+	background-color: white;
+}
