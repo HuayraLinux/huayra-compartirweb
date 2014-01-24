@@ -9,10 +9,18 @@
 	<ul class='archivos' ng-show='archivos'>
 		<li ng-repeat='a in archivos'>
 			
-			<i ng-show="a.type === 'folder'" class='icon-folder-open'></i>
-			<i ng-show="a.type === 'file'" class='icon-file'></i>
-			
-			{{a.name}} ({{a.size}}) <button class='btn btn-success btn-xs' ng-click='descargar(a)'>Descargar</button></li>
+			<!-- Si es directorio -->
+			<span ng-show="a.type === 'folder'">
+				<i class='icon-folder-open'></i>
+				{{a.name}}
+			</span>
+				
+			<span ng-show="a.type === 'file'">
+				<i class='icon-file'></i>
+				{{a.name}} ({{a.size | bytes}}) 
+				<button class='btn btn-success btn-xs' ng-click='descargar(a)'>Descargar</button></li>
+			</span>
+				
 	</ul>
 
 </div>
