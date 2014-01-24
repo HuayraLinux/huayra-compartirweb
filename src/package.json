@@ -1,5 +1,15 @@
 {
 	"name": "huayra-compartirweb",
 	"main": "index.html",
-	"version": "0.0.1"
+	"version": "0.0.1",
+	"single-instance": false,
+	"window": {
+		"toolbar": false,
+ 		"min_width": 750,
+ 		"min_height": 500,
+ 		"width": 750,
+ 		"height": 500,
+		"position": "center"
+		
+	}
 }
