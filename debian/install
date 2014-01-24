@@ -1,0 +1,3 @@
+src/* usr/share/huayra-compartir/src
+bin/huayra-compartir usr/bin/
+node_modules/* usr/share/huayra-compartir/node_modules
