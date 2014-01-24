@@ -30,6 +30,11 @@ module.exports = function() {
 			var archivos = [];
 			
 			for (i=0; i<files.length; i++) {
+				if (/^\./.test(files[i]))
+					continue;
+				
+				
+				
 				var stat = fs.statSync(path.join(directorio_mis_archivos, files[i]));
 				
 				archivos.push({
