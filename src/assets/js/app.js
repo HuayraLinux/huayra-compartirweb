@@ -1,16 +1,20 @@
-var gui = require('nw.gui');
-
-var app = angular.module('app', ['ngRoute']);
-
 /* Botón en la barra superior para recargar toda la aplicación. */
 window.actualizar = function() {
 	document.location.reload();
 }
 	
-	/* Botón en la barra superior para mostrar las herramientas de desarrollo. */
+/* Botón en la barra superior para mostrar las herramientas de desarrollo. */
 window.mostrar_herramientas_de_desarrollo = function() {
 	gui.Window.get().showDevTools();
 }
+
+
+var gui = require('nw.gui');
+var servidor = require('./servidor');
+
+servidor.iniciar();
+
+var app = angular.module('app', ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.
           when('/principal', {
@@ -65,5 +69,15 @@ app.controller("NotificacionesCtrl", function($scope) {
 app.controller("AmigosCtrl", function($scope) {
 });
 	
-app.controller("ArchivosCtrl", function($scope) {
+app.controller("ArchivosCtrl", function($scope, $http) {
+	$scope.archivos = [];
+	
+	$http.get(servidor.url).success(function(data) {
+		$scope.archivos = data.archivos;
+	});
+	
+	$scope.descargar = function(archivo) {
+		alert(archivo);
+	}
+	
 });

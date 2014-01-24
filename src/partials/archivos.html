@@ -1,3 +1,14 @@
 <div id="page-heading">
-	<h1>Archivos</h1>
+  <h1>Mis archivos</h1>
+</div>
+
+		
+<div class="container">
+	<p ng-hide='archivos'>sin archivos...</p>
+	
+			
+	<ul ng-show='archivos'>
+		<li ng-repeat='a in archivos'>{{a.type}} - {{a.name}} ({{a.size}}) <button class='btn btn-success btn-xs' ng-click='descargar(a)'>Descargar</button></li>
+	</ul>
+
 </div>
