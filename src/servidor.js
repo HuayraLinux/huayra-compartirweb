@@ -10,6 +10,7 @@ module.exports = function() {
 	
 	var app = express();
 	
+	/* middleware para permitir acceso al servidor desde cualquier host. */
 	app.all('/', function(req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -17,6 +18,7 @@ module.exports = function() {
 	});
 	
 	
+	/* Informa el tipo de archivo dado una ruta */
 	function obtener_tipo(stat) {
 		if (stat.isDirectory())
 			return 'folder';
@@ -24,41 +26,70 @@ module.exports = function() {
 		return "file";
 	}
 	
-	app.get('/', function(req, res) {
-			
-		fs.readdir(directorio_mis_archivos, function(error, files) {
+	/* Construye una lista de archivos especificando el tamaño, nombre y tipo de cada
+	 * archivos. Se utiliza para construir una estructura de datos que se pueda
+	 * retornar al script cliente y visualizar un listado de archivos.
+	 *
+	 * Esta función también se asegura de poner a los directorios al principio del
+	 * listado y a los archivos después.
+	 */
+	function generar_listado_tipado_de_archivos(directorio_base, listado) {
 			var archivos = [];
+			var directorios = [];
 			
-			for (i=0; i<files.length; i++) {
-				if (/^\./.test(files[i]))
+			/* Procesa cada uno de las cadenas buscando convertirlas en un diccionario
+			 * que se almanece en 'archivos' o 'directorios' especificando nombre, tamaño
+			 * y tipo del archivo procesado.
+			 */
+			for (i=0; i<listado.length; i++) {
+				
+				if (/^\./.test(listado[i]))  // Si es un archivo comenzado con '.' lo ignora.
 					continue;
 				
-				
-				
-				var stat = fs.statSync(path.join(directorio_mis_archivos, files[i]));
-				
-				archivos.push({
-					name: files[i],
-					type: obtener_tipo(stat),
+				var stat = fs.statSync(path.join(directorio_base, listado[i]));
+				var tipo = obtener_tipo(stat);
+				var registro = {
+					name: listado[i],
+					type: tipo,
 					size: stat.size,
-				});
+				}
+				
+				if (tipo === 'folder')
+					directorios.push(registro);
+				else
+					archivos.push(registro);
 			}
 		
-			/* El resultado es de la forma:
-			 *
-			 * {
-			 *    archivos: [
-			 *                 {name: 'un nombre',
-			 *                  size: 1231,
-			 *                  type: 'folder',
-			 *                 },
-			 *                  ...
-			 *              ];
-			 * }
-			 *
-			 */
-			res.send({archivos: archivos});
+		return directorios.concat(archivos);
+	}
+	
+	app.get('/ls', function(req, res) {
+		var listado = fs.readdirSync(directorio_mis_archivos);
+		var archivos = generar_listado_tipado_de_archivos(directorio_mis_archivos, listado);
+		
+		res.send({
+			archivos: archivos,
+			cantidad: archivos.length
 		});
+	});
+	
+	app.get(/^\/ls\/(.*)/, function(req, res) {
+		var ruta = req.params[0] || "";
+		console.log(ruta);
+		
+		var ruta_completa = path.join(directorio_mis_archivos, ruta);
+		
+		var listado = fs.readdirSync(ruta_completa);
+		var archivos = generar_listado_tipado_de_archivos(ruta_completa, listado);
+		
+		res.send({
+			archivos: archivos,
+			cantidad: archivos.length
+		});
+	});
+	
+	app.get('/', function(req, res) {
+		res.send({info: "usa el path /ls"});
 	});
 		
 		

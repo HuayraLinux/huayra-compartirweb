@@ -65,6 +65,8 @@ header a.hasnotifications {
 
 .mini-icono {
 	opacity: 0.5;
+	margin-left: 10px;
+	cursor: pointer;
 }
 
 .mini-icono:hover {

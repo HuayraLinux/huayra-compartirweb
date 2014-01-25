@@ -8,9 +8,9 @@ window.mostrar_herramientas_de_desarrollo = function() {
 	gui.Window.get().showDevTools();
 }
 
-
 var gui = require('nw.gui');
 var servidor = require('./servidor');
+var path = require('path');
 
 servidor.iniciar();
 
@@ -79,14 +79,36 @@ app.controller("AmigosCtrl", function($scope) {
 });
 	
 app.controller("ArchivosCtrl", function($scope, $http) {
+	$scope.esta_en_directorio_raiz = true;
+	$scope.directorio = servidor.url + '/ls';
 	$scope.archivos = [];
 	
-	$http.get(servidor.url).success(function(data) {
-		$scope.archivos = data.archivos;
-	});
+	function actualizar_listado() {
+		$http.get($scope.directorio).success(function(data) {
+			$scope.archivos = data.archivos;
+		});
+	}
 	
 	$scope.descargar = function(archivo) {
 		alert(archivo);
 	}
 	
+	$scope.$watch('directorio', function() {
+		console.log($scope.directorio);
+		console.log(servidor.url + '/ls');
+		console.log("");
+		
+		$scope.esta_en_directorio_raiz = /\/ls$/.test($scope.directorio);
+	});
+	
+	$scope.regresar = function() {
+		$scope.abrir_directorio('..');
+	}
+	
+	$scope.abrir_directorio = function(directorio) {
+		$scope.directorio = path.join($scope.directorio, directorio);
+		actualizar_listado();
+	}
+	
+	actualizar_listado();
 });

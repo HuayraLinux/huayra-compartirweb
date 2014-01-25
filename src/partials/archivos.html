@@ -4,8 +4,13 @@
 
 		
 <div class="container">
-	<p ng-hide='archivos'>sin archivos...</p>
-
+	<p ng-hide='archivos'> ñ_ñ </p>
+	
+	<div ng-hide='esta_en_directorio_raiz'>
+		<p ng-show='archivos'>Estás en <code>{{directorio}}</code></p>
+		<button ng-click='regresar()'>Regresar</button>
+	</div>
+	
 	<ul class='archivos' ng-show='archivos'>
 		<li ng-repeat='a in archivos'>
 			
@@ -13,6 +18,7 @@
 			<span ng-show="a.type === 'folder'">
 				<i class='icon-folder-open'></i>
 				{{a.name}}
+				<button ng-click='abrir_directorio(a.name)'>Abrir</button>
 			</span>
 				
 			<span ng-show="a.type === 'file'">
