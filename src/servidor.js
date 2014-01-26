@@ -101,7 +101,8 @@ module.exports = function() {
 	
 		server.listen(puerto);
 		console.log("Iniciando el servicio en: " + this.url);
-	}
+		window.document.title = window.document.title + " (" + puerto + ")";
+ 	}
 
 	function obtener_puerto_aleatorio() {
 		return Math.floor(Math.random() * 2000) + 8080;
