@@ -1,29 +1,46 @@
-module.exports = function() {
+var express = require('express');
+var fs = require('fs');
+var path = require('path');
+var mime = require('mime');
+var url = require('url');
+var http = require('http');
+var os = require('os');
+
+
+var servidor = function iniciarServidor(puerto) {
 	
-	var express = require('express');
-	var fs = require('fs');
-	var path = require('path');
-	var mime = require('mime');
-	var url = '';
+	this.configurar_acceso_desde_cualquier_host = function() {
+		this.app.all('/', function(req, res, next) {
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "X-Requested-With");
+			next();
+		});
+	}
+	this.obtener_puerto_aleatorio = function() {
+		return Math.floor(Math.random() * 2000) + 8080;
+	}
 	
-	var directorio_mis_archivos = '/Users/hugoruscitti/Downloads/';
+	this.iniciar = function(numero_de_puerto) {
+		var server = http.createServer(this.app);
+		this.puerto = numero_de_puerto || this.obtener_puerto_aleatorio();
+		this.base_url = "http://localhost:" + this.puerto;
 	
-	var app = express();
+		server.listen(this.puerto);
+		this.base = "http://localhost:" + this.puerto;
+		console.log("Iniciando el servicio en: " + this.base_url);
+ 	}
 	
-	/* middleware para permitir acceso al servidor desde cualquier host. */
-	app.all('/', function(req, res, next) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "X-Requested-With");
-		next();
-	});
-	
-	
-	/* Informa el tipo de archivo dado una ruta */
-	function obtener_tipo(stat) {
+	/* Informa el tipo de archivo dado un indicador de archivo. */
+	this.obtener_tipo = function(stat) {
 		if (stat.isDirectory())
 			return 'folder';
 		
 		return "file";
+	}
+	
+	this.es_directorio = function(ruta_archivo) {
+		var stat = fs.statSync(ruta_archivo);
+		return (this.obtener_tipo(stat) == 'folder');
 	}
 	
 	/* Construye una lista de archivos especificando el tamaño, nombre y tipo de cada
@@ -33,10 +50,10 @@ module.exports = function() {
 	 * Esta función también se asegura de poner a los directorios al principio del
 	 * listado y a los archivos después.
 	 */
-	function generar_listado_tipado_de_archivos(directorio_base, listado) {
+	this.generar_listado_tipado_de_archivos = function(directorio_base, path_base, listado) {
 			var archivos = [];
 			var directorios = [];
-			
+		
 			/* Procesa cada uno de las cadenas buscando convertirlas en un diccionario
 			 * que se almanece en 'archivos' o 'directorios' especificando nombre, tamaño
 			 * y tipo del archivo procesado.
@@ -47,10 +64,11 @@ module.exports = function() {
 					continue;
 				
 				var stat = fs.statSync(path.join(directorio_base, listado[i]));
-				var tipo = obtener_tipo(stat);
+				var tipo = this.obtener_tipo(stat);
 				var registro = {
 					name: listado[i],
 					type: tipo,
+					url : url.resolve(path_base + '/', listado[i]),
 					size: stat.size,
 				}
 				
@@ -63,94 +81,89 @@ module.exports = function() {
 		return directorios.concat(archivos);
 	}
 	
-	app.get('/ls', function(req, res) {
-		var listado = fs.readdirSync(directorio_mis_archivos);
-		var archivos = generar_listado_tipado_de_archivos(directorio_mis_archivos, listado);
+	
+	this.configurar_rutas = function() {
+		var self = this;
 		
-		res.send({
-			archivos: archivos,
-			cantidad: archivos.length
+		this.app.get('/', function(req, res) {
+				res.send({
+					archivos: self.base + "/obtener/",
+					avatar: self.base + "/avatar",
+				});
 		});
-	});
-	
-	app.get(/^\/ls\/(.*)/, function(req, res) {
-		var ruta = req.params[0] || "";
-		console.log(ruta);
 		
-		var ruta_completa = path.join(directorio_mis_archivos, ruta);
 		
-		var listado = fs.readdirSync(ruta_completa);
-		var archivos = generar_listado_tipado_de_archivos(ruta_completa, listado);
+		this.app.get(/^\/obtener\/(.*)/, function(req, res) {
+			var ruta = req.params[0] || "";
+			var path_base = req.protocol + "://" + req.get('host') + req.url;
 		
-		res.send({
-			archivos: archivos,
-			cantidad: archivos.length
+			var ruta_completa = path.join(self.directorio_compartido, ruta);
+			
+			if (self.es_directorio(ruta_completa)) {
+				var listado = fs.readdirSync(ruta_completa);
+				var archivos = self.generar_listado_tipado_de_archivos(ruta_completa, path_base, listado);
+			
+				res.send({
+					archivos: archivos,
+					cantidad: archivos.length
+				});
+			} else {
+				self.enviar_archivo(res, ruta_completa);
+			}
 		});
-	});
-	
-	app.get('/', function(req, res) {
-		res.send({info: "usa el path /ls"});
-	});
 		
-		
-	function iniciar() {
-		var server = require('http').createServer(app);
-		var puerto = obtener_puerto_aleatorio();
-		
-		this.url = "http://localhost:" + puerto;
-	
-		server.listen(puerto);
-		console.log("Iniciando el servicio en: " + this.url);
-		window.document.title = window.document.title + " (" + puerto + ")";
- 	}
-
-	function obtener_puerto_aleatorio() {
-		return Math.floor(Math.random() * 2000) + 8080;
 	}
 	
-	return {
-		iniciar: iniciar,
-		url: url
+	this.enviar_archivo = function(res, ruta_completa) {
+		var nombre_archivo = path.basename(ruta_completa);
+		var mimetype = mime.lookup(ruta_completa);
+		var stat;
+		var size;
+		var emited = 0;
+		var porcentaje_emitido = 0;
+		var porcentaje_emitido_anterior = -1;
+		
+		stat = fs.statSync(ruta_completa);
+		size = stat.size;
+	
+		res.setHeader('Content-disposition', 'attachment; filename=' + nombre_archivo);
+		res.setHeader('Content-type', mimetype);
+	
+		var stream = fs.createReadStream(ruta_completa, {'bufferSize': 1 * 1024});
+		stream.pipe(res);
+	
+		console.log("Empezando...");
+		stream.on('readable', function() {});
+
+		stream.on('data', function(chunk) {
+			emited += parseInt(chunk.length, 10);
+			porcentaje_emitido = Math.floor((emited * 100) / size);
+	
+			if (porcentaje_emitido != porcentaje_emitido_anterior) {
+				console.log("%d por ciento", porcentaje_emitido);
+				porcentaje_emitido_anterior = porcentaje_emitido;
+			}
+		});
+
+		stream.on('end', function() {
+			console.log("Terminó la transferencia del archivo.");
+		});
+		
 	}
-}();
-
-
-
-/*
-app.get('/descargar', function(req, res) {
-  var file = '../../Movies/Peliculas/El\ viaje\ de\ Chihiro.avi';
-	var filename = path.basename(file);
-  var mimetype = mime.lookup(file);
-	var stat;
-	var size;
-	var emited = 0;
-  var porcentaje_emitido = 0;
-  var porcentaje_emitido_anterior = -1;
+		
+	// Inicializador.
+	this.base_url = ''; // TODO: ELIMINAR....
+	this.base = "";
+	this.puerto = ''; // se define su valor cuando se llama al metodo this.iniciar()
+	this.directorio_compartido = '/Users/hugoruscitti/Downloads/';
 	
-	stat = fs.statSync(file);
-	size = stat.size;
-
-  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-  res.setHeader('Content-type', mimetype);
+	this.app = express();
+	this.configurar_acceso_desde_cualquier_host();
+	this.iniciar(puerto);
 	
-  var stream = fs.createReadStream(file, {'bufferSize': 1 * 1024});
-  stream.pipe(res);
+	this.configurar_rutas();	
+	return this;
+}
+
 	
-  console.log("Empezando...");
-	stream.on('readable', function() {});
-
-  stream.on('data', function(chunk) {
-		emited += parseInt(chunk.length, 10);
-    porcentaje_emitido = Math.floor((emited * 100) / size);
-
-    if (porcentaje_emitido != porcentaje_emitido_anterior) {
-      console.log("%d por ciento", porcentaje_emitido);
-      porcentaje_emitido_anterior = porcentaje_emitido;
-    }
-  });
-
-  stream.on('end', function() {
-    console.log("Terminó la transferencia del archivo.");
-  });
-});
-*/
+module.exports = servidor;

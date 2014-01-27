@@ -9,10 +9,10 @@ window.mostrar_herramientas_de_desarrollo = function() {
 }
 
 var gui = require('nw.gui');
-var servidor = require('./servidor');
+var modulo_servidor = require('./servidor');
 var path = require('path');
 
-servidor.iniciar();
+
 
 var app = angular.module('app', ['ngRoute']);
 
@@ -37,7 +37,10 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
             controller: 'ArchivosCtrl',
             templateUrl: 'partials/archivos.html'
           }).
-
+          when('/archivos/:url', {
+            controller: 'ArchivosCtrl',
+            templateUrl: 'partials/archivos.html'
+          }).
 					otherwise({redirectTo:'/principal'});
 }]);
 
@@ -55,6 +58,9 @@ app.filter('bytes', function() {
 app.controller("MainCtrl", function($scope) {
 	$scope.nombre = "mi nombre";
 	$scope.frase = "una frase...";
+
+	var servidor = modulo_servidor();
+	$scope.base = servidor.base;
 });
 
 app.controller("PrincipalCtrl", function($scope) {
@@ -78,37 +84,3 @@ app.controller("NotificacionesCtrl", function($scope) {
 app.controller("AmigosCtrl", function($scope) {
 });
 	
-app.controller("ArchivosCtrl", function($scope, $http) {
-	$scope.esta_en_directorio_raiz = true;
-	$scope.directorio = servidor.url + '/ls';
-	$scope.archivos = [];
-	
-	function actualizar_listado() {
-		$http.get($scope.directorio).success(function(data) {
-			$scope.archivos = data.archivos;
-		});
-	}
-	
-	$scope.descargar = function(archivo) {
-		alert(archivo);
-	}
-	
-	$scope.$watch('directorio', function() {
-		console.log($scope.directorio);
-		console.log(servidor.url + '/ls');
-		console.log("");
-		
-		$scope.esta_en_directorio_raiz = /\/ls$/.test($scope.directorio);
-	});
-	
-	$scope.regresar = function() {
-		$scope.abrir_directorio('..');
-	}
-	
-	$scope.abrir_directorio = function(directorio) {
-		$scope.directorio = path.join($scope.directorio, directorio);
-		actualizar_listado();
-	}
-	
-	actualizar_listado();
-});
