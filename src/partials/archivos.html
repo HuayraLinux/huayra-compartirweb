@@ -1,32 +1,38 @@
 <div id="page-heading">
   <h1>Mis archivos</h1>
 </div>
-
 		
 <div class="container">
-	<p ng-hide='archivos'> ñ_ñ </p>
 	
-	<div ng-hide='esta_en_directorio_raiz'>
-		<p ng-show='archivos'>Estás en <code>{{directorio}}</code></p>
-		<button ng-click='regresar()'>Regresar</button>
-	</div>
+	<table class="table table-bordered tabla-archivos" ng-show='archivos'>
+		
+		<thead>
+			<tr>
+				<th width='1%'></th>
+				<th width='80%'>Nombre</th>
+				<th width='120' class='col-size'>Tamaño</th>
+				<th width='120'>Acciones</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat='a in archivos' class='archivo' ng-show='archivos'>
+				
+				<!-- si es directorio -->
+				<td ng-show="a.type === 'folder'" ng-click='abrir(a)' class='clickeable'><i class='carpeta icon-folder-open'></i></td>
+				<td ng-show="a.type === 'folder'" ng-click='abrir(a)' class='clickeable'>{{a.name}}</td>
+				<td ng-show="a.type === 'folder'" class='col-size'></td>
+				<td ng-show="a.type === 'folder'"><button class='btn btn-info btn-xs' ng-click='abrir(a)'> <i class='icon-arrow-right'></i> </button></td>
+				
+				<!-- si es archivo -->
+				<td ng-show="a.type === 'file'"><i class='archivo icon-file'></i></td>
+				<td ng-show="a.type === 'file'">{{a.name}}</td>
+				<td ng-show="a.type === 'file'" class='col-size'>{{a.size | bytes}}</td>
+				<td ng-show="a.type === 'file'"><button class='btn btn-success btn-xs' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button></td>
+				
+			</tr>
+		</tbody>
+		
+	</table>
 	
-	<ul class='archivos' ng-show='archivos'>
-		<li ng-repeat='a in archivos'>
-			
-			<!-- Si es directorio -->
-			<span ng-show="a.type === 'folder'">
-				<i class='icon-folder-open'></i>
-				{{a.name}}
-				<button ng-click='abrir_directorio(a.name)'>Abrir</button>
-			</span>
-				
-			<span ng-show="a.type === 'file'">
-				<i class='icon-file'></i>
-				{{a.name}} ({{a.size | bytes}}) 
-				<button class='btn btn-success btn-xs' ng-click='descargar(a)'>Descargar</button></li>
-			</span>
-				
-	</ul>
-
 </div>

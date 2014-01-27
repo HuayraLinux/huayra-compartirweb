@@ -37,7 +37,7 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
             controller: 'ArchivosCtrl',
             templateUrl: 'partials/archivos.html'
           }).
-          when('/archivos/:url', {
+          when('/archivos/:url*', {
             controller: 'ArchivosCtrl',
             templateUrl: 'partials/archivos.html'
           }).

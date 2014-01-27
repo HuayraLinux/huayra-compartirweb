@@ -14,8 +14,6 @@
 	left: 0;
 	right: 0;
 	min-height: 10px;
-	border-top: 1px solid rgb(184, 184, 184);
-	
 }
 
 .titulo {
@@ -86,4 +84,42 @@ ul.archivos li {
 	
 ul.archivos li:hover {
 	background-color: white;
+}
+
+.carpeta {
+	color: rgb(21, 180, 65);
+}
+
+.archivo {
+	color: rgb(137, 180, 226);
+}
+
+tr.archivo:hover {
+	background-color: rgb(253, 255, 228);
+}
+
+table.tabla-archivos {
+	margin-right: 20px;
+}
+
+.col-size {
+	text-align: right;
+}
+
+
+header {
+	border-bottom: 1px solid rgb(184, 184, 184) !important;
+	z-index: 100 !important;
+}
+
+#page-leftbar {
+	z-index: 200 !important;
+	top: 44px !important;
+	color: red;
+	box-shadow: none;
+	border-right: 1px solid rgb(184, 184, 184) !important;
+}
+
+.clickeable {
+	cursor: pointer;
 }

@@ -132,7 +132,7 @@ var servidor = function iniciarServidor(puerto) {
 		var stream = fs.createReadStream(ruta_completa, {'bufferSize': 1 * 1024});
 		stream.pipe(res);
 	
-		console.log("Empezando...");
+		console.log("Empezando a transferir el archivo ...");
 		stream.on('readable', function() {});
 
 		stream.on('data', function(chunk) {

@@ -1,20 +1,30 @@
-app.controller("ArchivosCtrl", function($scope, $http, $routeParams) {
+app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location) {
 	$scope.esta_en_directorio_raiz = true;
 	$scope.archivos = [];
+	var path = "";
 	
-	var relative_path = $routeParams.url || "obtener/";
-	var base_path = $scope.$parent.base;
+	if ($routeParams.url === undefined) {
+		var base_path = $scope.$parent.base;
+		var relative_path = "obtener/";
+		var path = base_path + '/' +  relative_path;
+	}
+	else {
+		var relative_path = $routeParams.url;
+		var path = 'http://' +  relative_path;
+	}
 	
 	function actualizar_listado() {
-		var path = base_path + '/' +  relative_path;
-		alert(path);
 		$http.get(path).success(function(data) {
 			$scope.archivos = data.archivos;
 		});
 	}
 	
 	$scope.descargar = function(archivo) {
-		alert(archivo);
+	}
+	
+	$scope.abrir = function(archivo) {
+		var ruta_con_dominio = archivo.url.replace('http://', '');
+		$location.path('/archivos/' + ruta_con_dominio);
 	}
 	
 	//$scope.$watch('directorio', function() {
@@ -25,10 +35,6 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams) {
 		$scope.abrir_directorio('..');
 	}
 	
-	$scope.abrir_directorio = function(directorio) {
-		$scope.directorio = path.join($scope.directorio, directorio);
-		actualizar_listado();
-	}
 	
 	actualizar_listado();
 });

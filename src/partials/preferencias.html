@@ -7,32 +7,46 @@
 
 			<div class="row">
 				<div class="col-md-12">
+					
 					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4>Mis datos</h4>
-							<div class="options">
-							</div>
-						</div>
-						<div class="panel-body">
-							<p>¿Como quieres aparecer en la red?</p>
-							
-							<p>
-							<label>Nombre <input ng-model='nombre'></input></label>
-							</p>
+				      <div class="panel-heading">
+				          <h4>Mis datos</h4>
+				      </div>
 						
-							<p>
-							<label>Frase <input ng-model='frase'></input></label>
-							</p>
+				      <div class="panel-body" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+				      	<h3>Ingresa tus datos personales</h3>
+								<p>Esta información será utilizada para mostrar tu equipo en la red</p>
+								
+						<form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="focusedinput" class="col-sm-3 control-label">Tu nombre</label>
+						    <div class="col-sm-6">
+						      <input ng-model='nombre' type="text" class="form-control" id="focusedinput" placeholder="nombre">
+						    </div>
+						  </div>
 							
-							
-							
-							<p>
-								<button class='btn btn-success' ng-click='guardar_datos()'>Guardar</button>
-							</p>
-							
-							
-						</div>
-					</div>
+						  <div class="form-group">
+						    <label for="disabledinput" class="col-sm-3 control-label">Una frase que te guste</label>
+						    <div class="col-sm-6">
+						      <input ng-model='frase' type="text" class="form-control" placeholder="mi frase">
+						    </div>
+						  </div>
+				
+						</form>
+								
+				   </div>
+				      <div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-6 col-sm-offset-3">
+				      			<div class="btn-toolbar">
+					      			<button ng-click='guardar_datos()' class="btn-primary btn">Guardar</button>
+				      			</div>
+				      		</div>
+				      	</div>
+				      </div>
+				  </div>
+					
+					
 				</div>
 			</div>
 
