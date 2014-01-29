@@ -14,7 +14,7 @@ var path = require('path');
 
 
 
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'ngAnimate']);
 
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.
           when('/principal', {

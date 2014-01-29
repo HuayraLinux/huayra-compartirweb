@@ -2,7 +2,7 @@
 <html lang="es" ng-app='app'>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<title>Huayra Compartir</title>
 	
@@ -12,16 +12,19 @@
   <link href="assets/css/styles.min.css" rel="stylesheet" type='text/css' media="all" />
   <link href="assets/css/estilo.css" rel="stylesheet" type='text/css' media="all" />
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css' />
+  
 	<script src='bower_components/angular/angular.js'></script>
+	<script src='bower_components/angular-animate/angular-animate.js'></script>
 	<script src='bower_components/angular-route/angular-route.js'></script>
 	<script src='bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js'></script>
+	
 	<script src='assets/js/app.js'></script>
 	<script src='assets/js/controllers/archivosCtrl.js'></script>
+</head>
 	
 <body ng-controller='MainCtrl'>
 
-    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
-
+  <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left titulo">
 					<img src='assets/img/logo.png'/>
         </div>
@@ -39,10 +42,10 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i></a>
           </li>
-		</ul>
+				</ul>
     </header>
 
-    <div id="page-container">
+     <div id="page-container">
         <nav id="page-leftbar" role="navigation">
             <ul class="acc-menu" id="sidebar">
 
@@ -63,7 +66,7 @@
 <div id="page-content">
 	<div id='wrap'>
 		
-		<ng-view></ng-view>
+		<ng-view class='view-animate'></ng-view>
 
 		<div class='acciones-depuracion'>
 			<i class='mini-icono icon-gear' onclick="mostrar_herramientas_de_desarrollo()"></i>

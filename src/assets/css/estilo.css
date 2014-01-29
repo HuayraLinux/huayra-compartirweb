@@ -123,3 +123,43 @@ header {
 .clickeable {
 	cursor: pointer;
 }
+
+
+
+
+
+.control-label {
+	width: 180px;
+}
+
+.campo-texto {
+	display: inline-block;
+}
+
+
+.view-animate {
+}
+ 
+.view-animate.ng-enter, .view-animate.ng-leave {
+  -webkit-transition:0.2s linear all;
+  transition:0.2s linear all;
+	
+  display:block;
+  width:100%;
+ 
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+ 
+.view-animate.ng-enter {
+  left:100%;
+}
+.view-animate.ng-enter.ng-enter-active {
+  left:0;
+}
+.view-animate.ng-leave.ng-leave-active {
+  left:-100%;
+}
