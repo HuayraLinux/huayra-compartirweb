@@ -29,6 +29,7 @@ test_mac:
 	open -a /Applications/node-webkit.app src
 
 build_mdns:
+	sudo apt-get install libavahi-compat-libdnssd-dev
 	cd node_modules/mdns/; ../.bin/nw-gyp rebuild --target=0.7.5
 
 test:
