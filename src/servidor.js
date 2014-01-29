@@ -5,6 +5,7 @@ var mime = require('mime');
 var url = require('url');
 var http = require('http');
 var os = require('os');
+var mdns = require('mdns');
 
 
 var servidor = function iniciarServidor(puerto) {
@@ -16,6 +17,7 @@ var servidor = function iniciarServidor(puerto) {
 			next();
 		});
 	}
+	
 	this.obtener_puerto_aleatorio = function() {
 		return Math.floor(Math.random() * 2000) + 8080;
 	}
@@ -28,7 +30,26 @@ var servidor = function iniciarServidor(puerto) {
 		server.listen(this.puerto);
 		this.base = "http://localhost:" + this.puerto;
 		console.log("Iniciando el servicio en: " + this.base_url);
+		
+		console.log("Creando aviso de servicio en la red.");
+		this.ad = mdns.createAdvertisement(mdns.tcp('http'), this.puerto);
+		this.ad.start();
+		
+		
+		this.browser = mdns.createBrowser(mdns.tcp('http'));
+
+		this.browser.on('serviceUp', function(service) {
+  		console.log("service up: ", service);
+		});
+		
+		this.browser.on('serviceDown', function(service) {
+  		console.log("service down: ", service);
+		});
+
+		this.browser.start();
+		
  	}
+	
 	
 	/* Informa el tipo de archivo dado un indicador de archivo. */
 	this.obtener_tipo = function(stat) {
@@ -159,7 +180,7 @@ var servidor = function iniciarServidor(puerto) {
 	
 	this.app = express();
 	this.configurar_acceso_desde_cualquier_host();
-	this.iniciar(puerto);
+	this.iniciar(9092);
 	
 	this.configurar_rutas();	
 	return this;

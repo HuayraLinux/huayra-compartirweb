@@ -8,6 +8,7 @@ all:
 	@echo " $(V)test_mac$(N)     Prueba la aplicacion usando nodewebkit en mac osx."
 	@echo " $(V)build$(N)        Genera las versiones compiladas."
 	@echo " $(V)version$(N)      Informa el numero de version."
+	@echo " $(V)build_mdns$(N)   Recompila el modulo mdns para node-webkit."
 	@echo ""
 
 version:
@@ -26,6 +27,9 @@ init:
 test_mac:
 	@echo "Cuidado - se está usando la version de nodewebkit del sistema."
 	open -a /Applications/node-webkit.app src
+
+build_mdns:
+	cd node_modules/mdns/; ../.bin/nw-gyp rebuild --target=0.7.5
 
 test:
 	echo "..."
