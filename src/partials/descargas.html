@@ -1,8 +1,12 @@
 <div id="page-heading">
   <h1>Descargas</h1>
 </div>
+
 		
 <div class="container">
+	<div class='barra-botones'>
+		<button class='btn btn-sm btn-success' ng-click='abrir_directorio()'>  <i class='icon-folder-open'></i> Abrir directorio </button>
+	</div>
 	
 	<p ng-hide='Descargas'>eeemmm... no hay ninguna descarga en curso.</p>
 	
@@ -24,7 +28,7 @@
 					<progreso model="d"></progreso>
 				</td>
 				<td ng-show='d.transmitido == d.size'>
-					<button class="btn btn-success btn-xs"> <i class="icon-upload-alt"></i> </button>
+					<button class="btn btn-success btn-xs" ng-click='abrir_item(d)'> <i class="icon-upload-alt"></i> </button>
 				</td>
 				<td ng-show='d.transmitido != d.size'>
 					<button class="btn btn-danger btn-xs"> <i class="icon-remove"></i> </button>
