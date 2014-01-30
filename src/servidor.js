@@ -6,7 +6,7 @@ var url = require('url');
 var http = require('http');
 var os = require('os');
 var polo = require('polo');
-
+var crypto = require('crypto');
 
 var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,  
 																				cuando_se_desconecta_un_equipo, 
@@ -27,10 +27,10 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 	this.iniciar = function(numero_de_puerto) {
 		var server = http.createServer(this.app);
 		this.puerto = numero_de_puerto || this.obtener_puerto_aleatorio();
-		this.base_url = "http://localhost:" + this.puerto;
+		this.base_url = "http://" + os.hostname() + ":" + this.puerto;
 	
 		server.listen(this.puerto);
-		this.base = "http://localhost:" + this.puerto;
+		this.base = "http://" + os.hostname() + ":" + this.puerto;
 		console.log("Iniciando el servicio en: " + this.base_url);
  	}
 	
@@ -181,9 +181,9 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 		name: 'huayra-compartir',
 		version: 0.1,
 		host: os.hostname(),
+		id: crypto.createHash('md5').update(os.hostname()).digest('hex'),
 		port: this.puerto
 	});
-	
 	
 	// Genera la interfaz de rutas.
 	this.configurar_rutas();	
