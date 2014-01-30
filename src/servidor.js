@@ -5,10 +5,12 @@ var mime = require('mime');
 var url = require('url');
 var http = require('http');
 var os = require('os');
-var mdns = require('mdns');
+var polo = require('polo');
 
 
-var servidor = function iniciarServidor(puerto) {
+var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,  
+																				cuando_se_desconecta_un_equipo, 
+																				puerto) {
 	
 	this.configurar_acceso_desde_cualquier_host = function() {
 		this.app.all('/', function(req, res, next) {
@@ -30,24 +32,6 @@ var servidor = function iniciarServidor(puerto) {
 		server.listen(this.puerto);
 		this.base = "http://localhost:" + this.puerto;
 		console.log("Iniciando el servicio en: " + this.base_url);
-		
-		console.log("Creando aviso de servicio en la red.");
-		this.ad = mdns.createAdvertisement(mdns.tcp('http'), this.puerto);
-		this.ad.start();
-		
-		
-		this.browser = mdns.createBrowser(mdns.tcp('http'));
-
-		this.browser.on('serviceUp', function(service) {
-  		console.log("service up: ", service);
-		});
-		
-		this.browser.on('serviceDown', function(service) {
-  		console.log("service down: ", service);
-		});
-
-		this.browser.start();
-		
  	}
 	
 	
@@ -171,6 +155,7 @@ var servidor = function iniciarServidor(puerto) {
 		});
 		
 	}
+	
 		
 	// Inicializador.
 	this.base_url = ''; // TODO: ELIMINAR....
@@ -178,11 +163,29 @@ var servidor = function iniciarServidor(puerto) {
 	this.puerto = ''; // se define su valor cuando se llama al metodo this.iniciar()
 	this.directorio_compartido = '/Users/hugoruscitti/Downloads/';
 	
+	// Inicia el servicio http.
 	this.app = express();
 	this.configurar_acceso_desde_cualquier_host();
-	this.iniciar(9092);
+	this.iniciar();
 	
+	// Publica en la red que el servicio http está online.
+	console.log("Publicando en la red que el servicio está online.");
+	this.polo = polo();
+	
+	this.polo.on('up', cuando_se_conecta_un_equipo);
+	this.polo.on('down', cuando_se_desconecta_un_equipo);
+	
+	this.polo.put({
+		name: 'huayra-compartir',
+		version: 0.1,
+		host: os.hostname(),
+		port: this.puerto
+	});
+	
+	
+	// Genera la interfaz de rutas.
 	this.configurar_rutas();	
+	
 	return this;
 }
 

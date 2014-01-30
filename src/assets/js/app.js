@@ -16,6 +16,15 @@ var path = require('path');
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate']);
 
+
+
+app.factory("Descargas", function() {
+	var descargas = [
+	];
+	
+	return descargas;
+});
+
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.
           when('/principal', {
             controller: 'PrincipalCtrl',
@@ -32,6 +41,10 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
           when('/amigos', {
             controller: 'AmigosCtrl',
             templateUrl: 'partials/amigos.html'
+          }).
+          when('/descargas', {
+            controller: 'DescargasCtrl',
+            templateUrl: 'partials/descargas.html'
           }).
           when('/archivos', {
             controller: 'ArchivosCtrl',
@@ -55,11 +68,23 @@ app.filter('bytes', function() {
 	}
 });
 
-app.controller("MainCtrl", function($scope) {
+app.controller("MainCtrl", function($scope, Descargas) {
 	$scope.nombre = "mi nombre";
 	$scope.frase = "una frase...";
+	$scope.amigos = [];
+	$scope.Descargas = Descargas;
+	
+	function cuando_se_conecta_un_equipo(nombre, servicio) {
+		$scope.amigos.push({nombre: nombre, frame: '????'});
+		$scope.$apply();
+	}
+	
+	function cuando_se_desconecta_un_equipo(nombre, servicio) {
+		console.log("Se desconectó uno!!!", servicio);
+	}
 
-	var servidor = modulo_servidor();
+	var servidor = modulo_servidor(cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
+	
 	$scope.base = servidor.base;
 });
 
@@ -77,10 +102,14 @@ app.controller("PreferenciasCtrl", function($scope) {
 });
 
 
+app.controller("DescargasCtrl", function($scope, Descargas) {
+	$scope.Descargas = Descargas;
+});
 
 app.controller("NotificacionesCtrl", function($scope) {
 });
 
 app.controller("AmigosCtrl", function($scope) {
+	$scope.amigos = $scope.$parent.amigos;
 });
 	

@@ -1,6 +1,7 @@
-app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location) {
+app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, Descargas) {
 	$scope.esta_en_directorio_raiz = true;
 	$scope.archivos = [];
+	$scope.Descargas = Descargas;
 	var path = "";
 	
 	if ($routeParams.url === undefined) {
@@ -20,6 +21,8 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location) 
 	}
 	
 	$scope.descargar = function(archivo) {
+		$scope.Descargas.push({name: archivo.name, url: archivo.url, progreso: 0});
+		console.log('bajar', archivo.name, archivo.url);
 	}
 	
 	$scope.abrir = function(archivo) {

@@ -1,0 +1,28 @@
+<div id="page-heading">
+  <h1>Descargas</h1>
+</div>
+		
+<div class="container">
+	
+	<p ng-hide='Descargas'>zzzzz... no estás bajando en este momento.</p>
+	
+	<table class="table table-bordered tabla-archivos" ng-show='Descargas'>
+		
+		<thead>
+			<tr>
+				<th width='50%'>Nombre</th>
+				<th width='50%' class='col-size'>Progreso</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat='d in Descargas' class='archivo' ng-show='Descargas'>
+				<td>{{d.name}}</td>
+				<!-- <td>{{d.url}}</td> -->
+				<td>{{d.progreso}}</td>
+			</tr>
+		</tbody>
+		
+	</table>
+	
+</div>
