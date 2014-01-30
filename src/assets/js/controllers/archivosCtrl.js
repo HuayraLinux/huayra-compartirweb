@@ -27,9 +27,6 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		
 		//console.log('bajar', archivo.name, archivo.url);
 		
-		
-		
-		
 		var http = require('http');
 		var fs = require('fs');
 
@@ -39,20 +36,10 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 http.get(archivo.url, function(res) {
   res.on('data', function(chunk) {
     file.write(chunk);
-		/*
 		objeto_descarga.transmitido += chunk.length;
-		
-		contador -= 1;
-		
-		if (contador < 0) {
-			$scope.$apply();
-			contador = 1000;
-		}
-		*/
   });
   res.on('end', function() {
-		objeto_descarga.transmitido += objeto_descarga.size;
-		$scope.$apply();
+		objeto_descarga.transmitido = objeto_descarga.size;
     file.close();
   });
   file.on('close', function() {

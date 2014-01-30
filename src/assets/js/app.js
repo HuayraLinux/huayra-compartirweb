@@ -17,6 +17,29 @@ var path = require('path');
 var app = angular.module('app', ['ngRoute', 'ngAnimate']);
 
 
+app.directive("progreso", function() {
+	
+	function link(scope, element, attrs) {
+		scope.$watch(function() {
+			var porcentaje = scope.model.transmitido / scope.model.size * 100;
+			element.children(0).css('width', Math.floor(porcentaje) + "%");
+		});
+	}
+	
+	return {
+		restrict: 'E',
+		replace: true,
+		template: '<div>' +
+							'<div style="background-color: green; height: 2px;"></div>' + 
+							'{{model.transmitido / model.size * 100 | number:0}} %' + 
+						  '</div>',
+		scope: {
+			model: '=',
+			porcentaje: '='
+		},
+		link: link
+	}
+});
 
 app.factory("Descargas", function() {
 	var descargas = [
@@ -75,7 +98,7 @@ app.controller("MainCtrl", function($scope, Descargas) {
 	$scope.Descargas = Descargas;
 	
 	function cuando_se_conecta_un_equipo(nombre, servicio) {
-		$scope.amigos.push({nombre: nombre, frame: '????'});
+		$scope.amigos.push({nombre: nombre, servicio: servicio});
 		$scope.$apply();
 	}
 	
@@ -102,8 +125,23 @@ app.controller("PreferenciasCtrl", function($scope) {
 });
 
 
-app.controller("DescargasCtrl", function($scope, Descargas) {
+app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 	$scope.Descargas = Descargas;
+	var timer = null;
+	
+	function actualizar_listado() {
+		console.log("actualizando listado!");
+		timer = $timeout(actualizar_listado, 1000);
+	}
+	
+	console.log("iniciando timer para actualizar progreso de las descargas.");
+	actualizar_listado();
+	
+	$scope.$on("$destroy", function(event) {
+		$timeout.cancel(timer);
+		console.log("cancelando el timer de actualización");
+	});
+	
 });
 
 app.controller("NotificacionesCtrl", function($scope) {

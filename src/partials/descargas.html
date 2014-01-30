@@ -4,14 +4,15 @@
 		
 <div class="container">
 	
-	<p ng-hide='Descargas'>zzzzz... no estás bajando en este momento.</p>
+	<p ng-hide='Descargas'>eeemmm... no hay ninguna descarga en curso.</p>
 	
 	<table class="table table-bordered tabla-archivos" ng-show='Descargas'>
 		
 		<thead>
 			<tr>
-				<th width='50%'>Nombre</th>
-				<th width='50%' class='col-size'>Progreso</th>
+				<th width='80%'>Nombre</th>
+				<th width='20%' class='col-size'>Progreso</th>
+				<th>Acciones</th>
 			</tr>
 		</thead>
 		
@@ -19,7 +20,15 @@
 			<tr ng-repeat='d in Descargas' class='archivo' ng-show='Descargas'>
 				<td>{{d.name}}</td>
 				<!-- <td>{{d.url}}</td> -->
-				<td>{{d.transmitido}} / {{d.size}} = {{d.transmitido/d.size * 100}}</td>
+				<td class='col-size'>
+					<progreso model="d"></progreso>
+				</td>
+				<td ng-show='d.transmitido == d.size'>
+					<button class="btn btn-success btn-xs"> <i class="icon-upload-alt"></i> </button>
+				</td>
+				<td ng-show='d.transmitido != d.size'>
+					<button class="btn btn-danger btn-xs"> <i class="icon-remove"></i> </button>
+				</td>
 			</tr>
 		</tbody>
 		
