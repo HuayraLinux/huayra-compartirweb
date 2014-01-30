@@ -1,8 +1,16 @@
+var fs = require('fs');
+
 app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, Descargas) {
 	$scope.esta_en_directorio_raiz = true;
 	$scope.archivos = [];
 	$scope.Descargas = Descargas;
 	var path = "";
+	
+	var ruta_descargas = process.env.HOME + '/Descargas/';
+	
+	// Genera el directorio descargas si no existe.
+	if (! fs.existsSync(ruta_descargas))
+		fs.mkdir(ruta_descargas);
 	
 	if ($routeParams.url === undefined) {
 		var base_path = $scope.$parent.base;
@@ -27,12 +35,11 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		
 		archivo.bajando = true;
 		
-		//console.log('bajar', archivo.name, archivo.url);
 		
 		var http = require('http');
 		var fs = require('fs');
 
-		var file = fs.createWriteStream('dest');
+		var file = fs.createWriteStream(ruta_descargas + archivo.name);
 		var contador = 1020;
 
 http.get(archivo.url, function(res) {

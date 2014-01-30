@@ -125,6 +125,9 @@ app.controller("PreferenciasCtrl", function($scope) {
 
 
 app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
+	var gui = require('nw.gui');
+	var ruta_descargas = process.env.HOME + '/Descargas/';
+	
 	$scope.Descargas = Descargas;
 	var timer = null;
 	
@@ -132,6 +135,14 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 		console.log("actualizando listado!");
 		timer = $timeout(actualizar_listado, 1000);
 	}
+	
+	 $scope.abrir_directorio = function() {
+		gui.Shell.openItem(ruta_descargas);
+	}
+	 
+	 $scope.abrir_item = function(item) {
+		 gui.Shell.openItem(ruta_descargas + item.name);
+	 }
 	
 	console.log("iniciando timer para actualizar progreso de las descargas.");
 	actualizar_listado();

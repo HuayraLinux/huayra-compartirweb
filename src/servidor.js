@@ -165,10 +165,9 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 	this.puerto = ''; // se define su valor cuando se llama al metodo this.iniciar()
 	this.directorio_compartido = process.env.HOME + '/compartido/';
 	
-	
+	// Genera el directorio compartido si no existe.
 	if (! path.existsSync(this.directorio_compartido))
 		fs.mkdir(this.directorio_compartido);
-	
 	
 	// Inicia el servicio http.
 	this.app = express();
