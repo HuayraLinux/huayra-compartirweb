@@ -163,4 +163,9 @@ header {
 }
 .view-animate.ng-leave.ng-leave-active {
   left:-100%;
+}	
+
+
+.barra-botones {
+	margin-bottom: 20px;
 }

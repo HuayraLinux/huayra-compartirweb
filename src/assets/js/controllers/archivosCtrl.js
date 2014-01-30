@@ -25,6 +25,8 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		objeto_descarga.transmitido = 0;
 		$scope.Descargas.push(objeto_descarga);
 		
+		archivo.bajando = true;
+		
 		//console.log('bajar', archivo.name, archivo.url);
 		
 		var http = require('http');
@@ -97,7 +99,7 @@ progress(request(archivo.url), {
 	//});
 	
 	$scope.regresar = function() {
-		$scope.abrir_directorio('..');
+		history.back();
 	}
 	
 	

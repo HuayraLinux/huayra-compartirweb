@@ -13,7 +13,6 @@ var modulo_servidor = require('./servidor');
 var path = require('path');
 
 
-
 var app = angular.module('app', ['ngRoute', 'ngAnimate']);
 
 

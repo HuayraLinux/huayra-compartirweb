@@ -2,7 +2,13 @@
   <h1>Mis archivos</h1>
 </div>
 		
+
+
 <div class="container">
+	<div class='barra-botones'>
+		<button class='btn btn-sm btn-success' ng-click='regresar()'>  <i class='icon-arrow-left'></i> Regresar </button>
+	</div>
+	
 	<table class="table table-bordered tabla-archivos" ng-show='archivos'>
 		
 		<thead>
@@ -27,7 +33,7 @@
 				<td ng-show="a.type === 'file'"><i class='archivo icon-file'></i></td>
 				<td ng-show="a.type === 'file'">{{a.name}}</td>
 				<td ng-show="a.type === 'file'" class='col-size'>{{a.size | bytes}}</td>
-				<td ng-show="a.type === 'file'"><button class='btn btn-success btn-xs' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button></td>
+				<td ng-show="a.type === 'file'"><button class='btn btn-success btn-xs' ng-disabled='a.bajando' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button></td>
 				
 			</tr>
 		</tbody>
