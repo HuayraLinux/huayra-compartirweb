@@ -141,6 +141,7 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 		stream.on('readable', function() {});
 
 		stream.on('data', function(chunk) {
+			/*
 			emited += parseInt(chunk.length, 10);
 			porcentaje_emitido = Math.floor((emited * 100) / size);
 	
@@ -148,6 +149,7 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 				console.log("%d por ciento", porcentaje_emitido);
 				porcentaje_emitido_anterior = porcentaje_emitido;
 			}
+			*/
 		});
 
 		stream.on('end', function() {

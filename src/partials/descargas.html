@@ -19,7 +19,7 @@
 			<tr ng-repeat='d in Descargas' class='archivo' ng-show='Descargas'>
 				<td>{{d.name}}</td>
 				<!-- <td>{{d.url}}</td> -->
-				<td>{{d.progreso}}</td>
+				<td>{{d.transmitido}} / {{d.size}} = {{d.transmitido/d.size * 100}}</td>
 			</tr>
 		</tbody>
 		
