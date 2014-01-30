@@ -147,7 +147,11 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 app.controller("NotificacionesCtrl", function($scope) {
 });
 
-app.controller("AmigosCtrl", function($scope) {
+app.controller("AmigosCtrl", function($scope, $location) {
 	$scope.amigos = $scope.$parent.amigos;
+	
+	$scope.abrir_descargas_de = function(amigo) {
+		$location.path('/archivos/' + amigo.servicio.address + '/obtener/');
+	}
 });
 	
