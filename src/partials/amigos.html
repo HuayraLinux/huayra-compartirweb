@@ -3,7 +3,16 @@
 </div>
 		
 <div class="container">
-	<ul>
-		<li ng-repeat='a in amigos'><button class='btn btn-success btn-xs' ng-click='abrir_descargas_de(a)'>Abrir</button> {{a}}</li>
-	</ul>
+	
+	<table class="table table-bordered tabla-archivos" ng-show='amigos'>
+		
+		<tbody>
+			<tr ng-repeat='a in amigos' class='archivo repeat-item'>
+				<td><button class='btn btn-success' ng-click='abrir_descargas_de(a)'>Abrir</button></td>
+				<td>{{a.nombre}} (en el host '{{a.servicio.host}}')</td>
+			</tr>
+		</tbody>
+		
+	</table>
+	
 </div>
