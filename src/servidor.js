@@ -159,7 +159,6 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 		stream.on('readable', function() {});
 
 		stream.on('data', function(chunk) {
-			/*
 			emited += parseInt(chunk.length, 10);
 			porcentaje_emitido = Math.floor((emited * 100) / size);
 	
@@ -167,7 +166,6 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 				console.log("%d por ciento", porcentaje_emitido);
 				porcentaje_emitido_anterior = porcentaje_emitido;
 			}
-			*/
 		});
 
 		stream.on('end', function() {
@@ -203,6 +201,7 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 		name: 'huayra-compartir',
 		version: 0.1,
 		host: os.hostname(),
+		ip: this.obtener_ip(),
 		id: crypto.createHash('md5').update(os.hostname()).digest('hex'),
 		port: this.puerto
 	});
