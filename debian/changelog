@@ -1,3 +1,62 @@
+huayra-compartir (0.12) unstable; urgency=low
+
+  * Agregando animaciones, filtros y posibilidad de limpiar descargas.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 31 Jan 2014 16:39:09 +0100
+
+huayra-compartir (0.11) unstable; urgency=low
+
+  * Reemplazando la publicación del hostname por la IP para publicar el servicio en la red.
+  * Mejorando la pantalla principal.
+  * Reparando bug de las transferencias incompletas.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 31 Jan 2014 14:40:07 +0100
+
+huayra-compartir (0.10) unstable; urgency=low
+
+  * Implementando las ruta ~/compartido.
+  * Creando un directorio para las descargas.
+  * Implementando interacción básica con mate para abrir descargas y directorios.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 30 Jan 2014 22:37:12 +0100
+
+huayra-compartir (0.9) unstable; urgency=low
+
+  * Implementando mejoras en la vista de descargas.
+  * Haciendo accesible la vista de archivos desde la red.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 30 Jan 2014 21:01:21 +0100
+
+huayra-compartir (0.8) unstable; urgency=low
+
+  * Agregando biblioteca polo
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 29 Jan 2014 21:14:42 +0100
+
+huayra-compartir (0.7) unstable; urgency=low
+
+  * Agregando pre-compilados de mdns. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 29 Jan 2014 20:06:19 +0100
+
+huayra-compartir (0.5) unstable; urgency=low
+
+  * Incorporando mdns.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 29 Jan 2014 18:34:07 +0100
+
+huayra-compartir (0.4) unstable; urgency=low
+
+  * Re-implementando el modo depuración.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 24 Jan 2014 16:59:29 +0100
+
+huayra-compartir (0.3) unstable; urgency=low
+
+  * Quitando el modo depuración.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 24 Jan 2014 16:44:16 +0100
+
 huayra-compartir (0.2) unstable; urgency=low
 
   * Actualizando dependencias. 
