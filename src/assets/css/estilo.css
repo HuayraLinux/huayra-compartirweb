@@ -169,3 +169,29 @@ header {
 .barra-botones {
 	margin-bottom: 20px;
 }
+
+.container-principal {
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 18px;
+	padding-top: 9px;
+	width: 450px;
+	text-align: justify;
+}
+
+h1.titular-principal {
+	width: 200px;
+	margin: auto !important;
+	padding-top: 40px !important;
+	float: none !important;
+}
+
+
+.container {
+	padding-left: 20px;
+padding-right: 20px;
+}
+
+
+#sidebar a.actual {
+}
