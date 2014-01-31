@@ -82,6 +82,7 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
 
 app.filter('bytes', function() {
 	return function(bytes, precision) {
+		if (bytes==0) return '...';
 		if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
 		if (typeof precision === 'undefined') precision = 1;
 		var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
@@ -150,6 +151,24 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 	 
 	 $scope.abrir_item = function(item) {
 		 gui.Shell.openItem(ruta_descargas + item.name);
+	 }
+	 
+	 
+	 $scope.limpiar_completados = function() {
+		 var lista_limpia = [];
+		 
+		 for (var i=0; i<$scope.Descargas.length; i++) {
+			 if (Descargas[i].bajando)
+				 lista_limpia.push(Descargas[i]);
+		 }
+		 
+		 while ($scope.Descargas.length > 0) {
+    	Descargas.pop();
+		 }	
+		 
+		 for (var i=0; i<lista_limpia.length; i++) {
+			 $scope.Descargas.push(lista_limpia[i]);
+		 }
 	 }
 	
 	console.log("iniciando timer para actualizar progreso de las descargas.");
