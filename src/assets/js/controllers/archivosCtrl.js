@@ -32,6 +32,7 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		var objeto_descarga = archivo;
 		objeto_descarga.transmitido = 0;
 		$scope.Descargas.push(objeto_descarga);
+		$scope.$parent.descargas_sin_ver += 1;
 		
 		archivo.bajando = true;
 		
@@ -40,19 +41,24 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		var fs = require('fs');
 
 		var file = fs.createWriteStream(ruta_descargas + archivo.name);
-		var contador = 1020;
 
 http.get(archivo.url, function(res) {
+	
   res.on('data', function(chunk) {
     file.write(chunk);
 		objeto_descarga.transmitido += chunk.length;
+		console.log(objeto_descarga.transmitido);
   });
+	
   res.on('end', function() {
 		objeto_descarga.transmitido = objeto_descarga.size;
-    file.close();
+    //file.close();
   });
-  file.on('close', function() {
-  });
+	
+	res.on('error', function() {
+		console.log("Error!!!");
+	});
+	
 });
 		
 		
