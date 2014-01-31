@@ -24,13 +24,31 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 		return Math.floor(Math.random() * 2000) + 8080;
 	}
 	
+	this.obtener_ip = function() {
+		var ip = 'localhost';
+		var interfaces = os.networkInterfaces();
+		
+		for (var nombre in interfaces) {
+			
+			for (var i=0; i<interfaces[nombre].length; i++) {
+				var elemento = interfaces[nombre][i];
+				
+				if (elemento.family == 'IPv4' && elemento.internal == false)
+					ip = elemento.address;
+			}
+			
+		}
+		
+		return ip;
+	}
+	
 	this.iniciar = function(numero_de_puerto) {
 		var server = http.createServer(this.app);
 		this.puerto = numero_de_puerto || this.obtener_puerto_aleatorio();
-		this.base_url = "http://" + os.hostname() + ":" + this.puerto;
+		this.base_url = "http://" + this.obtener_ip() + ":" + this.puerto;
 	
 		server.listen(this.puerto);
-		this.base = "http://" + os.hostname() + ":" + this.puerto;
+		this.base = "http://" + this.obtener_ip() + ":" + this.puerto;
 		console.log("Iniciando el servicio en: " + this.base_url);
  	}
 	
@@ -166,7 +184,7 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 	this.directorio_compartido = process.env.HOME + '/compartido/';
 	
 	// Genera el directorio compartido si no existe.
-	if (! path.existsSync(this.directorio_compartido))
+	if (! fs.existsSync(this.directorio_compartido))
 		fs.mkdir(this.directorio_compartido);
 	
 	// Inicia el servicio http.

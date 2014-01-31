@@ -132,7 +132,6 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 	var timer = null;
 	
 	function actualizar_listado() {
-		console.log("actualizando listado!");
 		timer = $timeout(actualizar_listado, 1000);
 	}
 	
