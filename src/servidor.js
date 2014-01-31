@@ -95,6 +95,8 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 					size: stat.size,
 				}
 				
+				//console.log(registro);
+				
 				if (tipo === 'folder')
 					directorios.push(registro);
 				else
@@ -163,7 +165,7 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 			porcentaje_emitido = Math.floor((emited * 100) / size);
 	
 			if (porcentaje_emitido != porcentaje_emitido_anterior) {
-				console.log("%d por ciento", porcentaje_emitido);
+				//console.log("%d por ciento", porcentaje_emitido);
 				porcentaje_emitido_anterior = porcentaje_emitido;
 			}
 		});
