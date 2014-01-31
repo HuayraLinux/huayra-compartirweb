@@ -4,6 +4,7 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 	$scope.esta_en_directorio_raiz = true;
 	$scope.archivos = [];
 	$scope.Descargas = Descargas;
+	$scope.filtro = '';
 	var path = "";
 	
 	var ruta_descargas = process.env.HOME + '/Descargas/';
@@ -47,12 +48,12 @@ http.get(archivo.url, function(res) {
   res.on('data', function(chunk) {
     file.write(chunk);
 		objeto_descarga.transmitido += chunk.length;
-		console.log(objeto_descarga.transmitido);
   });
 	
   res.on('end', function() {
 		objeto_descarga.transmitido = objeto_descarga.size;
-    //file.close();
+		objeto_descarga.bajando = false;
+    //file.close(); // produce un bug porque cierra el archivo mientras que está copiando. El archivo queda truncado.
   });
 	
 	res.on('error', function() {
@@ -105,6 +106,7 @@ progress(request(archivo.url), {
 	$scope.abrir = function(archivo) {
 		var ruta_con_dominio = archivo.url.replace('http://', '');
 		$location.path('/archivos/' + ruta_con_dominio);
+		$scope.filtro = '';
 	}
 	
 	//$scope.$watch('directorio', function() {
@@ -115,6 +117,12 @@ progress(request(archivo.url), {
 		history.back();
 	}
 	
+	var gui = require('nw.gui');
+	var ruta_compartidos = process.env.HOME + '/compartido/';
+	
+	$scope.abrir_carpeta_compartida = function() {
+		gui.Shell.openItem(ruta_compartidos);
+	}
 	
 	actualizar_listado();
 });
