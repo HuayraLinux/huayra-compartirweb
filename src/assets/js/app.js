@@ -95,6 +95,7 @@ app.controller("MainCtrl", function($scope, Descargas) {
 	$scope.frase = "una frase...";
 	$scope.amigos = [];
 	$scope.Descargas = Descargas;
+	$scope.notificaciones_sin_ver = 0;
 	
 	function cuando_se_conecta_un_equipo(nombre, servicio) {
 		$scope.amigos.push({nombre: nombre, servicio: servicio});
@@ -111,6 +112,12 @@ app.controller("MainCtrl", function($scope, Descargas) {
 });
 
 app.controller("PrincipalCtrl", function($scope) {
+	var gui = require('nw.gui');
+	var ruta_compartidos = process.env.HOME + '/compartido/';
+	
+	$scope.abrir_carpeta_compartida = function() {
+		gui.Shell.openItem(ruta_compartidos);
+	}
 });
 
 app.controller("PreferenciasCtrl", function($scope) {
@@ -127,6 +134,8 @@ app.controller("PreferenciasCtrl", function($scope) {
 app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 	var gui = require('nw.gui');
 	var ruta_descargas = process.env.HOME + '/Descargas/';
+	
+	$scope.$parent.descargas_sin_ver = 0;
 	
 	$scope.Descargas = Descargas;
 	var timer = null;

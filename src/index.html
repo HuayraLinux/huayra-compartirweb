@@ -51,15 +51,15 @@
 
                 <li><a href="#/principal"><i class="icon-home"></i> <span>Principal</span></a></li>
                 <li><a href="#/archivos"><i class="icon-table"></i> <span>Mis archivos</span></a></li>
-                <li><a href="#/descargas"><i class="icon-download-alt"></i> <span>Descargas</span> <span ng-show='Descargas.length > 0' class='badge badge-indigo'>{{Descargas.length}}</span></a></li>
+                <li><a href="#/descargas"><i class="icon-download-alt"></i> <span>Descargas</span> <span ng-show='descargas_sin_ver' class='badge badge-indigo'>{{descargas_sin_ver}}</span></a></li>
 
                 <li class="divider"></li>
 
-                <li><a href="#/amigos"><i class="icon-user"></i> <span>Amigos</span> <span class="badge badge-indigo">4</span></a></li>
-                <li><a href="#/notificaciones"><i class="icon-bell-alt"></i> <span>Notificaciones</span> <span class="badge badge-danger">4</span></a></li>
+                <li><a href="#/amigos"><i class="icon-user"></i> <span>Amigos</span> <span class="badge badge-indigo" ng-show='amigos_sin_ver'>{{amigos_sin_ver}}</span></a></li>
+                <li><a href="#/notificaciones"><i class="icon-bell-alt"></i> <span>Notificaciones</span> <span class="badge badge-danger" ng-show='amigos_sin_ver'>{{notificaciones_sin_ver}}</span></a></li>
 
                 <li class="divider"></li>
-                <li><a href="#/preferencias"><i class="icon-pencil"></i> <span>Preferencias</span><span class="badge badge-primary">5</span></a></li>
+                <li><a href="#/preferencias"><i class="icon-pencil"></i> <span>Preferencias</span></a></li>
 
             </ul>
         </nav>
