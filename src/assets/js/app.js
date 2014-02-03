@@ -98,7 +98,12 @@ app.controller("MainCtrl", function($scope, Descargas) {
 	$scope.Descargas = Descargas;
 	$scope.notificaciones_sin_ver = 0;
 	
+	var servidor = modulo_servidor(cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
+	
 	function cuando_se_conecta_un_equipo(nombre, servicio) {
+		if (servicio.ip === servidor.mi_ip)
+			return; // Evita mostrar en la vista de amigos mi propio equipo.
+		
 		$scope.amigos.push({nombre: nombre, servicio: servicio});
 		$scope.$apply();
 	}
@@ -107,9 +112,9 @@ app.controller("MainCtrl", function($scope, Descargas) {
 		console.log("Se desconectó uno!!!", servicio);
 	}
 
-	var servidor = modulo_servidor(cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
 	
 	$scope.base = servidor.base;
+	$scope.mi_ip = servidor.mi_ip;
 });
 
 app.controller("PrincipalCtrl", function($scope) {
@@ -188,7 +193,8 @@ app.controller("AmigosCtrl", function($scope, $location) {
 	$scope.amigos = $scope.$parent.amigos;
 	
 	$scope.abrir_descargas_de = function(amigo) {
-		$location.path('/archivos/' + amigo.servicio.address + '/obtener/');
+		console.log(amigo);
+		$location.path('/archivos/' + amigo.servicio.ip + ':' + amigo.servicio.port + '/obtener/');
 	}
 });
 	
