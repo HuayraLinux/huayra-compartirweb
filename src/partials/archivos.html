@@ -43,7 +43,10 @@
 				<td ng-show="a.type === 'file'"><i class='archivo icon-file'></i></td>
 				<td ng-show="a.type === 'file'">{{a.name}}</td>
 				<td ng-show="a.type === 'file'" class='col-size'>{{a.size | bytes}}</td>
-				<td ng-show="a.type === 'file'"><button class='btn btn-success btn-xs' ng-disabled='a.bajando' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button></td>
+				<td ng-show="a.type === 'file'">
+					<button ng-hide='es_vista_mis_archivos' class='btn btn-success btn-xs' ng-disabled='a.bajando' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button>
+					<button ng-show='es_vista_mis_archivos' class="btn btn-success btn-xs" ng-click='abrir_item(d)'> <i class="icon-upload-alt"></i> </button>
+				</td>
 				
 			</tr>
 		</tbody>

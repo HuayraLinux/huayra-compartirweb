@@ -45,10 +45,13 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 	this.iniciar = function(numero_de_puerto) {
 		var server = http.createServer(this.app);
 		this.puerto = numero_de_puerto || this.obtener_puerto_aleatorio();
-		this.base_url = "http://" + this.obtener_ip() + ":" + this.puerto;
-	
+		this.mi_ip = this.obtener_ip();
+		
+		this.base_url = "http://" + this.mi_ip + ":" + this.puerto;
+		
 		server.listen(this.puerto);
-		this.base = "http://" + this.obtener_ip() + ":" + this.puerto;
+		this.base = "http://" + this.mi_ip + ":" + this.puerto;
+		
 		console.log("Iniciando el servicio en: " + this.base_url);
  	}
 	

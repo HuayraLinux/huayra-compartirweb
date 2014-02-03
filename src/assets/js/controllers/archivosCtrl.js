@@ -1,10 +1,14 @@
 var fs = require('fs');
+var http = require('http');
 
 app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, Descargas) {
 	$scope.esta_en_directorio_raiz = true;
 	$scope.archivos = [];
 	$scope.Descargas = Descargas;
 	$scope.filtro = '';
+	$scope.mi_ip = $scope.$parent.mi_ip;
+	$scope.es_vista_mis_archivos = true;
+	
 	var path = "";
 	
 	var ruta_descargas = process.env.HOME + '/Descargas/';
@@ -22,8 +26,14 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		var relative_path = $routeParams.url;
 		var path = 'http://' +  relative_path;
 	}
-	
+		
 	function actualizar_listado() {
+		if ($routeParams.url) {
+			var host_a_visitar = $routeParams.url.split(':')[0];
+			console.log(host_a_visitar);
+			$scope.es_vista_mis_archivos = (host_a_visitar === $scope.mi_ip);
+		}
+		
 		$http.get(path).success(function(data) {
 			$scope.archivos = data.archivos;
 		});
@@ -36,70 +46,27 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 		$scope.$parent.descargas_sin_ver += 1;
 		
 		archivo.bajando = true;
-		
-		
-		var http = require('http');
-		var fs = require('fs');
 
 		var file = fs.createWriteStream(ruta_descargas + archivo.name);
 
-http.get(archivo.url, function(res) {
-	
-  res.on('data', function(chunk) {
-    file.write(chunk);
-		objeto_descarga.transmitido += chunk.length;
-  });
-	
-  res.on('end', function() {
-		objeto_descarga.transmitido = objeto_descarga.size;
-		objeto_descarga.bajando = false;
-    //file.close(); // produce un bug porque cierra el archivo mientras que está copiando. El archivo queda truncado.
-  });
-	
-	res.on('error', function() {
-		console.log("Error!!!");
-	});
-	
-});
-		
-		
-		
-		
-		/*
-		
-		
-var fs = require('fs');
-var request = require('request');
-var progress = require('request-progress');
-
-// Note that the options argument is optional
-progress(request(archivo.url), {
-    throttle: 2000,  // Throttle the progress event to 2000ms, defaults to 1000ms
-    delay: 1000      // Only start to emit after 1000ms delay, defaults to 0ms
-})
-.on('progress', function (state) {
-    console.log('received size in bytes', state.received);
-	console.log(state);
-    // The properties bellow can be null if response does not contain
-    // the content-length header
-    console.log('total size in bytes', state.total);
-    console.log('percent', state.percent);
-		objeto_descarga.progreso = state.percent / 100;
-		console.log(objeto_descarga);
-		$scope.$apply();
-})
-.on('error', function (err) {
-    // Do something with err
-})
-.pipe(fs.createWriteStream('/tmp/doodle.png'))
-.on('error', function (err) {
-    // Do something with err
-})
-.on('close', function (err) {
-    // Saved to doogle.png!
-})
-		
-		*/
+		http.get(archivo.url, function(res) {
+			
+			res.on('data', function(chunk) {
+				file.write(chunk);
+				objeto_descarga.transmitido += chunk.length;
+			});
+			
+			res.on('end', function() {
+				objeto_descarga.transmitido = objeto_descarga.size;
+				objeto_descarga.bajando = false;
+				//file.close(); // produce un bug porque cierra el archivo mientras que está copiando. El archivo queda truncado.
+			});
+			
+			res.on('error', function() {
+				console.log("Error!!!");
+			});
+			
+		});
 		
 	}
 	
