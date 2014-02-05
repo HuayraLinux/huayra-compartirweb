@@ -105,6 +105,18 @@ app.filter('bytes', function() {
 app.controller("MainCtrl", function($scope, $http, Descargas) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
+    
+    function agregar_amigo(servicio) {
+        for (var key in $scope.amigos) {
+            if (servicio.id === $scope.amigos[key].id) {
+                $scope.amigos[key] = servicio;
+                return;
+            }
+        }
+        
+        // En caso de no encontrarlo en la lista de amigos, lo agrega.
+        $scope.amigos.push(servicio);
+    }
 
     $http.get(ruta_preferencias).
         success(function (data, status){
@@ -136,15 +148,28 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
         
             	if (servicio.ip === servidor.mi_ip)
               	return; // Evita mostrar en la vista de amigos mi propio equipo.
-        
-            	$scope.amigos.push(servicio);
-            	$scope.$apply();
                 
+                
+              var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
+                
+              $http.get(tmp_url).success(function(data) {
+                servicio.data = data;
+              });
+                
+              agregar_amigo(servicio);
+        
+                
+            	$scope.$apply();
             }
           }
         
           function cuando_se_desconecta_un_equipo(nombre, servicio) {
-             console.log("Se desconectó uno!!!", servicio);
+        		for (var key in $scope.amigos) {
+            	if (servicio.id === $scope.amigos[key].id)
+                $scope.amigos.splice(key, 1);
+            }
+                
+            $scope.$apply();
           }
         
           var servidor = modulo_servidor(data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
@@ -221,8 +246,7 @@ app.controller("AmigosCtrl", function($scope, $location) {
 	$scope.amigos = $scope.$parent.amigos;
 
 	$scope.abrir_descargas_de = function(amigo) {
-		console.log(amigo);
-		$location.path('/archivos/' + amigo.servicio.ip + ':' + amigo.servicio.port + '/obtener/');
+		$location.path('/archivos/' + amigo.ip + ':' + amigo.port + '/obtener/');
 	}
 });
 
