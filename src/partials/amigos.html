@@ -7,6 +7,13 @@
 	<table class="table table-bordered tabla-archivos" ng-show='amigos'>
 		
 		<tbody>
+        <pre>
+{{amigos|json}}
+        </pre>
+        
+        
+        
+        
 			<tr ng-repeat='a in amigos' class='archivo repeat-item'>
 				<td><button class='btn btn-success' ng-click='abrir_descargas_de(a)'>Abrir</button></td>
 				<td>{{a.nombre}} (en el host '{{a.servicio.host}}')</td>
