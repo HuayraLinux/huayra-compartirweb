@@ -131,13 +131,16 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
           $scope.notificaciones_sin_ver = 0;
         
           function cuando_se_conecta_un_equipo(nombre, servicio) {
-                // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
+            // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
+          	if (servicio.name === "huayra-compartir") {
         
-            if (servicio.ip === servidor.mi_ip)
-              return; // Evita mostrar en la vista de amigos mi propio equipo.
+            	if (servicio.ip === servidor.mi_ip)
+              	return; // Evita mostrar en la vista de amigos mi propio equipo.
         
-            $scope.amigos.push({nombre: nombre, servicio: servicio});
-            $scope.$apply();
+            	$scope.amigos.push(servicio);
+            	$scope.$apply();
+                
+            }
           }
         
           function cuando_se_desconecta_un_equipo(nombre, servicio) {
