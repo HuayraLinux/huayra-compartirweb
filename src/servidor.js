@@ -8,7 +8,8 @@ var os = require('os');
 var polo = require('polo');
 var crypto = require('crypto');
 
-var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,  
+var servidor = function iniciarServidor(data_preferencias,
+                                        cuando_se_conecta_un_equipo,  
 																				cuando_se_desconecta_un_equipo, 
 																				puerto) {
 	
@@ -117,6 +118,8 @@ var servidor = function iniciarServidor(cuando_se_conecta_un_equipo,
 				res.send({
 					archivos: self.base + "/obtener/",
 					avatar: self.base + "/avatar",
+          nombre: data_preferencias.nombre,
+          frase: data_preferencias.frase
 				});
 		});
 		

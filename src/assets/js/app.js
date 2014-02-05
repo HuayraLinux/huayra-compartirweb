@@ -104,50 +104,53 @@ app.filter('bytes', function() {
 
 app.controller("MainCtrl", function($scope, $http, Descargas) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
+    var data_preferencias = {};
 
     $http.get(ruta_preferencias).
         success(function (data, status){
             $scope.nombre = data.nombre;
             $scope.frase = data.frase;
             $scope.id = data.id;
+            data_preferencias = data;
         }).
         error(function (){
             $scope.nombre = "mi nombre";
             $scope.frase = "una frase...";
             $scope.id = uuid.v1();
-
-            guardar_preferencias({
+            data_preferencias = {
                 nombre: $scope.nombre,
                 frase: $scope.frase,
                 id: $scope.id
-            });
-        });
+            };
 
-	$scope.amigos = [];
-	$scope.Descargas = Descargas;
-	$scope.notificaciones_sin_ver = 0;
+            guardar_preferencias(data_preferencias);
+            
+        }).finally(function(data) {
+          $scope.amigos = [];
+          $scope.Descargas = Descargas;
+          $scope.notificaciones_sin_ver = 0;
+        
+          function cuando_se_conecta_un_equipo(nombre, servicio) {
+                // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
+        
+            if (servicio.ip === servidor.mi_ip)
+              return; // Evita mostrar en la vista de amigos mi propio equipo.
+        
+            $scope.amigos.push({nombre: nombre, servicio: servicio});
+            $scope.$apply();
+          }
+        
+          function cuando_se_desconecta_un_equipo(nombre, servicio) {
+             console.log("Se desconectó uno!!!", servicio);
+          }
+        
+          var servidor = modulo_servidor(data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
+        
+          $scope.base = servidor.base;
+          $scope.mi_ip = servidor.mi_ip;
+        
+    		});
 
-	var servidor = modulo_servidor(cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
-
-	function cuando_se_conecta_un_equipo(nombre, servicio) {
-        // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
-
-        if (servicio.ip === servidor.mi_ip)
-			return; // Evita mostrar en la vista de amigos mi propio equipo.
-
-		$scope.amigos.push({nombre: nombre, servicio: servicio});
-		$scope.$apply();
-	}
-
-	function cuando_se_desconecta_un_equipo(nombre, servicio) {
-        // Buscamos por ID y quitamos de la lista de amigos
-
-        console.log("Se desconectó uno!!!", servicio);
-	}
-
-
-	$scope.base = servidor.base;
-	$scope.mi_ip = servidor.mi_ip;
 });
 
 app.controller("PrincipalCtrl", function($scope) {
