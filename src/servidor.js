@@ -200,7 +200,10 @@ var servidor = function iniciarServidor(data_preferencias,
 	
 	// Publica en la red que el servicio http está online.
 	console.log("Publicando en la red que el servicio está online.");
-	this.polo = polo();
+    
+	this.polo = polo({
+      heartbeat: 5*1000
+  });
 	
 	this.polo.on('up', cuando_se_conecta_un_equipo);
 	this.polo.on('down', cuando_se_desconecta_un_equipo);
