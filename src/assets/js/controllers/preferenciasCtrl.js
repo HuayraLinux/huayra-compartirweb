@@ -5,31 +5,27 @@ var http = require('http');
 var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
 
 app.controller("PreferenciasCtrl", function($scope, $http) {
-    var perfil = new Object();
+    var preferencias = new Object();
 
     $http.get(ruta_preferencias).
         success(function (data, status){
-            perfil = data
-            $scope.nombre = perfil.nombre;
-            $scope.frase = perfil.frase;
+            preferencias = data
+            $scope.nombre = preferencias.nombre;
+            $scope.frase = preferencias.frase;
         }).
         error(function (){
-            perfil.nombre = $scope.$parent.nombre;
-            perfil.frase = $scope.$parent.frase;
+            preferencias.nombre = $scope.$parent.nombre;
+            preferencias.frase = $scope.$parent.frase;
         });
 
 	$scope.guardar_datos = function() {
-        perfil.nombre = $scope.nombre;
-        perfil.frase = $scope.frase;
+        preferencias.nombre = $scope.nombre;
+        preferencias.frase = $scope.frase;
 
-        fs.writeFile(ruta_preferencias, angular.toJson(perfil), function(err){
-            if (err) {
-                alert("error");
-            }
-        });
+        window.guardar_preferencias(preferencias);
 
-		$scope.$parent.nombre = perfil.nombre;
-		$scope.$parent.frase = perfil.frase;
+		$scope.$parent.nombre = preferencias.nombre;
+		$scope.$parent.frase = preferencias.frase;
 	}
 })
 
