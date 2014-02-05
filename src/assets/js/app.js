@@ -8,9 +8,20 @@ window.mostrar_herramientas_de_desarrollo = function() {
 	gui.Window.get().showDevTools();
 }
 
+window.guardar_preferencias = function(preferencias) {
+    var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
+
+    fs.writeFile(ruta_preferencias, angular.toJson(preferencias), function(err){
+        if (err) {
+            alert("error");
+        }
+    });
+}
+
 var gui = require('nw.gui');
 var modulo_servidor = require('./servidor');
 var path = require('path');
+var uuid = require('node-uuid');
 
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate']);
@@ -98,10 +109,18 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
         success(function (data, status){
             $scope.nombre = data.nombre;
             $scope.frase = data.frase;
+            $scope.id = data.id;
         }).
         error(function (){
             $scope.nombre = "mi nombre";
             $scope.frase = "una frase...";
+            $scope.id = uuid.v1();
+
+            guardar_preferencias({
+                nombre: $scope.nombre,
+                frase: $scope.frase,
+                id: $scope.id
+            });
         });
 
 	$scope.amigos = [];
@@ -111,7 +130,9 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
 	var servidor = modulo_servidor(cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
 
 	function cuando_se_conecta_un_equipo(nombre, servicio) {
-		if (servicio.ip === servidor.mi_ip)
+        // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
+
+        if (servicio.ip === servidor.mi_ip)
 			return; // Evita mostrar en la vista de amigos mi propio equipo.
 
 		$scope.amigos.push({nombre: nombre, servicio: servicio});
@@ -119,7 +140,9 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
 	}
 
 	function cuando_se_desconecta_un_equipo(nombre, servicio) {
-		console.log("Se desconectó uno!!!", servicio);
+        // Buscamos por ID y quitamos de la lista de amigos
+
+        console.log("Se desconectó uno!!!", servicio);
 	}
 
 
