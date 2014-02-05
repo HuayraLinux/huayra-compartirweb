@@ -210,7 +210,7 @@ var servidor = function iniciarServidor(data_preferencias,
 		version: 0.1,
 		host: os.hostname(),
 		ip: this.obtener_ip(),
-		id: crypto.createHash('md5').update(os.hostname()).digest('hex'),
+		id: data_preferencias.id,
 		port: this.puerto
 	});
 	
