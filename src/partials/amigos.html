@@ -8,7 +8,15 @@
 		
 		<tbody>
 			<tr ng-repeat='a in amigos' class='archivo repeat-item'>
-				<td><button class='btn btn-success' ng-click='abrir_descargas_de(a)'>Abrir</button></td>
+          
+				<td ng-hide='a.data.nombre'>
+            <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
+        </td>
+            
+				<td ng-show='a.data.nombre'>
+            <a href ng-click='abrir_descargas_de(a)'><img src='{{a.data.avatar}}'></a>
+        </td>
+            
 				<td>
            &nbsp;
            <p ng-hide='a.data.nombre'><img src='assets/img/spinner.gif'></p>

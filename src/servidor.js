@@ -123,7 +123,11 @@ var servidor = function iniciarServidor(data_preferencias,
 				});
 		});
 		
-		
+		this.app.get(/^\/avatar/, function(req, res) {
+		  var ruta_completa = './assets/img/avatar_por_omision.png';
+			self.enviar_archivo(res, ruta_completa);
+    });
+      
 		this.app.get(/^\/obtener\/(.*)/, function(req, res) {
 			var ruta = req.params[0] || "";
 			var path_base = req.protocol + "://" + req.get('host') + req.url;

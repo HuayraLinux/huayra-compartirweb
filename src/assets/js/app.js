@@ -149,12 +149,13 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
           	if (servicio.name === "huayra-compartir") {
         
             	if (servicio.ip === servidor.mi_ip)
-              	return; // Evita mostrar en la vista de amigos mi propio equipo.
+             	  return; // Evita mostrar en la vista de amigos mi propio equipo.
                 
                 
               var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
                 
               $http.get(tmp_url).success(function(data) {
+                  console.log(data);
                 servicio.data = data;
               });
                 
