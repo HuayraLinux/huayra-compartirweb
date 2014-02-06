@@ -109,8 +109,8 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
     function agregar_amigo(servicio) {
         for (var key in $scope.amigos) {
             if (servicio.id === $scope.amigos[key].id) {
-                $scope.amigos[key].data.nombre = servicio.nombre;
-                $scope.amigos[key].data.frase = servicio.frase;
+                $scope.amigos[key].nombre = servicio.nombre;
+                $scope.amigos[key].frase = servicio.frase;
                 return;
             }
         }
