@@ -127,12 +127,16 @@ var servidor = function iniciarServidor(data_preferencias,
             var ruta_completa = process.env.HOME + '/.huayra-compartir_avatar';
 
             fs.exists(ruta_completa, function(exists) {
-                if (!exists) {
-                    ruta_completa = './assets/img/avatar_por_omision.png';
+                console.log(exists);
+                if (exists == false) {
+                    self.enviar_archivo(res, './assets/img/avatar_por_omision.png');
+                }
+                else {
+                    self.enviar_archivo(res, ruta_completa);
                 }
             });
 
-            self.enviar_archivo(res, ruta_completa);
+
         });
 
 		this.app.get(/^\/obtener\/(.*)/, function(req, res) {
