@@ -8,21 +8,22 @@
 
 		<tbody>
 			<tr ng-repeat='a in amigos' class='archivo repeat-item'>
-
-				<td ng-hide='a.data.nombre'>
+				<td ng-hide='a.data.nombre' class='td-avatar'>
             <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
         </td>
-
-				<td ng-show='a.data.nombre'>
-            <a href ng-click='abrir_descargas_de(a)'><img src="http://{{ a.ip }}:{{a.port}}/avatar"></a>
+            
+				<td ng-show='a.data.nombre' class='td-avatar'>
+            <a href ng-click='abrir_descargas_de(a)'><img src='{{a.data.avatar}}'></a>
         </td>
 
 				<td>
            &nbsp;
            <p ng-hide='a.data.nombre'><img src='assets/img/spinner.gif'></p>
-
-           <h1 ng-show='a.data'>{{a.data.nombre}}</h1>
-           <p ng-show='a.data'>{{a.data.frase}} <span class="pull-right">({{ a.ip }})</span></p>
+           <h3 ng-show='a.data'>{{a.data.nombre}}</h3>
+           <h4 ng-show='a.data' class='titulo-frase'>{{a.data.frase}}
+					<span class="pull-right">({{ a.ip }})</span>
+           </h4>
+					
 				</td>
 
 			</tr>
