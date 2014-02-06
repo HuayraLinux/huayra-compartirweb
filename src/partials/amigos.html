@@ -11,9 +11,9 @@
 				<td ng-hide='a.data.nombre' class='td-avatar'>
             <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
         </td>
-            
+
 				<td ng-show='a.data.nombre' class='td-avatar'>
-            <a href ng-click='abrir_descargas_de(a)'><img src='{{a.data.avatar}}'></a>
+            <a href ng-click='abrir_descargas_de(a)'><img src='http://{{ a.ip }}:{{a.port}}/avatar'></a>
         </td>
 
 				<td>
@@ -23,7 +23,7 @@
            <h4 ng-show='a.data' class='titulo-frase'>{{a.data.frase}}
 					<span class="pull-right">({{ a.ip }})</span>
            </h4>
-					
+
 				</td>
 
 			</tr>
