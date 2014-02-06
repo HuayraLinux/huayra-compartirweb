@@ -105,15 +105,16 @@ app.filter('bytes', function() {
 app.controller("MainCtrl", function($scope, $http, Descargas) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
-    
+
     function agregar_amigo(servicio) {
         for (var key in $scope.amigos) {
             if (servicio.id === $scope.amigos[key].id) {
-                $scope.amigos[key] = servicio;
+                $scope.amigos[key].data.nombre = servicio.nombre;
+                $scope.amigos[key].data.frase = servicio.frase;
                 return;
             }
         }
-        
+
         // En caso de no encontrarlo en la lista de amigos, lo agrega.
         $scope.amigos.push(servicio);
     }
@@ -136,52 +137,52 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
             };
 
             guardar_preferencias(data_preferencias);
-            
+
         }).finally(function(data) {
           $scope.amigos = [];
           $scope.Descargas = Descargas;
           $scope.notificaciones_sin_ver = 0;
-        
+
           function cuando_se_conecta_un_equipo(nombre, servicio) {
             console.log({evento: "up", servicio: servicio});
-              
+
             // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
           	if (servicio.name === "huayra-compartir") {
-        
+
             	if (servicio.ip === servidor.mi_ip)
              	  return; // Evita mostrar en la vista de amigos mi propio equipo.
-                
-                
+
+
               var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
-                
+
               $http.get(tmp_url).success(function(data) {
                   console.log(data);
                 servicio.data = data;
               });
-                
+
               agregar_amigo(servicio);
-        
-                
+
+
             	$scope.$apply();
             }
           }
-        
+
           function cuando_se_desconecta_un_equipo(nombre, servicio) {
             console.log({evento: "down", servicio: servicio});
-              
+
         		for (var key in $scope.amigos) {
              	if (servicio.id === $scope.amigos[key].id)
                  $scope.amigos.splice(key, 1);
              }
-                
+
             $scope.$apply();
           }
-        
+
           var servidor = modulo_servidor(data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
-        
+
           $scope.base = servidor.base;
           $scope.mi_ip = servidor.mi_ip;
-        
+
     		});
 
 });

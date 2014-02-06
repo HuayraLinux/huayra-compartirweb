@@ -127,7 +127,6 @@ var servidor = function iniciarServidor(data_preferencias,
             var ruta_completa = process.env.HOME + '/.huayra-compartir_avatar';
 
             fs.exists(ruta_completa, function(exists) {
-                console.log(exists);
                 if (exists == false) {
                     self.enviar_archivo(res, './assets/img/avatar_por_omision.png');
                 }
@@ -172,7 +171,7 @@ var servidor = function iniciarServidor(data_preferencias,
 		stat = fs.statSync(ruta_completa);
 		size = stat.size;
 
-		//res.setHeader('Content-disposition', 'attachment; filename=' + nombre_archivo);
+		res.setHeader('Content-disposition', 'attachment; filename=' + nombre_archivo);
 		res.setHeader('Content-type', mimetype);
 
 		var stream = fs.createReadStream(ruta_completa, {'bufferSize': 1 * 1024});
@@ -223,14 +222,22 @@ var servidor = function iniciarServidor(data_preferencias,
 	this.polo.on('up', cuando_se_conecta_un_equipo);
 	this.polo.on('down', cuando_se_desconecta_un_equipo);
 
-	this.polo.put({
-		name: 'huayra-compartir',
-		version: 0.1,
-		host: os.hostname(),
-		ip: this.obtener_ip(),
-		id: data_preferencias.id,
-		port: this.puerto
-	});
+    var self = this
+    function publicar_servicio() {
+        self.polo.put({
+	    	name: 'huayra-compartir',
+	    	version: 0.1,
+	    	host: os.hostname(),
+	    	ip: self.obtener_ip(),
+	    	id: data_preferencias.id,
+	    	port: self.puerto
+	    });
+
+        setTimeout(publicar_servicio, 15*1000);
+    };
+
+    publicar_servicio();
+
 
 	// Genera la interfaz de rutas.
 	this.configurar_rutas();
