@@ -231,3 +231,7 @@ padding-right: 20px;
 .titulo-frase {
 	font-weight: 100;
 }
+
+.active {
+    background-color: rgb(196, 196, 196);
+}
