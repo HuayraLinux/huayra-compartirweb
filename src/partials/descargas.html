@@ -19,25 +19,34 @@
 
 		<thead>
 			<tr>
-				<th width='80%'>Nombre</th>
+				<th width='70%'>Nombre</th>
+				<th width='10%' class='col-size'>Estado</th>
 				<th width='20%' class='col-size'>Progreso</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<tr ng-repeat='d in Descargas' class='archivo  repeat-item'>
-				<td>{{d.name}} <span ng-show='d.estado == "error"'>No se pudo descargar el archivo!</span></td>
-				<!-- <td>{{d.url}}</td> -->
+			<tr ng-repeat='d in Descargas' class='archivo  repeat-item' ng-class="{'error': d.estado == 'error'}">
+				<td>{{d.name}}</td>
+          
+        <td>
+            <span ng-show='d.estado == "error"'>Error</span>
+            <span ng-show='d.estado == "success"'>Descargado</span>
+        </td>
+          
 				<td class='col-size'>
-					<progreso model="d"></progreso>
+					<progreso  ng-show="d.estado != 'error'" model="d"></progreso>
 				</td>
+          
 				<td ng-show='d.transmitido == d.size'>
-					<button class="btn btn-success btn-xs" ng-click='abrir_item(d)'> <i class="icon-upload-alt"></i> </button>
+					<button  ng-show="d.estado != 'error'" class="btn btn-success btn-xs" ng-click='abrir_item(d)'> <i class="icon-upload-alt"></i> </button>
 				</td>
+          
 				<td ng-show='d.transmitido != d.size'>
-					<button class="btn btn-danger btn-xs" disabled> <i class="icon-remove"></i> </button>
+					<button  ng-show="d.estado != 'error'" class="btn btn-danger btn-xs" disabled> <i class="icon-remove"></i> </button>
 				</td>
+          
 			</tr>
 		</tbody>
 
