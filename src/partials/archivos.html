@@ -10,13 +10,16 @@
 		<input class='form-control input-busqueda' ng-model='filtro' placeholder='Buscar'></input>
 	</div>
 	
+<div ng-show='en_curso'>
+    <img src='assets/img/spinner.gif'>
+</div>
+
+<div ng-hide='en_curso'>
 	<table class="table table-bordered tabla-archivos" ng-hide='archivos'>
 		<tr>
 			<td>Actualmente no hay archivos para mostrar.</td>
 		</tr>
 	</table>
-	
-	
 	
 	<table class="table table-bordered tabla-archivos" ng-show='archivos'>
 		
@@ -51,5 +54,5 @@
 		</tbody>
 		
 	</table>
-	
+</div>
 </div>

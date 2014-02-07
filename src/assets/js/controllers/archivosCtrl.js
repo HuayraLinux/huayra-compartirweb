@@ -34,7 +34,10 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 			$scope.es_vista_mis_archivos = (host_a_visitar === $scope.mi_ip);
 		}
 		
+    $scope.en_curso = true;
+      
 		$http.get(path).success(function(data) {
+    	$scope.en_curso = false;
 			$scope.archivos = data.archivos;
 		});
 	}
