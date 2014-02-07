@@ -3,7 +3,16 @@
 </div>
 
 <div class="container">
-	<ul>
-		<li ng-repeat='n in notificaciones'>{{n.texto}}</li>
-	</ul>
+	<div class='barra-botones'>
+		<button ng-disabled='!notificaciones' class='btn btn-info' ng-click='limpiar()'>  <i class='icon-eraser'></i> Limpiar</button>
+	</div>
+	
+	<table class="table table-bordered tabla-archivos" ng-hide='notificaciones'>
+		<tr>
+			<td>No hay notificaciones por ahora...</td>
+		</tr>
+	</table>
+	
+	<div class='alert alert-warning' ng-repeat='n in notificaciones'>{{n.texto}}</div>
+	
 </div>

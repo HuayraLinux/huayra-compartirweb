@@ -246,6 +246,13 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 });
 
 app.controller("NotificacionesCtrl", function($scope) {
+	$scope.notificaciones = [
+		{texto: "Hey!, hola!"},
+	];
+	
+	$scope.limpiar = function() {
+		$scope.notificaciones = [];
+	}
 });
 
 app.controller("AmigosCtrl", function($scope, $location) {
