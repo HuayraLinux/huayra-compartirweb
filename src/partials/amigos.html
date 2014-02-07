@@ -26,7 +26,7 @@
 				<td>
            &nbsp;
            <p ng-hide='a.data.nombre'><img src='assets/img/spinner.gif'></p>
-           <h3 ng-show='a.data'>{{a.data.nombre}}</h3>
+           <h3 ng-show='a.data'><a href ng-click='abrir_descargas_de(a)'>{{a.data.nombre}}</a></h3>
            <h4 ng-show='a.data' class='titulo-frase'>{{a.data.frase}}
 					<span class="pull-right">({{ a.ip }})</span>
            </h4>
