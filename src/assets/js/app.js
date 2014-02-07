@@ -109,11 +109,17 @@ app.filter('bytes', function() {
 	}
 });
 
-app.controller("MainCtrl", function($scope, $http, Descargas, Eventos) {
+app.controller("MainCtrl", function($scope, $location, $http, Descargas, Eventos) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
     $scope.notificaciones = [];
     
+    $scope.getClass = function(path) {
+    	if ($location.path().substr(0, path.length) == path)
+          return "active";
+      else
+          return "";
+  	}       
     
     Eventos.on('inicia', function(data) {
           $scope.notificaciones.push(data);
