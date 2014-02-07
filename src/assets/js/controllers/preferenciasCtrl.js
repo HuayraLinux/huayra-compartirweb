@@ -19,6 +19,10 @@ app.controller("PreferenciasCtrl", function($scope, $http) {
   				var outputImage = fs.createWriteStream(ruta_avatar);
 					var conversion = inputImage.pipe(resizer.contain({height: 100, width:100})).pipe(outputImage);
             
+          conversion.on('error', function(error) {
+              console.log(error);
+          });
+            
           conversion.on('end', function() {
           	var imagen_avatar = document.getElementById('imagen_avatar');
             imagen_avatar.src = ruta_avatar + '?' + new Date()
