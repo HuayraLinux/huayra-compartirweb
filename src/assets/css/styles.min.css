@@ -6950,7 +6950,6 @@ body.show-rightbar #chatarea .chatmsg.sent:after {
 #sidebar a:hover {
     background-color: #d2d3d6;
     color: #3f444c;
-    box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.1);
 }
 #sidebar a:hover i {
     color: #3f444c;
@@ -7201,7 +7200,7 @@ body.collapse-leftbar #search.keep-open>a {
     background: #d2d3d6!important;
 }
 body.collapse-leftbar #search.keep-open>a:hover {
-    background: #3f444c;
+    background: red;
 }
 body.collapse-leftbar #search.keep-open form {
     display: block;
