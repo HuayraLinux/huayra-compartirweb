@@ -36,10 +36,12 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 
     $scope.en_curso = true;
 
-		$http.get(path).success(function(data) {
-    	$scope.en_curso = false;
-			$scope.archivos = data.archivos;
-		});
+    setTimeout(function() {
+        $http.get(path).success(function(data) {
+          $scope.en_curso = false;
+          $scope.archivos = data.archivos;
+        });
+    }, 500);
 	}
 
 	$scope.descargar = function(archivo) {
