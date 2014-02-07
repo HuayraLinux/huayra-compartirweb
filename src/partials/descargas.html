@@ -2,21 +2,21 @@
   <h1>Descargas</h1>
 </div>
 
-		
+
 <div class="container">
 	<div class='barra-botones'>
 		<button class='btn btn-success' ng-click='abrir_directorio()'>  <i class='icon-folder-open'></i> Abrir directorio </button>
 		<button class='btn btn-info' ng-click='limpiar_completados()'>  <i class='icon-eraser'></i> Limpiar completados</button>
 	</div>
-	
+
 	<table class="table table-bordered tabla-archivos" ng-hide='Descargas'>
 		<tr>
 			<td>Actualmente no hay descargas en curso, visitá la sección <a href='#/amigos'>amigos</a> para buscar archivos.</td>
 		</tr>
 	</table>
-	
+
 	<table class="table table-bordered tabla-archivos" ng-show='Descargas'>
-		
+
 		<thead>
 			<tr>
 				<th width='80%'>Nombre</th>
@@ -24,10 +24,10 @@
 				<th>Acciones</th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 			<tr ng-repeat='d in Descargas' class='archivo  repeat-item'>
-				<td>{{d.name}}</td>
+				<td>{{d.name}} <span ng-show='d.estado == "error"'>No se pudo descargar el archivo!</span></td>
 				<!-- <td>{{d.url}}</td> -->
 				<td class='col-size'>
 					<progreso model="d"></progreso>
@@ -40,7 +40,7 @@
 				</td>
 			</tr>
 		</tbody>
-		
+
 	</table>
-	
+
 </div>
