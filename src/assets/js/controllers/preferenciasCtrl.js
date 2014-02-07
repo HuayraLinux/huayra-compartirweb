@@ -1,8 +1,10 @@
 
 var fs = require('fs');
+var resizer = require('resizer');
 var http = require('http');
 
 var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
+var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
 
 app.controller("PreferenciasCtrl", function($scope, $http) {
     var preferencias = new Object();
@@ -13,7 +15,15 @@ app.controller("PreferenciasCtrl", function($scope, $http) {
         var el = document.getElementById('fileDialog');
         
         el.addEventListener("change", function(evt) {
-      		console.log(this.value);
+  				var inputImage = fs.createReadStream(this.value);
+  				var outputImage = fs.createWriteStream(ruta_avatar);
+					var conversion = inputImage.pipe(resizer.contain({height: 100, width:100})).pipe(outputImage);
+            
+          conversion.on('end', function() {
+          	var imagen_avatar = document.getElementById('imagen_avatar');
+            imagen_avatar.src = ruta_avatar + '?' + new Date()
+          });
+            
     		}, false);
         
         el.click();
