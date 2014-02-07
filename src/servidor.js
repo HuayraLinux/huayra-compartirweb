@@ -130,10 +130,10 @@ var servidor = function iniciarServidor(eventos,
 
             fs.exists(ruta_completa, function(exists) {
                 if (exists == false) {
-                    self.enviar_archivo(res, './assets/img/avatar_por_omision.png');
+                    self.enviar_archivo(res, './assets/img/avatar_por_omision.png', false);
                 }
                 else {
-                    self.enviar_archivo(res, ruta_completa);
+                    self.enviar_archivo(res, ruta_completa, false);
                 }
             });
 
@@ -161,7 +161,9 @@ var servidor = function iniciarServidor(eventos,
 
 	}
 
-	this.enviar_archivo = function(res, ruta_completa) {
+	this.enviar_archivo = function(res, ruta_completa, notificar) {
+        var notificar = typeof notificar !== 'undefined' ? notificar : true;
+
 		var nombre_archivo = path.basename(ruta_completa);
 		var mimetype = mime.lookup(ruta_completa);
 		var stat;
@@ -169,10 +171,12 @@ var servidor = function iniciarServidor(eventos,
 		var emited = 0;
 		var porcentaje_emitido = 0;
 		var porcentaje_emitido_anterior = -1;
-    var id = uuid.v1();
 
-    eventos.emit('inicia', {id: id, estado: 'warning', texto: "Enviando el archivo " + nombre_archivo});
-      
+        if (notificar) {
+            var id = uuid.v1();
+            eventos.emit('inicia', {id: id, estado: 'warning', texto: "Enviando el archivo " + nombre_archivo});
+        }
+
 		stat = fs.statSync(ruta_completa);
 		size = stat.size;
 
@@ -195,8 +199,10 @@ var servidor = function iniciarServidor(eventos,
 			}
 		});
 
-		stream.on('end', function() {
-    	eventos.emit('finaliza', {id: id, estado: 'success', texto: "Terminó la transferencia del archivo: " + nombre_archivo});
+        stream.on('end', function() {
+            if (notificar) {
+                eventos.emit('finaliza', {id: id, estado: 'success', texto: "Terminó la transferencia del archivo: " + nombre_archivo});
+            }
 		});
 
 	}
