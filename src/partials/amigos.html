@@ -4,9 +4,16 @@
 
 <div class="container">
 
+	<table class="table table-bordered tabla-archivos" ng-hide='amigos'>
+		<tr>
+			<td>Mmm... parece que no estás conectado a una red o tus amigos no están conectados.</td>
+		</tr>
+	</table>
+	
 	<table class="table table-bordered tabla-archivos" ng-show='amigos'>
 
 		<tbody>
+			
 			<tr ng-repeat='a in amigos' class='archivo repeat-item'>
 				<td ng-hide='a.data.nombre' class='td-avatar'>
             <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
