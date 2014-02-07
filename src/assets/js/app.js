@@ -22,7 +22,7 @@ var gui = require('nw.gui');
 var modulo_servidor = require('./servidor');
 var path = require('path');
 var uuid = require('node-uuid');
-
+var events = require('events');
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate']);
 
@@ -56,6 +56,13 @@ app.factory("Descargas", function() {
 	];
 
 	return descargas;
+});
+
+
+app.factory('Eventos', function() {
+  console.log("Creando el emisor de eventos!");
+	var eventos = new events.EventEmitter();
+  return eventos;
 });
 
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.
@@ -102,9 +109,28 @@ app.filter('bytes', function() {
 	}
 });
 
-app.controller("MainCtrl", function($scope, $http, Descargas) {
+app.controller("MainCtrl", function($scope, $http, Descargas, Eventos) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
+    $scope.notificaciones = [];
+    
+    
+    Eventos.on('inicia', function(data) {
+          $scope.notificaciones.push(data);
+          $scope.$apply();
+    });
+        
+    Eventos.on('finaliza', function(data) {
+          for (var index in $scope.notificaciones) {
+            if ($scope.notificaciones[index].id === data.id) {
+              $scope.notificaciones[index].texto = data.texto;
+              $scope.notificaciones[index].estado = data.estado;
+              $scope.$apply();
+              return;
+             }
+           }
+    });
+        
 
     function agregar_amigo(servicio) {
         for (var key in $scope.amigos) {
@@ -178,7 +204,7 @@ app.controller("MainCtrl", function($scope, $http, Descargas) {
             $scope.$apply();
           }
 
-          var servidor = modulo_servidor(data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
+          var servidor = modulo_servidor(Eventos, data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
 
           $scope.base = servidor.base;
           $scope.mi_ip = servidor.mi_ip;
@@ -245,12 +271,16 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 
 });
 
-app.controller("NotificacionesCtrl", function($scope) {
-	$scope.notificaciones = [
-		{texto: "Hey!, hola!"},
-	];
+app.controller("NotificacionesCtrl", function($scope, Eventos) {
+  $scope.notificaciones = $scope.$parent.notificaciones;
+    
+  $scope.$parent.$watch('notificaciones', function() {
+      console.log("Cambiaron las notificaciones");
+  });
+    
 	
 	$scope.limpiar = function() {
+		$scope.$parent.notificaciones = [];
 		$scope.notificaciones = [];
 	}
 });

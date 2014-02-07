@@ -7,8 +7,10 @@ var http = require('http');
 var os = require('os');
 var polo = require('polo');
 var crypto = require('crypto');
+var uuid = require('node-uuid');
 
-var servidor = function iniciarServidor(data_preferencias,
+var servidor = function iniciarServidor(eventos,
+                                        data_preferencias,
                                         cuando_se_conecta_un_equipo,
 																				cuando_se_desconecta_un_equipo,
 																				puerto) {
@@ -167,7 +169,10 @@ var servidor = function iniciarServidor(data_preferencias,
 		var emited = 0;
 		var porcentaje_emitido = 0;
 		var porcentaje_emitido_anterior = -1;
+    var id = uuid.v1();
 
+    eventos.emit('inicia', {id: id, estado: 'warning', texto: "Enviando el archivo " + nombre_archivo});
+      
 		stat = fs.statSync(ruta_completa);
 		size = stat.size;
 
@@ -191,7 +196,7 @@ var servidor = function iniciarServidor(data_preferencias,
 		});
 
 		stream.on('end', function() {
-			console.log("Terminó la transferencia de: " + ruta_completa);
+    	eventos.emit('finaliza', {id: id, estado: 'success', texto: "Terminó la transferencia del archivo: " + nombre_archivo});
 		});
 
 	}

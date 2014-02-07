@@ -36,7 +36,7 @@
         	</li>
 
         	<li class="dropdown">
-        		<a href="#/notificaciones" class=" dropdown-toggle" data-toggle='dropdown'><i class="icon-bell-alt"></i><span class="badge" ng-show='notificaciones_sin_ver'>{{notificaciones_sin_ver}}</span></a>
+        		<a href="#/notificaciones" class=" dropdown-toggle" data-toggle='dropdown'><i class="icon-bell-alt"></i><span class="badge" ng-show='notificaciones.length'>{{notificaciones.length}}</span></a>
 					</li>
 
 				</ul>
@@ -53,7 +53,7 @@
                 <li class="divider"></li>
 
                 <li><a href="#/amigos"><i class="icon-user"></i> <span>Amigos</span> <span class="badge badge-indigo" ng-show='amigos_sin_ver'>{{amigos_sin_ver}}</span></a></li>
-                <li><a href="#/notificaciones"><i class="icon-bell-alt"></i> <span>Notificaciones</span> <span class="badge badge-danger" ng-show='notificaciones_sin_ver'>{{notificaciones_sin_ver}}</span></a></li>
+                <li><a href="#/notificaciones"><i class="icon-bell-alt"></i> <span>Notificaciones</span> <span class="badge badge-indigo" ng-show='notificaciones.length'>{{notificaciones.length}}</span></a></li>
 
                 <li class="divider"></li>
                 <li><a href="#/preferencias"><i class="icon-pencil"></i> <span>Preferencias</span></a></li>

@@ -2,17 +2,22 @@
 	<h1>Notificaciones</h1>
 </div>
 
+<pre>
+parent = {{$parent.notificaciones}}
+
+scope =  {{notificaciones}}
+</pre>
 <div class="container">
 	<div class='barra-botones'>
-		<button ng-disabled='!notificaciones' class='btn btn-info' ng-click='limpiar()'>  <i class='icon-eraser'></i> Limpiar</button>
+		<button ng-disabled='notificaciones.length === 0' class='btn btn-info' ng-click='limpiar()'>  <i class='icon-eraser'></i> Limpiar</button>
 	</div>
 	
-	<table class="table table-bordered tabla-archivos" ng-hide='notificaciones'>
+	<table class="table table-bordered tabla-archivos" ng-hide='notificaciones.length > 0'>
 		<tr>
 			<td>No hay notificaciones por ahora...</td>
 		</tr>
 	</table>
 	
-	<div class='alert alert-warning' ng-repeat='n in notificaciones'>{{n.texto}}</div>
+	<div class='alert alert-{{n.estado}}' ng-repeat='n in notificaciones'>{{n.texto}}</div>
 	
 </div>
