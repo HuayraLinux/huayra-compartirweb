@@ -1,13 +1,12 @@
 <div id="page-heading">
-  <h1>Mis archivos</h1>
+  <h1 ng-hide='es_vista_mis_archivos'>Archivos remotos</h1>
+  <h1 ng-show='es_vista_mis_archivos'>Mi archivos</h1>
 </div>
 		
-
-
 <div class="container">
 	<div class='barra-botones'>
 		<button class='btn btn-success' ng-click='regresar()'>  <i class='icon-arrow-left'></i> Regresar </button>
-		<button class='btn btn-success' ng-click='abrir_carpeta_compartida()'>  <i class='icon-folder-open'></i> Abrir directorio compartido</button>
+		<button class='btn btn-success' ng-show='es_vista_mis_archivos' ng-click='abrir_carpeta_compartida()'>  <i class='icon-folder-open'></i> Abrir directorio compartido</button>
 		<input class='form-control input-busqueda' ng-model='filtro' placeholder='Buscar'></input>
 	</div>
 	
