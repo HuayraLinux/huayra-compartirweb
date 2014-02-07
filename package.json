@@ -27,6 +27,7 @@
     "polo": "~0.5.6",
     "request-progress": "~0.3.1",
     "request": "~2.33.0",
-    "node-uuid": "~1.4.1"
+    "node-uuid": "~1.4.1",
+    "resizer": "0.0.5"
   }
 }

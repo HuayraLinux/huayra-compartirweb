@@ -7,6 +7,17 @@ var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
 app.controller("PreferenciasCtrl", function($scope, $http) {
     var preferencias = new Object();
     $scope.url_avatar = $scope.base + '/avatar';
+    
+    
+    $scope.cambiar_imagen_de_perfil = function() {
+        var el = document.getElementById('fileDialog');
+        
+        el.addEventListener("change", function(evt) {
+      		console.log(this.value);
+    		}, false);
+        
+        el.click();
+    }
 
     $http.get(ruta_preferencias).
         success(function (data, status){

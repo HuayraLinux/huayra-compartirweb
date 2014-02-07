@@ -15,13 +15,14 @@
 								<p>Esta información es la que se mostrará en la sección <a href='#/amigos'>amigos</a>
 								de todas las otras netbooks de la red.</p>
 								
+                 <input style="display:none;" id="fileDialog" type="file" />
 								
 						<form class="form-horizontal">
                 
 						  <div class="form-group">
 						    <label for="focusedinput" class="col-sm-3 control-label">Avatar</label>
 						    <div class="campo-texto">
-                  <img width=100 height=100 ng-src='{{url_avatar}}'>
+                  <a href ng-click='cambiar_imagen_de_perfil()'><img width=100 height=100 ng-src='{{url_avatar}}'></a>
 						    </div>
 						  </div>
 							
