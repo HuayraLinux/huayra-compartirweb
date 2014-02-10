@@ -3,7 +3,7 @@ var fs = require('fs');
 var resizer = require('resizer');
 var http = require('http');
 var domain = require('domain');
-
+var exec = require('child_process').exec;
 var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
 var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
 
@@ -11,35 +11,27 @@ app.controller("PreferenciasCtrl", function($scope, $http) {
     var preferencias = new Object();
     $scope.url_avatar = $scope.base + '/avatar';
     
-    
     $scope.cambiar_imagen_de_perfil = function() {
         var el = document.getElementById('fileDialog');
-				var path_seleccionado = el.value;
         
         el.addEventListener("change", function(evt) {
+					var path_seleccionado = el.value;
+        	var comando = "convert '" + path_seleccionado + "' -thumbnail '100x100^' -gravity center -extent 100x100 png:" + ruta_avatar;
+            console.log(comando);
 					
-					function capturar_errores(error) {
-						console.log("Error al generar el avatar:", {error: error});
+					function cuando_termina_conversion() {
+						var imagen_avatar = document.getElementById('imagen_avatar');
+						imagen_avatar.src = ruta_avatar + '?' + new Date()
 					}
-					
-					var d = domain.create(); 
-					
-    			d.on('error', capturar_errores); 
-					
-    			d.run(function() { 
-						var inputImage = fs.createReadStream(path_seleccionado);
-						var outputImage = fs.createWriteStream(ruta_avatar);
-						var stream = resizer.contain({height: 100, width:100});
-						var conversion = inputImage.pipe(stream).pipe(outputImage);
-						
-						function cuando_termina_conversion() {
-							var imagen_avatar = document.getElementById('imagen_avatar');
-							imagen_avatar.src = ruta_avatar + '?' + new Date()
-						}
-						
-						conversion.on('end', cuando_termina_conversion);
-    			}); 
-					
+            
+          exec(comando, function(error, stdout, stderror) {
+              console.log({error: error,
+                           stdout: stdout,
+                           stderr: stderror});
+              
+              cuando_termina_conversion();
+          });
+          
     		}, false);
         
         el.click();
