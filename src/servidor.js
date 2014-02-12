@@ -217,7 +217,8 @@ var servidor = function iniciarServidor(eventos,
 	// Genera el directorio compartido si no existe.
 	if (! fs.existsSync(this.directorio_compartido))
 		fs.mkdir(this.directorio_compartido);
-
+ 
+    
 	// Inicia el servicio http.
 	this.app = express();
 	this.configurar_acceso_desde_cualquier_host();
@@ -226,28 +227,33 @@ var servidor = function iniciarServidor(eventos,
 	// Publica en la red que el servicio http está online.
 	console.log("Publicando en la red que el servicio está online.");
 
-	this.polo = polo({
-      heartbeat: 5*1000
-  });
+  if (this.obtener_ip() !== "localhost") {
+      
+  	this.polo = polo({
+    	heartbeat: 5*1000
+    });
 
-	this.polo.on('up', cuando_se_conecta_un_equipo);
-	this.polo.on('down', cuando_se_desconecta_un_equipo);
+    this.polo.on('up', cuando_se_conecta_un_equipo);
+    this.polo.on('down', cuando_se_desconecta_un_equipo);
 
-    var self = this
+    var self = this;
+      
     function publicar_servicio() {
-        self.polo.put({
-	    	name: 'huayra-compartir',
-	    	version: 0.1,
-	    	host: os.hostname(),
-	    	ip: self.obtener_ip(),
-	    	id: data_preferencias.id,
-	    	port: self.puerto
-	    });
+    	self.polo.put({
+          name: 'huayra-compartir',
+          version: 0.1,
+          host: os.hostname(),
+          ip: self.obtener_ip(),
+          id: data_preferencias.id,
+          port: self.puerto
+    	});
 
-        setTimeout(publicar_servicio, 15*1000);
-    };
+    	setTimeout(publicar_servicio, 15*1000);
+    }
 
-    publicar_servicio();
+  	publicar_servicio();
+      
+  }
 
 
 	// Genera la interfaz de rutas.
