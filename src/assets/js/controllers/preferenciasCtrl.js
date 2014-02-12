@@ -1,6 +1,5 @@
 
 var fs = require('fs');
-var resizer = require('resizer');
 var http = require('http');
 var domain = require('domain');
 var exec = require('child_process').exec;
