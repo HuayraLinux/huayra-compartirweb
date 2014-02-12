@@ -221,7 +221,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Descargas, Eventos
 
 app.controller("PrincipalCtrl", function($scope) {
 	var gui = require('nw.gui');
-	var ruta_compartidos = process.env.HOME + '/compartido/';
+	var ruta_compartidos = process.env.HOME + '/Compartido/';
 
 	$scope.abrir_carpeta_compartida = function() {
 		gui.Shell.openItem(ruta_compartidos);

@@ -212,7 +212,7 @@ var servidor = function iniciarServidor(eventos,
 	this.base_url = ''; // TODO: ELIMINAR....
 	this.base = "";
 	this.puerto = ''; // se define su valor cuando se llama al metodo this.iniciar()
-	this.directorio_compartido = process.env.HOME + '/compartido/';
+	this.directorio_compartido = process.env.HOME + '/Compartido/';
 
 	// Genera el directorio compartido si no existe.
 	if (! fs.existsSync(this.directorio_compartido))
