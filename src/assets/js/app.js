@@ -176,7 +176,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Descargas, Eventos
           $scope.notificaciones_sin_ver = 0;
 
           function cuando_se_conecta_un_equipo(nombre, servicio) {
-            console.log({evento: "up", servicio: servicio});
+            //console.log({evento: "up", servicio: servicio});
 
             // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
           	if (servicio.name === "huayra-compartir") {
@@ -200,7 +200,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Descargas, Eventos
           }
 
           function cuando_se_desconecta_un_equipo(nombre, servicio) {
-            console.log({evento: "down", servicio: servicio});
+            //console.log({evento: "down", servicio: servicio});
 
         		for (var key in $scope.amigos) {
              	if (servicio.id === $scope.amigos[key].id)
