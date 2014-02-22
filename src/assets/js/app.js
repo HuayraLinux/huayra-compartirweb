@@ -24,7 +24,7 @@ var path = require('path');
 var uuid = require('node-uuid');
 var events = require('events');
 
-var app = angular.module('app', ['ngRoute', 'ngAnimate']);
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
 app.directive("progreso", function() {
 
@@ -290,11 +290,4 @@ app.controller("NotificacionesCtrl", function($scope, Eventos) {
     }
 });
 
-app.controller("AmigosCtrl", function($scope, $location) {
-    $scope.amigos = $scope.$parent.amigos;
-
-    $scope.abrir_descargas_de = function(amigo) {
-        $location.path('/archivos/' + amigo.ip + ':' + amigo.port + '/obtener/');
-    }
-});
 
