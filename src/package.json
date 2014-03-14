@@ -9,6 +9,7 @@
  		"min_height": 510,
  		"width": 750,
  		"height": 510,
+                "icon": "huayra-compartir.png",
 		"position": "center"
 	}
 }
