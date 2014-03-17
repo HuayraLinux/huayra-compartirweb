@@ -1,3 +1,81 @@
+huayra-compartir (0.24) unstable; urgency=low
+
+  * Arreglos menores. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 17 Mar 2014 18:30:47 +0100
+
+huayra-compartir (0.23) unstable; urgency=low
+
+  * Arreglos generales. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 14 Mar 2014 20:46:24 +0100
+
+huayra-compartir (0.22) unstable; urgency=low
+
+  * Configurando el menú para ubicar la aplicación en Internet. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 12 Feb 2014 20:58:34 +0100
+
+huayra-compartir (0.21) unstable; urgency=low
+
+  * Quitando el modulo resizer y otros arreglos. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 12 Feb 2014 17:37:02 +0100
+
+huayra-compartir (0.20) unstable; urgency=low
+
+  * Haciendo que el paquete sea independiente de arquitectura.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 10 Feb 2014 20:01:37 +0100
+
+huayra-compartir (0.19) unstable; urgency=low
+
+  * Arreglos sobre avatares.
+  * Haciendo que las fuentes funcionen offline.
+  * Mostrando la sección activa en el menú.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 10 Feb 2014 16:13:55 +0100
+
+huayra-compartir (0.18) unstable; urgency=low
+
+  * Agregando la posiblidad de cambiar el avatar.
+  * Implementando modificaciones.
+  * Arreglo en el listado de amigos y las notificaciones de clientes.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 07 Feb 2014 20:15:13 +0100
+
+huayra-compartir (0.17) unstable; urgency=low
+
+  * Agregando avatars.
+  * Arreglos generales para utilizar polo y descubrir equipos.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 06 Feb 2014 20:23:03 +0100
+
+huayra-compartir (0.16) unstable; urgency=low
+
+  * Actualizando icono de la aplicacion.
+  * Agregando codigo depuracion.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 05 Feb 2014 19:40:05 +0100
+
+huayra-compartir (0.15) unstable; urgency=low
+
+  * Actualizaciones generales. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 05 Feb 2014 19:10:49 +0100
+
+huayra-compartir (0.14) unstable; urgency=low
+
+  * mejorando la vista amigos. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 31 Jan 2014 17:05:52 +0100
+
+huayra-compartir (0.13) unstable; urgency=low
+
+  * Agregando icono y acceso desde el menu. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 31 Jan 2014 16:46:00 +0100
+
 huayra-compartir (0.12) unstable; urgency=low
 
   * Agregando animaciones, filtros y posibilidad de limpiar descargas.

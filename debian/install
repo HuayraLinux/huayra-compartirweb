@@ -1,8 +1,8 @@
 src/* usr/share/huayra-compartir/src
 bin/huayra-compartir usr/bin/
 node_modules/express/* usr/share/huayra-compartir/node_modules/express
-node_modules/mdns/* usr/share/huayra-compartir/node_modules/mdns
 node_modules/mime/* usr/share/huayra-compartir/node_modules/mime
 node_modules/polo/* usr/share/huayra-compartir/node_modules/polo
+node_modules/node-uuid/* usr/share/huayra-compartir/node_modules/node-uuid
 debian/huayra-compartir.desktop /usr/share/applications
 debian/huayra-compartir.svg /usr/share/icons/hicolor/scalable/apps
