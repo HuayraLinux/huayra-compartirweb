@@ -4,10 +4,12 @@ N="\x1b[0m"
 V="\x1b[32;01m"
 R="\033[1;31m"
 
-NEEDED_COMMANDS="node npm bower nw"
+NEEDED_COMMANDS="npm node bower nw"
+
+echo "Analizando dependencias ...\n"
 
 for cmd in ${NEEDED_COMMANDS} ; do
-    if ! command -v ${cmd} &> /dev/null ; then
+    if ! command -v ${cmd} ; then
         echo "${R}ERROR: imposible ejecutar el comando${N}"
         echo "${R}Hay dependencias sin instalar, como '${cmd}' por ejemplo ...${N}"
         echo ""

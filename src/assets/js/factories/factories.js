@@ -13,8 +13,48 @@ app.factory('Eventos', function() {
 });
 
 
+app.factory("Menu", function() {
+    var menu = undefined;
+    var tray = undefined;
 
-app.factory("Singleton", function() {
+    function mostrar_ventana() {
+        var ventana = gui.Window.get();
+        ventana.show();
+        ventana.restore();
+    }
+
+    function crear() {
+        tray = new gui.Tray({title: '', icon: 'assets/img/icono_1.png' });
+
+        menu = new gui.Menu();
+
+        tray.on ('click',function() {
+          mostrar_ventana();
+        });
+
+        menu.append(new gui.MenuItem({
+          label: 'Mostrar',
+          click: function() {
+            mostrar_ventana();
+          }
+        }));
+
+        menu.append(new gui.MenuItem({
+          label: 'Salir',
+          click: function() {
+            gui.App.quit();
+          }
+        }));
+
+        tray.menu = menu;
+      }
+
+
+    return {crear: crear};
+});
+
+
+app.factory("Singleton", function(Menu) {
     /* Se encarga de mantener una sola instancia de la
     aplicación abierta */
 
@@ -25,6 +65,7 @@ app.factory("Singleton", function() {
     function mostrar_ventana() {
         var ventana = gui.Window.get();
         ventana.show();
+        ventana.restore();
     }
 
     function iniciar() {
@@ -34,7 +75,16 @@ app.factory("Singleton", function() {
             res.end('Singleton APP');
             mostrar_ventana();
         }).listen(port, '127.0.0.1', function(){
-            mostrar_ventana();
+            //mostrar_ventana();
+            Menu.crear();
+
+            // Se re-define por unica vez el evento close. Esto evita que
+            // la ventana se pueda cerrar.
+            gui.Window.get().on('close', function() {
+                this.hide();
+            });
+
+	    console.log("%cHey, bienvenido al modo desarrollo. Desde acá vas a poder ver y modificar el funcionamiento de la aplicación.", "color: blue");
         });
 
         server.on('error', function(){
