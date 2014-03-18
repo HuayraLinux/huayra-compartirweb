@@ -18,6 +18,8 @@ window.guardar_preferencias = function(preferencias) {
     });
 }
 
+
+
 var gui = require('nw.gui');
 var modulo_servidor = require('./servidor');
 var path = require('path');
@@ -25,44 +27,6 @@ var uuid = require('node-uuid');
 var events = require('events');
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
-
-app.directive("progreso", function() {
-
-    function link(scope, element, attrs) {
-        scope.$watch(function() {
-            var porcentaje = scope.model.transmitido / scope.model.size * 100;
-            element.children(0).css('width', Math.floor(porcentaje) + "%");
-        });
-    }
-
-    return {
-        restrict: 'E',
-        replace: true,
-        template: '<div>' +
-                  '<div style="background-color: green; height: 2px;"></div>' +
-                  '{{model.transmitido / model.size * 100 | number:0}} %' +
-                  '</div>',
-        scope: {
-            model: '=',
-            porcentaje: '='
-        },
-        link: link
-    }
-});
-
-app.factory("Descargas", function() {
-    var descargas = [
-    ];
-
-    return descargas;
-});
-
-
-app.factory('Eventos', function() {
-  console.log("Creando el emisor de eventos!");
-    var eventos = new events.EventEmitter();
-  return eventos;
-});
 
 app.config(['$routeProvider', function($routeProvider) { $routeProvider.
           when('/principal', {
@@ -93,25 +57,19 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
             controller: 'ArchivosCtrl',
             templateUrl: 'partials/archivos.html'
           }).
-                    otherwise({redirectTo:'/principal'});
+          otherwise({redirectTo:'/principal'});
 }]);
 
 
-app.filter('bytes', function() {
-    return function(bytes, precision) {
-        if (bytes==0) return '...';
-        if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
-        if (typeof precision === 'undefined') precision = 1;
-        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
-            number = Math.floor(Math.log(bytes) / Math.log(1024));
-        return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
-    }
-});
 
-app.controller("MainCtrl", function($scope, $location, $http, Descargas, Eventos) {
+app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descargas, Eventos) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
     $scope.notificaciones = [];
+
+
+
+    Singleton.iniciar();
 
     $scope.getClass = function(path) {
         if ($location.path().substr(0, path.length) == path)
@@ -275,19 +233,3 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
     });
 
 });
-
-app.controller("NotificacionesCtrl", function($scope, Eventos) {
-  $scope.notificaciones = $scope.$parent.notificaciones;
-
-  $scope.$parent.$watch('notificaciones', function() {
-      console.log("Cambiaron las notificaciones");
-  });
-
-
-    $scope.limpiar = function() {
-        $scope.$parent.notificaciones = [];
-        $scope.notificaciones = [];
-    }
-});
-
-
