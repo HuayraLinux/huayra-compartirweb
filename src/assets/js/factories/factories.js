@@ -16,6 +16,7 @@ app.factory('Eventos', function() {
 app.factory("Menu", function() {
     var menu = undefined;
     var tray = undefined;
+    var animar_icono = false;
 
     function mostrar_ventana() {
         var ventana = gui.Window.get();
@@ -23,8 +24,31 @@ app.factory("Menu", function() {
         ventana.restore();
     }
 
+    function animar_icono(estado) {
+        if (estado) {
+            animar_icono = true;
+        } else {
+            animar_icono = false;
+            tray.icon = "assets/img/icono_4.png";
+        }
+    }
+
     function crear() {
-        tray = new gui.Tray({title: '', icon: 'assets/img/icono_1.png' });
+        tray = new gui.Tray({title: '', icon: 'assets/img/icono_4.png' });
+        var numero = 1;
+
+
+        setInterval(function() {
+            if (animar_icono) {
+                numero = numero + 1;
+
+                if (numero > 3)
+                    numero = 1;
+
+                tray.icon = "assets/img/icono_" + numero + ".png";
+            }
+
+        }, 1000);
 
         menu = new gui.Menu();
 
@@ -50,7 +74,8 @@ app.factory("Menu", function() {
       }
 
 
-    return {crear: crear};
+    return {crear: crear, 
+            animar_icono: animar_icono};
 });
 
 
