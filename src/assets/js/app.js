@@ -67,16 +67,31 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
     var data_preferencias = {};
     $scope.notificaciones = [];
 
-
-
     Singleton.iniciar();
 
     $scope.getClass = function(path) {
-        if ($location.path().substr(0, path.length) == path)
-          return "active";
-      else
-          return "";
-      }
+
+        if ($location.path().substr(0, "/archivos".length) == "/archivos") {
+            var es_mi_equipo = ($location.path().indexOf($scope.mi_ip) > 1);
+
+            // Muestra la seccion archivos.
+            if (path == '/archivos' && (es_mi_equipo || $location.path() === "/archivos"))
+                return "active";
+
+            // Muestra la seccion amigos.
+            if (path == '/amigos' && !es_mi_equipo && $location.path() !== "/archivos")
+                return "active";
+
+
+        } else {
+            // Si no es una seccion especial, usa la URL y el path
+            // para indicar si la sección está activa o no.
+            if ($location.path().substr(0, path.length) == path)
+                return "active";
+            else
+                return "";
+        }
+    }
 
     Eventos.on('inicia', function(data) {
           $scope.notificaciones.push(data);
@@ -185,51 +200,4 @@ app.controller("PrincipalCtrl", function($scope) {
     }
 });
 
-app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
-    var gui = require('nw.gui');
-    var ruta_descargas = process.env.HOME + '/Descargas/';
 
-    $scope.$parent.descargas_sin_ver = 0;
-
-    $scope.Descargas = Descargas;
-    var timer = null;
-
-    function actualizar_listado() {
-        timer = $timeout(actualizar_listado, 1000);
-    }
-
-     $scope.abrir_directorio = function() {
-        gui.Shell.openItem(ruta_descargas);
-    }
-
-     $scope.abrir_item = function(item) {
-         gui.Shell.openItem(ruta_descargas + item.name);
-     }
-
-
-     $scope.limpiar_completados = function() {
-         var lista_limpia = [];
-
-         for (var i=0; i<$scope.Descargas.length; i++) {
-             if (Descargas[i].bajando)
-                 lista_limpia.push(Descargas[i]);
-         }
-
-         while ($scope.Descargas.length > 0) {
-        Descargas.pop();
-         }
-
-         for (var i=0; i<lista_limpia.length; i++) {
-             $scope.Descargas.push(lista_limpia[i]);
-         }
-     }
-
-    console.log("iniciando timer para actualizar progreso de las descargas.");
-    actualizar_listado();
-
-    $scope.$on("$destroy", function(event) {
-        $timeout.cancel(timer);
-        console.log("cancelando el timer de actualización");
-    });
-
-});
