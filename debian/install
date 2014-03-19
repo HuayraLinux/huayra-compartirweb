@@ -5,4 +5,5 @@ node_modules/mime/* usr/share/huayra-compartir/node_modules/mime
 node_modules/polo/* usr/share/huayra-compartir/node_modules/polo
 node_modules/node-uuid/* usr/share/huayra-compartir/node_modules/node-uuid
 debian/huayra-compartir.desktop /usr/share/applications
+debian/huayra-compartir.desktop etc/xdg/autostart
 debian/huayra-compartir.svg /usr/share/icons/hicolor/scalable/apps
