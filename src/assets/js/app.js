@@ -62,7 +62,7 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
 
 
 
-app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descargas, Eventos) {
+app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descargas, Eventos, $timeout) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
     $scope.notificaciones = [];
@@ -184,10 +184,25 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
 
           var servidor = modulo_servidor(Eventos, data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
 
+
+          // Realiza consultas sobre la red para informar
+          // si se queda sin conexión.
+          var timer = null;
+
+          function actualizar_notificador_modo_offline() {
+              timer = $timeout(actualizar_notificador_modo_offline, 3000);
+              $scope.offline = (servidor.obtener_ip() === "localhost");
+              console.log(servidor.obtener_ip());
+          }
+
+          $scope.$on("$destroy", function(event) {
+              $timeout.cancel(timer);
+          });
+
+          actualizar_notificador_modo_offline();
           $scope.base = servidor.base;
           $scope.mi_ip = servidor.mi_ip;
-
-            });
+        });
 
 });
 

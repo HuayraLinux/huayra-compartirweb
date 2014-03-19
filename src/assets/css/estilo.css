@@ -1,37 +1,37 @@
 #page-leftbar {
-	width: 180px;
-	position: fixed;
-	top: 30px;
-	bottom: 0;
-	padding-top: 18px;
+    width: 180px;
+    position: fixed;
+    top: 30px;
+    bottom: 0;
+    padding-top: 18px;
 }
 
 #page-content {
-	overflow-x: hidden;
-	margin-left: 180px;
-	position: absolute;
-	bottom: 0;
-	top: 45px;
-	left: 0;
-	right: 0;
-	min-height: 10px;
+    overflow-x: hidden;
+    margin-left: 180px;
+    position: absolute;
+    bottom: 0;
+    top: 45px;
+    left: 0;
+    right: 0;
+    min-height: 10px;
 }
 
 .titulo {
-	color: #b7b7b7;
+    color: #b7b7b7;
 }
 
 .navbar-inverse {
-	background-color:rgb(230, 231, 232);
+    background-color:rgb(230, 231, 232);
 }
 
 .navbar-inverse img {
-	margin-left: 25px;
-	margin-top: 3px;
+    margin-left: 25px;
+    margin-top: 3px;
 }
 
 .navbar {
-	min-height: 45px;
+    min-height: 45px;
 }
 
 
@@ -40,89 +40,89 @@
 
 
 header .toolbar .dropdown, header #headerbardropdown, header #rightmenu-trigger {
-	border: 0;
+    border: 0;
 }
 
 .navbar-inverse .navbar-nav>li>a {
-	color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 header a.hasnotifications {
-	color: rgba(0, 0, 0, 0.5) !important;
+    color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
-	color: black;
+    color: black;
 }
 
 .acciones-depuracion {
-	position: fixed;
-	bottom: 15px;
-	left: 8px;
-	z-index: 5000;
+    position: fixed;
+    bottom: 15px;
+    left: 8px;
+    z-index: 5000;
 }
 
 .mini-icono {
-	opacity: 0.5;
-	margin-left: 10px;
-	cursor: pointer;
+    opacity: 0.5;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .mini-icono:hover {
-	opacity: 1;
+    opacity: 1;
 }
 
 
 ul.archivos {
-	list-style: none;
-	padding: 0;
-	margin-left: 1em;
+    list-style: none;
+    padding: 0;
+    margin-left: 1em;
 }
 
 ul.archivos li {
-	padding-bottom: 5px;
+    padding-bottom: 5px;
 }
-	
+
 ul.archivos li:hover {
-	background-color: white;
+    background-color: white;
 }
 
 .carpeta {
-	color: rgb(21, 180, 65);
+    color: rgb(21, 180, 65);
 }
 
 .archivo {
-	color: rgb(137, 180, 226);
+    color: rgb(137, 180, 226);
 }
 
 tr.archivo:hover {
-	background-color: rgb(253, 255, 228);
+    background-color: rgb(253, 255, 228);
 }
 
 table.tabla-archivos {
-	margin-right: 20px;
+    margin-right: 20px;
 }
 
 .col-size {
-	text-align: right;
+    text-align: right;
 }
 
 
 header {
-	border-bottom: 1px solid rgb(184, 184, 184) !important;
-	z-index: 100 !important;
+    border-bottom: 1px solid rgb(184, 184, 184) !important;
+    z-index: 100 !important;
 }
 
 #page-leftbar {
-	z-index: 200 !important;
-	top: 44px !important;
-	color: red;
-	box-shadow: none;
-	border-right: 1px solid rgb(184, 184, 184) !important;
+    z-index: 200 !important;
+    top: 44px !important;
+    color: red;
+    box-shadow: none;
+    border-right: 1px solid rgb(184, 184, 184) !important;
 }
 
 .clickeable {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 
@@ -130,31 +130,31 @@ header {
 
 
 .control-label {
-	width: 180px;
+    width: 180px;
 }
 
 .campo-texto {
-	display: inline-block;
+    display: inline-block;
 }
 
 
 .view-animate {
 }
- 
+
 .view-animate.ng-enter, .view-animate.ng-leave {
   -webkit-transition:0.2s linear all;
   transition:0.2s linear all;
-	
+
   display:block;
   width:100%;
- 
+
   position:absolute;
   top:0;
   left:0;
   right:0;
   bottom:0;
 }
- 
+
 .view-animate.ng-enter {
   left:100%;
 }
@@ -163,33 +163,33 @@ header {
 }
 .view-animate.ng-leave.ng-leave-active {
   left:-100%;
-	opacity: 0;
-}	
+    opacity: 0;
+}
 
 
 .barra-botones {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .container-principal {
-	padding-left: 30px;
-	padding-right: 30px;
-	font-size: 18px;
-	padding-top: 9px;
-	width: 450px;
-	text-align: justify;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 18px;
+    padding-top: 9px;
+    width: 450px;
+    text-align: justify;
 }
 
 h1.titular-principal {
-	width: 200px;
-	margin: auto !important;
-	padding-top: 40px !important;
-	float: none !important;
+    width: 200px;
+    margin: auto !important;
+    padding-top: 40px !important;
+    float: none !important;
 }
 
 
 .container {
-	padding-left: 20px;
+    padding-left: 20px;
 padding-right: 20px;
 }
 
@@ -199,8 +199,8 @@ padding-right: 20px;
 
 
 .input-busqueda {
-	width: 150px;
-	float: right;
+    width: 150px;
+    float: right;
 }
 
 
@@ -224,11 +224,11 @@ padding-right: 20px;
 
 
 .td-avatar {
-	width: 120px;
+    width: 120px;
 }
 
 .titulo-frase {
-	font-weight: 100;
+    font-weight: 100;
 }
 
 .active {
@@ -242,10 +242,25 @@ padding-right: 20px;
 }
 
 .centrado {
-   text-align:center; 
+   text-align:center;
    height: 200px;
    margin-top: 50px;
 }
 
 
 
+.nota {
+    color: gray;
+    margin: -10px;
+    text-align: right;
+}
+
+.offline {
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    margin: auto;
+    left: 45%;
+    color: rgb(216, 79, 79);
+    padding: 5px;
+}
