@@ -2,14 +2,14 @@
   <h1 ng-hide='es_vista_mis_archivos'>Archivos remotos</h1>
   <h1 ng-show='es_vista_mis_archivos'>Mis archivos</h1>
 </div>
-		
+
 <div class="container">
-	<div class='barra-botones'>
-		<button class='btn btn-success' ng-click='regresar()'>  <i class='icon-arrow-left'></i> Regresar </button>
-		<button class='btn btn-success' ng-show='es_vista_mis_archivos' ng-click='abrir_carpeta_compartida()'>  <i class='icon-folder-open'></i> Abrir directorio compartido</button>
-		<input class='form-control input-busqueda' ng-model='filtro' placeholder='Buscar'></input>
-	</div>
-	
+    <div class='barra-botones'>
+        <button class='btn btn-success' ng-click='regresar()'>  <i class='icon-arrow-left'></i> Regresar </button>
+        <button class='btn btn-success' ng-show='es_vista_mis_archivos' ng-click='abrir_carpeta_compartida()'>  <i class='icon-folder-open'></i> Abrir directorio compartido</button>
+        <input class='form-control input-busqueda' ng-model='filtro' placeholder='Buscar'></input>
+    </div>
+
 <div ng-show='en_curso' class='centrado'>
     <img src='assets/img/spinner.gif'>
     <br/>
@@ -17,44 +17,44 @@
 </div>
 
 <div ng-hide='en_curso'>
-	<table class="table table-bordered tabla-archivos" ng-hide='archivos'>
-		<tr>
-			<td>Actualmente no hay archivos para mostrar.</td>
-		</tr>
-	</table>
-	
-	<table class="table table-bordered tabla-archivos" ng-show='archivos'>
-		
-		<thead>
-			<tr>
-				<th width='1%'></th>
-				<th width='80%'>Nombre</th>
-				<th width='120' class='col-size'>Tamaño</th>
-				<th width='120'>Acciones</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-			<tr ng-repeat='a in archivos | filter:filtro' class='archivo repeat-item' ng-show='archivos'>
-				
-				<!-- si es directorio -->
-				<td ng-show="a.type === 'folder'" ng-click='abrir(a)' class='clickeable'><i class='carpeta icon-folder-open'></i></td>
-				<td ng-show="a.type === 'folder'" ng-click='abrir(a)' class='clickeable'>{{a.name}}</td>
-				<td ng-show="a.type === 'folder'" class='col-size'></td>
-				<td ng-show="a.type === 'folder'"><button class='btn btn-info btn-xs' ng-click='abrir(a)'> <i class='icon-arrow-right'></i> </button></td>
-				
-				<!-- si es archivo -->
-				<td ng-show="a.type === 'file'"><i class='archivo icon-file'></i></td>
-				<td ng-show="a.type === 'file'">{{a.name}}</td>
-				<td ng-show="a.type === 'file'" class='col-size'>{{a.size | bytes}}</td>
-				<td ng-show="a.type === 'file'">
-					<button ng-hide='es_vista_mis_archivos' class='btn btn-success btn-xs' ng-disabled='a.bajando' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button>
-					<button ng-show='es_vista_mis_archivos' class="btn btn-success btn-xs" ng-click='abrir_item(d)'> <i class="icon-upload-alt"></i> </button>
-				</td>
-				
-			</tr>
-		</tbody>
-		
-	</table>
+    <table class="table table-bordered tabla-archivos" ng-hide='archivos'>
+        <tr>
+            <td>Actualmente no hay archivos para mostrar.</td>
+        </tr>
+    </table>
+
+    <table class="table table-bordered tabla-archivos" ng-show='archivos'>
+
+        <thead>
+            <tr>
+                <th width='1%'></th>
+                <th width='80%'>Nombre</th>
+                <th width='120' class='col-size'>Tamaño</th>
+                <th width='120'>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat='a in archivos | filter:filtro' class='archivo repeat-item' ng-show='archivos'>
+
+                <!-- si es directorio -->
+                <td ng-show="a.type === 'folder'" ng-click='abrir(a)' class='clickeable'><i class='carpeta icon-folder-open'></i></td>
+                <td ng-show="a.type === 'folder'" ng-click='abrir(a)' class='clickeable'>{{a.name}}</td>
+                <td ng-show="a.type === 'folder'" class='col-size'></td>
+                <td ng-show="a.type === 'folder'"><button class='btn btn-info btn-xs' ng-click='abrir(a)'> <i class='icon-arrow-right'></i> </button></td>
+
+                <!-- si es archivo -->
+                <td ng-show="a.type === 'file'"><i class='archivo icon-file'></i></td>
+                <td ng-show="a.type === 'file'">{{a.name}}</td>
+                <td ng-show="a.type === 'file'" class='col-size'>{{a.size | bytes}}</td>
+                <td ng-show="a.type === 'file'">
+                    <button ng-hide='es_vista_mis_archivos' class='btn btn-success btn-xs' ng-disabled='a.bajando' ng-click='descargar(a)'> <i class='icon-arrow-down'></i> </button>
+                    <button ng-show='es_vista_mis_archivos' class="btn btn-success btn-xs" ng-click='abrir_item(d)'> <i class="icon-upload-alt"></i> </button>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
 </div>
 </div>
