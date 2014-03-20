@@ -1,3 +1,9 @@
+huayra-compartir (0.26) unstable; urgency=low
+
+  * Arreglos menores. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 20 Mar 2014 17:59:48 +0100
+
 huayra-compartir (0.25) unstable; urgency=low
 
   * Agregando mensaje para notificar si esta en modo offline.
