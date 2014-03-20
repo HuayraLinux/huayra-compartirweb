@@ -1,3 +1,10 @@
+huayra-compartir (0.27) unstable; urgency=low
+
+  * Quitando el botón 'agregar' amigo.
+  * Evitando mostrar mi propio equipo si hay problemas de red.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 20 Mar 2014 21:18:16 +0100
+
 huayra-compartir (0.26) unstable; urgency=low
 
   * Arreglos menores. 
