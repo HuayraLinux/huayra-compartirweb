@@ -153,7 +153,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
             // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
               if (servicio.name === "huayra-compartir") {
 
-                if (servicio.ip === servidor.mi_ip)
+                if (servicio.ip === servidor.mi_ip || servicio.ip === 'localhost')
                    return; // Evita mostrar en la vista de amigos mi propio equipo.
 
 
