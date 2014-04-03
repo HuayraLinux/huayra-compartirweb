@@ -115,11 +115,21 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
             if (servicio.id === $scope.amigos[key].id) {
                 $scope.amigos[key].nombre = servicio.nombre;
                 $scope.amigos[key].frase = servicio.frase;
+                console.log('El amigo ya está');
                 return;
             }
         }
 
+        console.log('Agrego amigo');
         // En caso de no encontrarlo en la lista de amigos, lo agrega.
+        var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
+
+        $http.get(tmp_url).success(function(data) {
+            console.log(data);
+            servicio.data = data;
+            console.log($scope.amigos)
+        });
+
         $scope.amigos.push(servicio);
     }
 
@@ -156,14 +166,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
                 if (servicio.ip === servidor.mi_ip || servicio.ip === 'localhost')
                    return; // Evita mostrar en la vista de amigos mi propio equipo.
 
-
-              var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
-
-              $http.get(tmp_url).success(function(data) {
-                  console.log(data);
-                servicio.data = data;
-              });
-
+              console.log('Llamo agregar_amigo')
               agregar_amigo(servicio);
 
 
@@ -192,7 +195,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
           function actualizar_notificador_modo_offline() {
               timer = $timeout(actualizar_notificador_modo_offline, 3000);
               $scope.offline = (servidor.obtener_ip() === "localhost");
-              console.log(servidor.obtener_ip());
+              //console.log(servidor.obtener_ip());
           }
 
           $scope.$on("$destroy", function(event) {
