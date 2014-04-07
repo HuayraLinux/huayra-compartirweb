@@ -21,7 +21,6 @@ window.guardar_preferencias = function(preferencias) {
 
 
 var gui = require('nw.gui');
-var modulo_servidor = require('./servidor');
 var path = require('path');
 var uuid = require('node-uuid');
 var events = require('events');
@@ -62,7 +61,7 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
 
 
 
-app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descargas, Eventos, $timeout) {
+app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servidor, Descargas, Eventos, $timeout) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
     $scope.notificaciones = [];
@@ -115,12 +114,10 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
             if (servicio.id === $scope.amigos[key].id) {
                 $scope.amigos[key].nombre = servicio.nombre;
                 $scope.amigos[key].frase = servicio.frase;
-                console.log('El amigo ya está');
                 return;
             }
         }
 
-        console.log('Agrego amigo');
         // En caso de no encontrarlo en la lista de amigos, lo agrega.
         var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
 
@@ -163,11 +160,10 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
             // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
               if (servicio.name === "huayra-compartir") {
 
-                if (servicio.ip === servidor.mi_ip || servicio.ip === 'localhost')
+                if (servicio.ip === Servidor.mi_ip || servicio.ip === 'localhost')
                    return; // Evita mostrar en la vista de amigos mi propio equipo.
 
-              console.log('Llamo agregar_amigo')
-              agregar_amigo(servicio);
+                agregar_amigo(servicio);
 
 
                 $scope.$apply();
@@ -185,17 +181,27 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
             $scope.$apply();
           }
 
-          var servidor = modulo_servidor(Eventos, data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
 
+          Servidor.inyectar_dependencias(Eventos, data_preferencias, cuando_se_conecta_un_equipo, cuando_se_desconecta_un_equipo);
+          Servidor.iniciar();
 
           // Realiza consultas sobre la red para informar
           // si se queda sin conexión.
           var timer = null;
+          var modo_offline_anterior = (Servidor.obtener_ip() === "localhost");
 
           function actualizar_notificador_modo_offline() {
               timer = $timeout(actualizar_notificador_modo_offline, 3000);
-              $scope.offline = (servidor.obtener_ip() === "localhost");
-              //console.log(servidor.obtener_ip());
+              $scope.offline = (Servidor.obtener_ip() === "localhost");
+
+              if ($scope.offline != modo_offline_anterior) {
+
+                if (! $scope.offline) {
+                  Servidor.reiniciar_polo();
+                }
+              }
+
+              modo_offline_anterior = $scope.offline;
           }
 
           $scope.$on("$destroy", function(event) {
@@ -203,8 +209,8 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Descarg
           });
 
           actualizar_notificador_modo_offline();
-          $scope.base = servidor.base;
-          $scope.mi_ip = servidor.mi_ip;
+          $scope.base = Servidor.base;
+          $scope.mi_ip = Servidor.mi_ip;
         });
 
 });
@@ -217,5 +223,3 @@ app.controller("PrincipalCtrl", function($scope) {
         gui.Shell.openItem(ruta_compartidos);
     }
 });
-
-
