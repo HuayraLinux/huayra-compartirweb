@@ -137,7 +137,7 @@ app.factory('Servidor', function() {
 
         if (notificar) {
             var id = uuid.v1();
-            eventos.emit('inicia', {id: id, estado: 'warning', texto: "Enviando el archivo " + nombre_archivo});
+            this.Eventos.emit('inicia', {id: id, estado: 'warning', texto: "Enviando el archivo " + nombre_archivo});
         }
 
         stat = fs.statSync(ruta_completa);
@@ -162,6 +162,7 @@ app.factory('Servidor', function() {
             }
         });
 
+      	var eventos = this.Eventos;
         stream.on('end', function() {
             if (notificar) {
                 eventos.emit('finaliza', {id: id, estado: 'success', texto: "Terminó la transferencia del archivo: " + nombre_archivo});
