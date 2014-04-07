@@ -122,9 +122,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
         var tmp_url = "http://" + servicio.ip + ":" + servicio.port;
 
         $http.get(tmp_url).success(function(data) {
-            console.log(data);
             servicio.data = data;
-            console.log($scope.amigos)
         });
 
         $scope.amigos.push(servicio);
