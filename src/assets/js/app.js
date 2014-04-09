@@ -158,7 +158,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
             // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
               if (servicio.name === "huayra-compartir") {
 
-                if (servicio.ip === Servidor.mi_ip || servicio.ip === 'localhost')
+                if (servicio.id === data_preferencias.id)
                    return; // Evita mostrar en la vista de amigos mi propio equipo.
 
                 agregar_amigo(servicio);
@@ -197,6 +197,9 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
                 if (! $scope.offline) {
                   Servidor.reiniciar_polo();
                 }
+                  $scope.base = Servidor.base_url();
+                  $scope.mi_ip = Servidor.obtener_ip();
+                  $scope.puerto = Servidor.obtener_puerto();
               }
 
               modo_offline_anterior = $scope.offline;
@@ -207,8 +210,8 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
           });
 
           actualizar_notificador_modo_offline();
-          $scope.base = Servidor.base;
-          $scope.mi_ip = Servidor.mi_ip;
+          $scope.base = Servidor.base_url();
+          $scope.mi_ip = Servidor.obtener_ip();
           $scope.puerto = Servidor.obtener_puerto();
         });
 
