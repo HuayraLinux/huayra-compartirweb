@@ -7,7 +7,7 @@ var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
 
 app.controller("PreferenciasCtrl", function($scope, $http) {
     var preferencias = new Object();
-    $scope.url_avatar = $scope.base + '/avatar';
+    $scope.url_avatar = 'http://localhost:' + $scope.puerto + '/avatar';
 
     $scope.cambiar_imagen_de_perfil = function() {
         var el = document.getElementById('fileDialog');

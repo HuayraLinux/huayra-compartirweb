@@ -57,19 +57,20 @@ app.factory('Servidor', function() {
         return ip;
     }
 
+    this.obtener_puerto = function() {
+        return this.puerto
+    }
+
+    this.base_url = function(){
+        return "http://" + this.obtener_ip() + ":" + this.puerto
+    }
+
     this.iniciar_servidor = function(numero_de_puerto) {
         var server = http.createServer(this.app);
         this.puerto = numero_de_puerto || this.obtener_puerto_aleatorio();
-        this.mi_ip = this.obtener_ip();
-
-        this.base_url = "http://" + this.mi_ip + ":" + this.puerto;
-
         server.listen(this.puerto);
-        this.base = "http://" + this.mi_ip + ":" + this.puerto;
-
-        console.log("Iniciando el servicio en: " + this.base_url);
+        console.log("Iniciando el servicio en: " + this.base_url());
      }
-
 
     /* Informa el tipo de archivo dado un indicador de archivo. */
     this.obtener_tipo = function(stat) {
@@ -176,8 +177,8 @@ app.factory('Servidor', function() {
 
         this.app.get('/', function(req, res) {
             res.send({
-                archivos: self.base + "/obtener/",
-                avatar: self.base + "/avatar",
+                archivos: self.base_url() + "/obtener/",
+                avatar: self.base_url() + "/avatar",
                 nombre: self.data_preferencias.nombre,
                 frase: self.data_preferencias.frase
             });
@@ -255,9 +256,6 @@ app.factory('Servidor', function() {
     this.data_preferencias = undefined;
     this.cuando_se_conecta_un_equipo = undefined;
     this.cuando_se_desconecta_un_equipo = undefined;
-    this.base_url = '';
-    this.base = "";
-    this.puerto = ''; // se define su valor cuando se llama al metodo this.iniciar()
     this.directorio_compartido = process.env.HOME + '/Compartido/';
 
     this.iniciar = function() {
