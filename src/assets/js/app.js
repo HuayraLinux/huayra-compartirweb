@@ -209,6 +209,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
           actualizar_notificador_modo_offline();
           $scope.base = Servidor.base;
           $scope.mi_ip = Servidor.mi_ip;
+          $scope.puerto = Servidor.obtener_puerto();
         });
 
 });

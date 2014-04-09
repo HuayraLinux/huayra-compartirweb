@@ -57,6 +57,10 @@ app.factory('Servidor', function() {
         return ip;
     }
 
+    this.obtener_puerto = function() {
+        return this.puerto
+    }
+
     this.iniciar_servidor = function(numero_de_puerto) {
         var server = http.createServer(this.app);
         this.puerto = numero_de_puerto || this.obtener_puerto_aleatorio();
