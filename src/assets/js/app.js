@@ -92,6 +92,14 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
         }
     }
 
+    $scope.esPaginaPrincipal = function() {
+        if ($location.path() === "/principal")
+        	return "view-principal";
+        else 
+        	return "";
+    }
+    
+    
     Eventos.on('inicia', function(data) {
           $scope.notificaciones.push(data);
           $scope.$apply();

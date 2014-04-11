@@ -280,3 +280,13 @@ input, textarea /*.contenteditable?*/ {
     -ms-user-select:text;
     user-select:text;
 }
+
+#page-heading {
+	background: hidden;
+}
+
+.view-principal {
+	background-image: url('../img/fondo.png');
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}

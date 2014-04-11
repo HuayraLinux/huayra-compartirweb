@@ -5584,7 +5584,7 @@ body.static-header {
 }
 #page-content {
     min-height: 650px;
-    background: #f7f8fa;
+
     box-shadow: -1px 0 0 0 rgba(0, 0, 0, 0.1);
 }
 #wrap>.container {
@@ -5667,7 +5667,6 @@ footer>div.clearfix ul li:last-child {
     background: transparent;
 }
 #page-heading {
-    background: #f7f8fa;
 }
 #page-heading:before, #page-heading:after {
     content: " ";
