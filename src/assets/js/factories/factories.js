@@ -399,7 +399,6 @@ app.factory("Singleton", function(Menu) {
 
         server.on('error', function(){
             http.get('http://127.0.0.1:' + port, function() {
-                alert("Soy la segunda instancia, terminando y haciendo request para re-abrir...");
                 gui.App.quit();
             });
         });
