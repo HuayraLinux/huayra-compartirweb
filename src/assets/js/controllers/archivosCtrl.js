@@ -21,11 +21,19 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
         var base_path = $scope.$parent.base;
         var relative_path = "obtener/";
         var path = base_path + '/' +  relative_path;
+        $scope.path = '/';
     }
     else {
         var relative_path = $routeParams.url;
         var path = 'http://' +  relative_path;
+        $scope.path = relative_path.split('obtener/')[1];
+
+        if (! $scope.path) {
+          $scope.path = '/';
+        }
     }
+
+
 
     function actualizar_listado() {
         if ($routeParams.url) {
@@ -41,6 +49,10 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
                 $scope.archivos = data.archivos;
             });
         }, 500);
+    }
+
+    $scope.actualizar = function() {
+      actualizar_listado();
     }
 
     $scope.descargar = function(archivo) {
