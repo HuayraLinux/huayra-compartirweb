@@ -9,6 +9,10 @@ app.factory('AvahiFactory', function(AmigosFactory) {
       proceso = spawn('avahi-browse', ['-a', '-r', '-p'])
       var last = '';
 
+      proceso.stderr.on('data', function(data) {
+        console.log("stderr", data);
+      });
+
       proceso.stdout.on('data', function(chunk) {
         var lines, i;
 
@@ -104,6 +108,23 @@ app.factory('AvahiFactory', function(AmigosFactory) {
     })
 
     console.log("listo!!!!");
+  }
+
+  /*
+   * Finaliza los dos procesos de avahi activos.
+   */
+  obj.terminar = function() {
+
+    if (cliente) {
+      cliente.kill('SIGHUP');
+      cliente = null;
+    }
+
+    if (proceso) {
+      proceso.kill('SIGHUP');
+      proceso = null;
+    }
+
   }
 
   return obj;

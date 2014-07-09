@@ -372,6 +372,7 @@ app.factory("Menu", function() {
         menu.append(new gui.MenuItem({
           label: 'Salir',
           click: function() {
+            AvahiFactory.terminar();
             gui.App.quit();
           }
         }));
@@ -385,7 +386,7 @@ app.factory("Menu", function() {
 });
 
 
-app.factory("Singleton", function(Menu) {
+app.factory("Singleton", function(Menu, AvahiFactory) {
     /* Se encarga de mantener una sola instancia de la
     aplicación abierta */
 
