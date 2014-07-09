@@ -7,7 +7,9 @@ var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
 
 app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, PreferenciasFactory) {
     var preferencias = new Object();
+
     $scope.url_avatar = 'http://localhost:' + $scope.puerto + '/avatar';
+    $scope.puede_guardar = true;
 
     $scope.cambiar_imagen_de_perfil = function() {
         var el = document.getElementById('fileDialog');
@@ -26,6 +28,7 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
                              stdout: stdout,
                              stderr: stderror});
 
+                $scope.puede_guardar = true;
                 cuando_termina_conversion();
             });
 
@@ -39,11 +42,20 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
             preferencias = data
             $scope.nombre = preferencias.nombre;
             $scope.frase = preferencias.frase;
+            $scope.puede_guardar = false;
         }).
         error(function (){
             preferencias.nombre = $scope.$parent.nombre;
             preferencias.frase = $scope.$parent.frase;
+            $scope.puede_guardar = false;
         });
+
+    function permitir_guardado() {
+      $scope.puede_guardar = true;
+    }
+
+    $scope.$watch('nombre', permitir_guardado);
+    $scope.$watch('frase', permitir_guardado);
 
     $scope.guardar_datos = function() {
         preferencias.nombre = $scope.nombre;
@@ -51,6 +63,8 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
         window.guardar_preferencias(preferencias);
         $scope.$parent.nombre = preferencias.nombre;
         $scope.$parent.frase = preferencias.frase;
+
+        $scope.puede_guardar = false;
 
         AvahiFactory.reiniciar_servicio_publicado();
         PreferenciasFactory.nombre = $scope.nombre;
