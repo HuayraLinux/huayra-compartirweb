@@ -235,6 +235,8 @@ app.factory('Servidor', function() {
 
     }
 
+    var self = this;
+
     this.iniciar_servicio_polo = function() {
 
       if (POLO_HABILITADO) {
@@ -245,7 +247,6 @@ app.factory('Servidor', function() {
         this.polo.on('up', this.cuando_se_conecta_un_equipo);
         this.polo.on('down', this.cuando_se_desconecta_un_equipo);
 
-        var self = this;
 
         function publicar_servicio() {
             self.polo.put({
@@ -307,7 +308,6 @@ app.factory('Servidor', function() {
                 frase: "...",
               };
 
-              self.cuando_se_conecta_un_equipo(id, servicio);
             } 
             
             if (tipo == '-') {
@@ -323,7 +323,18 @@ app.factory('Servidor', function() {
             if (tipo == '=') {
               puerto = mensaje[8];
               ip = mensaje[9].replace('ip=', '').replace('"', '').replace('"', '');
-              //console.log("Detalles de " + id, ip, puerto, mensaje);
+
+              var servicio = {
+                id: id,
+                name: 'huayra-compartir',
+                nombre: "...",
+                frase: "...",
+                ip: ip,
+                port: puerto
+              };
+
+              self.cuando_se_conecta_un_equipo(id, servicio);
+
             }
 
           }
@@ -338,9 +349,14 @@ app.factory('Servidor', function() {
 
       console.log("Ejecutando el comando!");
       
-      /*
-      setTimeout(function() {
-        var cliente = spawn('avahi-publish-service', ['-s', 'huayracompartir_asdad13331233', '_http._tcp', '9090', 'ip=123.322.123.22']);
+        var cliente = spawn('avahi-publish-service', 
+            [
+            '-s', 
+            'huayracompartir_'+ self.data_preferencias.id,
+            '_http._tcp', self.puerto, 
+            'ip=' + self.obtener_ip()
+            ]
+        );
 
         cliente.stdout.on('data', function(data) {
           console.log(data);
@@ -351,10 +367,6 @@ app.factory('Servidor', function() {
         })
 
         console.log("listo!!!!");
-
-      }, 2000);
-
-      */
     }
 
     this.iniciar = function() {
