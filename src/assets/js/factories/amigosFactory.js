@@ -29,6 +29,27 @@ app.factory('AmigosFactory', function($http) {
     return false;
   }
 
+  /*
+   * Vuelve a consultar los metadatos de cada uno de los amigos.
+   */
+  obj.forzar_actualizado = function() {
+    console.log('forzando actualizado');
+
+    for (var i in obj.amigos) {
+      var amigo = obj.amigos[i];
+
+      var tmp_url = "http://" + amigo.ip + ":" + amigo.port;
+      console.log(tmp_url);
+
+      $http.get(tmp_url).success(function(data) {
+        amigo.data = data;
+        console.log("responde", data);
+        //obj.amigos.push(amigo);
+      });
+
+    }
+
+  }
   
   /*
    * Intenta agregar un nuevo registro a la lista de amigos.
@@ -36,12 +57,12 @@ app.factory('AmigosFactory', function($http) {
   obj.agregar_amigo = function(amigo) {
 
     /* Evita agregarse a si mismo */
-    if (amigo.id === obj.id) {
+    if (amigo.id === obj.id)
       return;
-    }
 
-    if (obj.existe_referencia(amigo.id)) {
-    }
+    /* Evita duplicados */
+    if (obj.existe_referencia(amigo.id))
+      return
 
     // En caso de no encontrarlo en la lista de amigos, lo agrega.
     var tmp_url = "http://" + amigo.ip + ":" + amigo.port;

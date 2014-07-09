@@ -9,14 +9,10 @@ app.controller("AmigosCtrl", function($scope, $location, $modal, $timeout, Amigo
 
     $scope.actualizar = function() {
       $scope.actualizar_deshabilitado = true;
+      AmigosFactory.forzar_actualizado();
 
       $timeout(function() {
         $scope.actualizar_deshabilitado = false;
-        console.log($scope.amigos);
-
-        $scope.$parent.$apply();
-        $scope.amigos = $scope.$parent.amigos;
-        $scope.$apply();
       }, 1000);
 
     }
