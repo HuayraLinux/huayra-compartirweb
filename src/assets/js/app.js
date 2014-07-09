@@ -61,7 +61,7 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
 
 
 
-app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servidor, Descargas, Eventos, AmigosFactory, $timeout) {
+app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servidor, Descargas, Eventos, AmigosFactory, $timeout, PreferenciasFactory) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
     $scope.notificaciones = [];
@@ -143,6 +143,10 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
             $scope.id = data.id;
 
             AmigosFactory.definir_preferencia_id(data.id);
+
+            // TODO: mover código de preferencias al factory.
+            PreferenciasFactory.nombre = data.nombre;
+            PreferenciasFactory.frase = data.frase;
 
             data_preferencias = data;
         }).

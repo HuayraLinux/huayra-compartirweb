@@ -20,7 +20,7 @@ app.factory("Descargas", function() {
     return descargas;
 });
 
-app.factory('Servidor', function(AmigosFactory, AvahiFactory) {
+app.factory('Servidor', function(AmigosFactory, AvahiFactory, PreferenciasFactory) {
 
   function Servidor() {
 
@@ -180,11 +180,12 @@ app.factory('Servidor', function(AmigosFactory, AvahiFactory) {
         var self = this;
 
         this.app.get('/', function(req, res) {
+
             res.send({
                 archivos: self.base_url() + "/obtener/",
                 avatar: self.base_url() + "/avatar",
-                nombre: self.data_preferencias.nombre,
-                frase: self.data_preferencias.frase
+                nombre: PreferenciasFactory.nombre,
+                frase: PreferenciasFactory.frase
             });
         });
 
@@ -319,7 +320,7 @@ app.factory('Eventos', function() {
 });
 
 
-app.factory("Menu", function() {
+app.factory("Menu", function(AvahiFactory) {
     var menu = undefined;
     var tray = undefined;
     var animar_icono = false;
