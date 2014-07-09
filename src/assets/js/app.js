@@ -161,28 +161,27 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
           $scope.notificaciones_sin_ver = 0;
 
           function cuando_se_conecta_un_equipo(nombre, servicio) {
-            //console.log({evento: "up", servicio: servicio});
-
             // si el servicio es "huayra-compartir" copiamos el dict a nuestra lista de amigos
-              if (servicio.name === "huayra-compartir") {
+            console.log(servicio);
+            if (servicio.name === "huayra-compartir") {
 
-                if (servicio.id === data_preferencias.id)
-                   return; // Evita mostrar en la vista de amigos mi propio equipo.
+              if (servicio.id === data_preferencias.id)
+                return; // Evita mostrar en la vista de amigos mi propio equipo.
 
-                agregar_amigo(servicio);
+              agregar_amigo(servicio);
 
 
-                $scope.$apply();
+              $scope.$apply();
             }
+
           }
 
           function cuando_se_desconecta_un_equipo(nombre, servicio) {
-            //console.log({evento: "down", servicio: servicio});
-
-                for (var key in $scope.amigos) {
-                 if (servicio.id === $scope.amigos[key].id)
-                 $scope.amigos.splice(key, 1);
-             }
+            for (var key in $scope.amigos) {
+              if (servicio.id === $scope.amigos[key].id) {
+                $scope.amigos.splice(key, 1);
+              }
+            }
 
             $scope.$apply();
           }

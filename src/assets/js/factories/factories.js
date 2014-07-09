@@ -8,6 +8,7 @@ var os = require('os');
 var polo = require('polo');
 var crypto = require('crypto');
 var uuid = require('node-uuid');
+var spawn = require('child_process').spawn;
 
 app.factory("Descargas", function() {
     var descargas = [
@@ -257,6 +258,89 @@ app.factory('Servidor', function() {
     this.cuando_se_conecta_un_equipo = undefined;
     this.cuando_se_desconecta_un_equipo = undefined;
     this.directorio_compartido = process.env.HOME + '/Compartido/';
+    var self = this;
+
+
+    this.iniciar_avahi = function() {
+      var proceso = spawn('avahi-browse', ['-a', '-r', '-p'])
+      var last = '';
+
+      proceso.stdout.on('data', function(chunk) {
+        var lines, i;
+
+        lines = (last+chunk).split("\n");
+
+        for (i=0; i<lines.length-1; i++) {
+          var mensaje = lines[i].split(';');
+
+          var tipo = mensaje[0];
+          var nombre = mensaje[3];
+          var id = '';
+          var puerto = '';
+          var ip = '';
+
+          //console.log(lines[i]);
+
+          if (/huayracompartir/.test(nombre)) {
+            id = nombre.split('_')[1];
+
+            if (tipo == '+') {
+              var servicio = {
+                id: id,
+                name: 'huayra-compartir',
+                nombre: "...",
+                frase: "...",
+              };
+
+              self.cuando_se_conecta_un_equipo(id, servicio);
+            } 
+            
+            if (tipo == '-') {
+              var servicio = {
+                id: id,
+                name: 'huayra-compartir'
+              };
+
+              console.log("Se desconecto " + id)
+                self.cuando_se_desconecta_un_equipo(id, servicio);
+            }
+
+            if (tipo == '=') {
+              puerto = mensaje[8];
+              ip = mensaje[9].replace('ip=', '').replace('"', '').replace('"', '');
+              //console.log("Detalles de " + id, ip, puerto, mensaje);
+            }
+
+          }
+        }
+
+        last = lines[i];
+      });
+
+      proceso.on('exit', function(codigo) {
+        console.log("Error, el comando retorno: " + codigo);
+      })
+
+      console.log("Ejecutando el comando!");
+      
+      /*
+      setTimeout(function() {
+        var cliente = spawn('avahi-publish-service', ['-s', 'huayracompartir_asdad13331233', '_http._tcp', '9090', 'ip=123.322.123.22']);
+
+        cliente.stdout.on('data', function(data) {
+          console.log(data);
+        });
+
+        cliente.on('exit', function(codigo) {
+          console.log("Error, el comando retorno: " + codigo);
+        })
+
+        console.log("listo!!!!");
+
+      }, 2000);
+
+      */
+    }
 
     this.iniciar = function() {
       // Genera el directorio compartido si no existe.
@@ -273,6 +357,7 @@ app.factory('Servidor', function() {
 
       if (this.obtener_ip() !== "localhost") {
         this.iniciar_servicio_polo();
+        this.iniciar_avahi();
       }
 
       // Genera la interfaz de rutas.

@@ -1,5 +1,5 @@
-N=\x1b[0m
-V=\x1b[32;01m
+N=[0m
+V=[01;32m
 VERSION=`git name-rev --name-only --tags HEAD | sed 's/\^.*//'`
 
 all:
