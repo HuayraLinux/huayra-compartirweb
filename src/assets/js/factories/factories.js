@@ -10,6 +10,9 @@ var crypto = require('crypto');
 var uuid = require('node-uuid');
 var spawn = require('child_process').spawn;
 
+
+var POLO_HABILITADO = true;
+
 app.factory("Descargas", function() {
     var descargas = [
     ];
@@ -222,11 +225,16 @@ app.factory('Servidor', function() {
     }
 
     this.reiniciar_polo = function() {
-      console.log("Reiniciando polo.");
-      this.iniciar_servicio_polo();
+      if (POLO_HABILITADO) {
+        console.log("Reiniciando polo.");
+        this.iniciar_servicio_polo();
+      } else {
+        console.log("Polo esta deshabilitado.");
+      }
     }
 
     this.iniciar_servicio_polo = function() {
+      if (POLO_HABILITADO) {
         this.polo = polo({
             heartbeat: 5*1000
         });
@@ -250,6 +258,9 @@ app.factory('Servidor', function() {
         }
 
         publicar_servicio();
+      } else {
+        console.log("Polo esta deshabilitado");
+      }
     }
 
     // Inicializador.
