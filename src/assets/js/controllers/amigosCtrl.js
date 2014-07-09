@@ -1,8 +1,11 @@
 var app = angular.module('app');
 
-app.controller("AmigosCtrl", function($scope, $location, $modal, $timeout) {
+app.controller("AmigosCtrl", function($scope, $location, $modal, $timeout, AmigosFactory) {
+    $scope.data = {};
     $scope.amigos = $scope.$parent.amigos;
     $scope.actualizar_deshabilitado = false;
+
+    $scope.data.amigos = AmigosFactory.amigos;
 
     $scope.actualizar = function() {
       $scope.actualizar_deshabilitado = true;

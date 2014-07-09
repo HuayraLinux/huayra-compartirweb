@@ -20,7 +20,7 @@ app.factory("Descargas", function() {
     return descargas;
 });
 
-app.factory('Servidor', function() {
+app.factory('Servidor', function(AmigosFactory) {
 
   function Servidor() {
 
@@ -318,6 +318,8 @@ app.factory('Servidor', function() {
 
               console.log("Se desconecto " + id)
                 self.cuando_se_desconecta_un_equipo(id, servicio);
+
+              AmigosFactory.desconectar_amigo(id);
             }
 
             if (tipo == '=') {
@@ -333,6 +335,7 @@ app.factory('Servidor', function() {
                 port: puerto
               };
 
+              AmigosFactory.agregar_amigo(servicio);
               self.cuando_se_conecta_un_equipo(id, servicio);
 
             }
