@@ -20,7 +20,7 @@ app.factory("Descargas", function() {
     return descargas;
 });
 
-app.factory('Servidor', function(AmigosFactory) {
+app.factory('Servidor', function(AmigosFactory, AvahiFactory) {
 
   function Servidor() {
 
@@ -276,102 +276,6 @@ app.factory('Servidor', function(AmigosFactory) {
     this.directorio_compartido = process.env.HOME + '/Compartido/';
     var self = this;
 
-
-    this.iniciar_avahi = function() {
-      var proceso = spawn('avahi-browse', ['-a', '-r', '-p'])
-      var last = '';
-
-      proceso.stdout.on('data', function(chunk) {
-        var lines, i;
-
-        lines = (last+chunk).split("\n");
-
-        for (i=0; i<lines.length-1; i++) {
-          var mensaje = lines[i].split(';');
-
-          var tipo = mensaje[0];
-          var nombre = mensaje[3];
-          var id = '';
-          var puerto = '';
-          var ip = '';
-
-          //console.log(lines[i]);
-
-          if (/huayracompartir/.test(nombre)) {
-            id = nombre.split('_')[1];
-
-            if (tipo == '+') {
-              var servicio = {
-                id: id,
-                name: 'huayra-compartir',
-                nombre: "...",
-                frase: "...",
-              };
-
-            } 
-            
-            if (tipo == '-') {
-              var servicio = {
-                id: id,
-                name: 'huayra-compartir'
-              };
-
-              console.log("Se desconecto " + id)
-                self.cuando_se_desconecta_un_equipo(id, servicio);
-
-              AmigosFactory.desconectar_amigo(id);
-            }
-
-            if (tipo == '=') {
-              puerto = mensaje[8];
-              ip = mensaje[9].replace('ip=', '').replace('"', '').replace('"', '');
-
-              var servicio = {
-                id: id,
-                name: 'huayra-compartir',
-                nombre: "...",
-                frase: "...",
-                ip: ip,
-                port: puerto
-              };
-
-              AmigosFactory.agregar_amigo(servicio);
-              self.cuando_se_conecta_un_equipo(id, servicio);
-
-            }
-
-          }
-        }
-
-        last = lines[i];
-      });
-
-      proceso.on('exit', function(codigo) {
-        console.log("Error, el comando retorno: " + codigo);
-      })
-
-      console.log("Ejecutando el comando!");
-      
-        var cliente = spawn('avahi-publish-service', 
-            [
-            '-s', 
-            'huayracompartir_'+ self.data_preferencias.id,
-            '_http._tcp', self.puerto, 
-            'ip=' + self.obtener_ip()
-            ]
-        );
-
-        cliente.stdout.on('data', function(data) {
-          console.log(data);
-        });
-
-        cliente.on('exit', function(codigo) {
-          console.log("Error, el comando retorno: " + codigo);
-        })
-
-        console.log("listo!!!!");
-    }
-
     this.iniciar = function() {
       // Genera el directorio compartido si no existe.
       if (! fs.existsSync(this.directorio_compartido))
@@ -387,7 +291,9 @@ app.factory('Servidor', function(AmigosFactory) {
 
       if (this.obtener_ip() !== "localhost") {
         this.iniciar_servicio_polo();
-        this.iniciar_avahi();
+
+        AvahiFactory.iniciar();
+        AvahiFactory.publicar_servicio_en_la_red(self.data_preferencias.id, self.obtener_ip(), self.puerto);
       }
 
       // Genera la interfaz de rutas.

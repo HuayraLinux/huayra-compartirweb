@@ -7,11 +7,6 @@ AmigosFactory
 {{data.amigos|json}}
 </pre>
 
-anterior:
-<pre>
-{{amigos|json}}
-</pre>
-
 
 <div class="container">
   <div class='barra-botones'>
@@ -23,59 +18,12 @@ anterior:
 		-->
   </div>
 
-  <table class="table table-bordered tabla-archivos" ng-hide='amigos'>
+
+  <table class="table table-bordered tabla-archivos" ng-hide='data.amigos.length > 0'>
     <tr>
       <td>Mmm... parece que no estás conectado a una red o tus amigos no están conectados.</td>
     </tr>
   </table>
-
-  <table class="table table-bordered tabla-archivos" ng-show='amigos'>
-
-    <tbody>
-
-      <tr ng-repeat='a in amigos' class='archivo repeat-item'>
-        <td ng-hide='a.data.nombre' class='td-avatar'>
-            <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
-        </td>
-
-        <td ng-show='a.data.nombre' class='td-avatar'>
-            <a href ng-click='abrir_descargas_de(a)'><img src='http://{{ a.ip }}:{{a.port}}/avatar'></a>
-        </td>
-
-        <td>
-           &nbsp;
-           <p ng-hide='a.data.nombre'><img src='assets/img/spinner.gif'></p>
-           <h3 ng-show='a.data'><a href ng-click='abrir_descargas_de(a)'>{{a.data.nombre}}</a></h3>
-           <h4 ng-show='a.data' class='titulo-frase'>{{a.data.frase}}
-          <span class="pull-right">({{ a.ip }})</span>
-           </h4>
-
-        </td>
-
-      </tr>
-
-    </tbody>
-
-  </table>
-
-
-
-
-
-
-
-
-
-  AmigosFactory:
-
-  <table class="table table-bordered tabla-archivos" ng-hide='data.amigos.lenght > 0'>
-    <tr>
-      <td>Mmm... parece que no estás conectado a una red o tus amigos no están conectados.</td>
-    </tr>
-  </table>
-
-
-
 
   <table class="table table-bordered tabla-archivos" ng-show='data.amigos.length > 0'>
 
@@ -86,10 +34,12 @@ anterior:
             <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
         </td>
 
+        <!-- Bloque mostrando toda la información del amigo -->
         <td ng-show='a.data.nombre' class='td-avatar'>
             <a href ng-click='abrir_descargas_de(a)'><img src='http://{{ a.ip }}:{{a.port}}/avatar'></a>
         </td>
 
+        <!-- Bloque mostrando que se están por cargar detalles -->
         <td>
            &nbsp;
            <p ng-hide='a.data.nombre'><img src='assets/img/spinner.gif'></p>

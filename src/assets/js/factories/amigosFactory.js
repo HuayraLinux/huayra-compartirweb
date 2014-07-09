@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.factory('AmigosFactory', function() {
+app.factory('AmigosFactory', function($http) {
   var obj = {};
 
   obj.amigos = [];
@@ -17,10 +17,20 @@ app.factory('AmigosFactory', function() {
       return;
     }
 
+    // En caso de no encontrarlo en la lista de amigos, lo agrega.
+    var tmp_url = "http://" + amigo.ip + ":" + amigo.port;
+
+    $http.get(tmp_url).success(function(data) {
+        amigo.data = data;
+    });
+
+    // Agrega el los datos (potencialmente incompletos), luego del 'get'
+    // de mas arriba se completarían los datos.
     obj.amigos.push(amigo);
   }
 
   obj.desconectar_amigo = function(id) {
+
     var pos = -1;
 
     for (var i in obj.amigos) {
