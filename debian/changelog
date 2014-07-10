@@ -1,3 +1,59 @@
+huayra-compartir (0.37) unstable; urgency=low
+
+  * Evitando duplicandos en la lista de amigos.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 19:08:46 +0200
+
+huayra-compartir (0.36) unstable; urgency=low
+
+  * Agregando "actualizar" a la vista "mis archivos".
+  * Evitando que aparezca mi propio equipo en la vista amigos.
+  * Evitando que la aplicación falle si no está instalado avahi-utils.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 18:03:23 +0200
+
+huayra-compartir (0.35) unstable; urgency=low
+
+  * Primer implementación usando avahi como backend para descubrir la red. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 15:52:36 +0200
+
+huayra-compartir (0.34) unstable; urgency=low
+
+  * Actualizando icono del lanzador. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Apr 2014 23:25:44 +0200
+
+huayra-compartir (0.33) unstable; urgency=low
+
+  * Agregando marca de agua y nuevos iconos. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Apr 2014 23:04:40 +0200
+
+huayra-compartir (0.32) unstable; urgency=low
+
+  * Quitando mensaje depuración.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Apr 2014 18:04:37 +0200
+
+huayra-compartir (0.31) unstable; urgency=low
+
+  * Arreglos en el sistema de red polo. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 09 Apr 2014 20:46:33 +0200
+
+huayra-compartir (0.30) unstable; urgency=low
+
+  * Arreglo en el notificador de eventos.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 07 Apr 2014 20:10:23 +0200
+
+huayra-compartir (0.29) unstable; urgency=low
+
+  * Convirtiendo el modulo servidor en un servicio. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 07 Apr 2014 18:43:11 +0200
+
 huayra-compartir (0.28) unstable; urgency=low
 
   * Cambiando la forma de notificar usuarios a polo.
