@@ -50,7 +50,7 @@
                           <div class="row">
                               <div class="col-sm-6 col-sm-offset-3">
                                   <div class="btn-toolbar">
-                                      <button ng-click='guardar_datos()' class="btn-primary btn">Guardar</button>
+                                      <button ng-disabled='!puede_guardar' ng-click='guardar_datos()' class="btn-primary btn">Guardar</button>
                                   </div>
                               </div>
                           </div>

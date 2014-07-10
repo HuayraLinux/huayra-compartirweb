@@ -8,6 +8,10 @@ var os = require('os');
 var polo = require('polo');
 var crypto = require('crypto');
 var uuid = require('node-uuid');
+var spawn = require('child_process').spawn;
+
+
+var POLO_HABILITADO = false;
 
 app.factory("Descargas", function() {
     var descargas = [
@@ -16,7 +20,7 @@ app.factory("Descargas", function() {
     return descargas;
 });
 
-app.factory('Servidor', function() {
+app.factory('Servidor', function(AmigosFactory, AvahiFactory, PreferenciasFactory) {
 
   function Servidor() {
 
@@ -176,11 +180,12 @@ app.factory('Servidor', function() {
         var self = this;
 
         this.app.get('/', function(req, res) {
+
             res.send({
                 archivos: self.base_url() + "/obtener/",
                 avatar: self.base_url() + "/avatar",
-                nombre: self.data_preferencias.nombre,
-                frase: self.data_preferencias.frase
+                nombre: PreferenciasFactory.nombre,
+                frase: PreferenciasFactory.frase
             });
         });
 
@@ -221,11 +226,21 @@ app.factory('Servidor', function() {
     }
 
     this.reiniciar_polo = function() {
-      console.log("Reiniciando polo.");
-      this.iniciar_servicio_polo();
+
+      if (POLO_HABILITADO) {
+        console.log("Reiniciando polo.");
+        this.iniciar_servicio_polo();
+      } else {
+        console.log("Polo esta deshabilitado.");
+      }
+
     }
 
+    var self = this;
+
     this.iniciar_servicio_polo = function() {
+
+      if (POLO_HABILITADO) {
         this.polo = polo({
             heartbeat: 5*1000
         });
@@ -233,7 +248,6 @@ app.factory('Servidor', function() {
         this.polo.on('up', this.cuando_se_conecta_un_equipo);
         this.polo.on('down', this.cuando_se_desconecta_un_equipo);
 
-        var self = this;
 
         function publicar_servicio() {
             self.polo.put({
@@ -249,6 +263,10 @@ app.factory('Servidor', function() {
         }
 
         publicar_servicio();
+      } else {
+        console.log("Polo esta deshabilitado");
+      }
+
     }
 
     // Inicializador.
@@ -257,6 +275,7 @@ app.factory('Servidor', function() {
     this.cuando_se_conecta_un_equipo = undefined;
     this.cuando_se_desconecta_un_equipo = undefined;
     this.directorio_compartido = process.env.HOME + '/Compartido/';
+    var self = this;
 
     this.iniciar = function() {
       // Genera el directorio compartido si no existe.
@@ -273,6 +292,9 @@ app.factory('Servidor', function() {
 
       if (this.obtener_ip() !== "localhost") {
         this.iniciar_servicio_polo();
+
+        AvahiFactory.iniciar();
+        AvahiFactory.publicar_servicio_en_la_red(self.data_preferencias.id, self.obtener_ip(), self.puerto);
       }
 
       // Genera la interfaz de rutas.
@@ -298,7 +320,7 @@ app.factory('Eventos', function() {
 });
 
 
-app.factory("Menu", function() {
+app.factory("Menu", function(AvahiFactory) {
     var menu = undefined;
     var tray = undefined;
     var animar_icono = false;
@@ -351,6 +373,7 @@ app.factory("Menu", function() {
         menu.append(new gui.MenuItem({
           label: 'Salir',
           click: function() {
+            AvahiFactory.terminar();
             gui.App.quit();
           }
         }));
@@ -364,7 +387,7 @@ app.factory("Menu", function() {
 });
 
 
-app.factory("Singleton", function(Menu) {
+app.factory("Singleton", function(Menu, AvahiFactory) {
     /* Se encarga de mantener una sola instancia de la
     aplicación abierta */
 

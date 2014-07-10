@@ -6,9 +6,15 @@
 <div class="container">
     <div class='barra-botones'>
         <button class='btn btn-success' ng-click='regresar()'>  <i class='icon-arrow-left'></i> Regresar </button>
+        <button class='btn btn-success' ng-hide='es_vista_mis_archivos' ng-click='actualizar()'>  <i class='icon-refresh'></i> Actualizar</button>
         <button class='btn btn-success' ng-show='es_vista_mis_archivos' ng-click='abrir_carpeta_compartida()'>  <i class='icon-folder-open'></i> Abrir directorio compartido</button>
         <input class='form-control input-busqueda' ng-model='filtro' placeholder='Buscar'></input>
     </div>
+
+    <div class='path'>
+      Estás en: {{path}}
+    </div>
+
 
 <div ng-show='en_curso' class='centrado'>
     <img src='assets/img/spinner.gif'>

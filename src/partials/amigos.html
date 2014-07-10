@@ -4,6 +4,7 @@
 
 <div class="container">
   <div class='barra-botones'>
+      <button ng-disabled='actualizar_deshabilitado' ng-click='actualizar()' class='btn btn-success'><i class='icon icon-refresh'></i> Actualizar</button>
 		<!-- 
       // Deshabilitando temporalmente el botón "agregar amigo".
 
@@ -11,25 +12,28 @@
 		-->
   </div>
 
-  <table class="table table-bordered tabla-archivos" ng-hide='amigos'>
+
+  <table class="table table-bordered tabla-archivos" ng-hide='data.amigos.length > 0'>
     <tr>
       <td>Mmm... parece que no estás conectado a una red o tus amigos no están conectados.</td>
     </tr>
   </table>
 
-  <table class="table table-bordered tabla-archivos" ng-show='amigos'>
+  <table class="table table-bordered tabla-archivos" ng-show='data.amigos.length > 0'>
 
     <tbody>
 
-      <tr ng-repeat='a in amigos' class='archivo repeat-item'>
+      <tr ng-repeat='a in data.amigos' class='archivo repeat-item'>
         <td ng-hide='a.data.nombre' class='td-avatar'>
             <a href ng-click='abrir_descargas_de(a)'>Ingresar</a>
         </td>
 
+        <!-- Bloque mostrando toda la información del amigo -->
         <td ng-show='a.data.nombre' class='td-avatar'>
             <a href ng-click='abrir_descargas_de(a)'><img src='http://{{ a.ip }}:{{a.port}}/avatar'></a>
         </td>
 
+        <!-- Bloque mostrando que se están por cargar detalles -->
         <td>
            &nbsp;
            <p ng-hide='a.data.nombre'><img src='assets/img/spinner.gif'></p>
@@ -45,5 +49,9 @@
     </tbody>
 
   </table>
+
+
+
+
 
 </div>

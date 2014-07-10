@@ -1,7 +1,21 @@
 var app = angular.module('app');
 
-app.controller("AmigosCtrl", function($scope, $location, $modal) {
+app.controller("AmigosCtrl", function($scope, $location, $modal, $timeout, AmigosFactory) {
+    $scope.data = {};
     $scope.amigos = $scope.$parent.amigos;
+    $scope.actualizar_deshabilitado = false;
+
+    $scope.data.amigos = AmigosFactory.amigos;
+
+    $scope.actualizar = function() {
+      $scope.actualizar_deshabilitado = true;
+      AmigosFactory.forzar_actualizado();
+
+      $timeout(function() {
+        $scope.actualizar_deshabilitado = false;
+      }, 1000);
+
+    }
 
     var ModalAgregarCtrl = function($scope, $modalInstance, test) {
         $scope.ip_valida = false;

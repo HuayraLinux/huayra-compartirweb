@@ -163,7 +163,7 @@ header {
 }
 .view-animate.ng-leave.ng-leave-active {
   left:-100%;
-    opacity: 0;
+  opacity: 0;
 }
 
 
@@ -289,4 +289,9 @@ input, textarea /*.contenteditable?*/ {
 	background-image: url('../img/fondo.png');
   background-repeat: no-repeat;
   background-position: right bottom;
+}
+
+.path {
+    color:gray;
+    margin-bottom: 15px;
 }
