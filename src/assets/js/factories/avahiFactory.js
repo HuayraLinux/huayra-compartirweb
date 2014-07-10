@@ -10,7 +10,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
       var last = '';
 
       proceso.stderr.on('data', function(data) {
-        console.log("stderr", data.toString());
+        console.log("stderr", data);
       });
 
       proceso.stdout.on('data', function(chunk) {
@@ -95,14 +95,14 @@ app.factory('AvahiFactory', function(AmigosFactory) {
     cliente = spawn('avahi-publish-service',
         [
         '-s',
-        'huayracompartir_' + id + '_' + (Math.random() * 100),
+        'huayracompartir_' + id + '_' + Math.floor(Math.random() * 1000),
         '_http._tcp', puerto,
         'ip=' + ip
         ]
         );
 
     cliente.stdout.on('data', function(data) {
-      console.log("stderr", data.toString());
+      console.log("stderr", data);
     });
 
     cliente.on('error', function(codigo) {
