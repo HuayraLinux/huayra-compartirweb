@@ -40,8 +40,8 @@ app.factory('AvahiFactory', function(AmigosFactory) {
                 frase: "...",
               };
 
-            } 
-            
+            }
+
             if (tipo == '-') {
               AmigosFactory.desconectar_amigo(id);
             }
@@ -68,6 +68,10 @@ app.factory('AvahiFactory', function(AmigosFactory) {
         last = lines[i];
       });
 
+      proceso.on('error', function(codigo) {
+        console.error("ERROR: no se puede ejecutar avahi-browse", codigo);
+      });
+
       proceso.on('exit', function(codigo) {
         console.log("Error, el comando retorno: " + codigo);
       })
@@ -87,17 +91,21 @@ app.factory('AvahiFactory', function(AmigosFactory) {
 
     console.log("Publicando el servicio en avahi!");
 
-    cliente = spawn('avahi-publish-service', 
+    cliente = spawn('avahi-publish-service',
         [
-        '-s', 
+        '-s',
         'huayracompartir_' + id,
-        '_http._tcp', puerto, 
+        '_http._tcp', puerto,
         'ip=' + ip
         ]
         );
 
     cliente.stdout.on('data', function(data) {
       console.log(data);
+    });
+
+    cliente.on('error', function(codigo) {
+      console.error("ERROR: no se puede ejecutar avahi-publish-service", codigo);
     });
 
     cliente.on('exit', function(codigo) {
@@ -107,7 +115,6 @@ app.factory('AvahiFactory', function(AmigosFactory) {
         console.log("ha finalizado el comando avahi-publish-service");
     })
 
-    console.log("listo!!!!");
   }
 
   /*
