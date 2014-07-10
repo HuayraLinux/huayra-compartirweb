@@ -1,3 +1,15 @@
+huayra-compartir (0.39) unstable; urgency=low
+
+  * Cambiando el formato de ID para la red en avahi.
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 20:20:49 +0200
+
+huayra-compartir (0.38) unstable; urgency=low
+
+  * Cambiando la forma de terminar el proceso avahi-publish-service. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 19:34:01 +0200
+
 huayra-compartir (0.37) unstable; urgency=low
 
   * Evitando duplicandos en la lista de amigos.
