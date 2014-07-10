@@ -95,11 +95,11 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
     $scope.esPaginaPrincipal = function() {
         if ($location.path() === "/principal")
         	return "view-principal";
-        else 
+        else
         	return "";
     }
-    
-    
+
+
     Eventos.on('inicia', function(data) {
           $scope.notificaciones.push(data);
           $scope.$apply();
@@ -142,7 +142,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
             $scope.frase = data.frase;
             $scope.id = data.id;
 
-            AmigosFactory.definir_preferencia_id(data.id);
+            AmigosFactory.definir_preferencias(data.id, Servidor.obtener_ip());
 
             // TODO: mover código de preferencias al factory.
             PreferenciasFactory.nombre = data.nombre;

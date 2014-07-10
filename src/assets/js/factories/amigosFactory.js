@@ -5,13 +5,15 @@ app.factory('AmigosFactory', function($http) {
 
   obj.amigos = [];
   obj.id = "";
+  obj.ip = "";
 
   /*
    * Define el identificador que usará la aplicación
    * para identificarse en la red.
    */
-  obj.definir_preferencia_id = function(id) {
+  obj.definir_preferencias = function(id, ip) {
     obj.id = id;
+    obj.id = ip;
   }
 
   /*
@@ -50,15 +52,16 @@ app.factory('AmigosFactory', function($http) {
     }
 
   }
-  
+
   /*
    * Intenta agregar un nuevo registro a la lista de amigos.
    */
   obj.agregar_amigo = function(amigo) {
 
     /* Evita agregarse a si mismo */
-    if (amigo.id === obj.id)
+    if (amigo.id === obj.id || amigo.ip === obj.ip)
       return;
+
 
     /* Evita duplicados */
     if (obj.existe_referencia(amigo.id))
