@@ -10,7 +10,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
       var last = '';
 
       proceso.stderr.on('data', function(data) {
-        console.log("stderr", data);
+        console.log("stderr", data.toString());
       });
 
       proceso.stdout.on('data', function(chunk) {
@@ -101,7 +101,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
         );
 
     cliente.stdout.on('data', function(data) {
-      console.log(data);
+      console.log("stderr", data.toString());
     });
 
     cliente.on('error', function(codigo) {

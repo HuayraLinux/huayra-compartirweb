@@ -6,6 +6,7 @@ app.factory('AmigosFactory', function($http) {
   obj.amigos = [];
   obj.id = "";
   obj.ip = "";
+  obj.url_pendientes = [];
 
   /*
    * Define el identificador que usará la aplicación
@@ -41,7 +42,6 @@ app.factory('AmigosFactory', function($http) {
       var amigo = obj.amigos[i];
 
       var tmp_url = "http://" + amigo.ip + ":" + amigo.port;
-      console.log(tmp_url);
 
       $http.get(tmp_url).success(function(data) {
         amigo.data = data;
@@ -59,9 +59,10 @@ app.factory('AmigosFactory', function($http) {
   obj.agregar_amigo = function(amigo) {
 
     /* Evita agregarse a si mismo */
-    if (amigo.id === obj.id || amigo.ip === obj.ip)
+    if (amigo.id === obj.id || amigo.ip === obj.id)
       return;
 
+    console.log("amigo.id === obj.id || amigo.ip === obj.ip", amigo.ip, obj.id);
 
     /* Evita duplicados */
     if (obj.existe_referencia(amigo.id))
@@ -70,9 +71,19 @@ app.factory('AmigosFactory', function($http) {
     // En caso de no encontrarlo en la lista de amigos, lo agrega.
     var tmp_url = "http://" + amigo.ip + ":" + amigo.port;
 
+    if (obj.url_pendientes.indexOf(tmp_url) > -1)
+      return;
+    else
+      obj.url_pendientes.push(tmp_url);
+
     $http.get(tmp_url).success(function(data) {
       amigo.data = data;
       obj.amigos.push(amigo);
+
+      var index = obj.url_pendientes.indexOf(tmp_url);
+
+      if (index > -1)
+        obj.url_pendientes.splice(index, 1);
     });
 
   }
