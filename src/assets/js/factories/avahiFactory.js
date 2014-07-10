@@ -123,7 +123,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
   obj.terminar = function() {
 
     if (cliente) {
-      cliente.kill('SIGHUP');
+      cliente.kill('SIGTERM');
       cliente = null;
     }
 
