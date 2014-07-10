@@ -27,10 +27,11 @@ app.factory('AvahiFactory', function(AmigosFactory) {
           var puerto = '';
           var ip = '';
 
-          //console.log(lines[i]);
 
           if (/huayracompartir/.test(nombre)) {
-            id = nombre.split('_')[1];
+            console.log(mensaje);
+
+            id = nombre.split('_')[1].split('_')[0];
 
             if (tipo == '+') {
               var servicio = {
@@ -39,8 +40,8 @@ app.factory('AvahiFactory', function(AmigosFactory) {
                 nombre: "...",
                 frase: "...",
               };
-
             }
+
 
             if (tipo == '-') {
               AmigosFactory.desconectar_amigo(id);
@@ -79,7 +80,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
 
   obj.reiniciar_servicio_publicado = function() {
     if (cliente)
-      cliente.kill('SIGHUP');
+      cliente.kill('SIGTERM');
 
     obj.publicar_servicio_en_la_red(obj.id, obj.ip, obj.puerto);
   }
@@ -94,7 +95,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
     cliente = spawn('avahi-publish-service',
         [
         '-s',
-        'huayracompartir_' + id,
+        'huayracompartir_' + id + '_' + (Math.random() * 100),
         '_http._tcp', puerto,
         'ip=' + ip
         ]
