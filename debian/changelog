@@ -1,3 +1,15 @@
+huayra-compartir (0.41) unstable; urgency=low
+
+  * Eliminando el reinicio de avahi. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 21:22:18 +0200
+
+huayra-compartir (0.40) unstable; urgency=low
+
+  * Arreglos menores. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 20:54:06 +0200
+
 huayra-compartir (0.39) unstable; urgency=low
 
   * Cambiando el formato de ID para la red en avahi.

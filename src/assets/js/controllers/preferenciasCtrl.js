@@ -66,7 +66,7 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
 
         $scope.puede_guardar = false;
 
-        AvahiFactory.reiniciar_servicio_publicado();
+        //AvahiFactory.reiniciar_servicio_publicado();
         PreferenciasFactory.nombre = $scope.nombre;
         PreferenciasFactory.frase = $scope.frase;
     }
