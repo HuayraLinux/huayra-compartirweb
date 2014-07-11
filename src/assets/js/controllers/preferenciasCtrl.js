@@ -54,6 +54,14 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
       $scope.puede_guardar = true;
     }
 
+    $scope.publicar = function() {
+      AvahiFactory.reiniciar_servicio_publicado();
+    }
+
+    $scope.scan = function() {
+      AvahiFactory.reiniciar_servicio_descubrimiento();
+    }
+
     $scope.$watch('nombre', permitir_guardado);
     $scope.$watch('frase', permitir_guardado);
 
@@ -66,7 +74,6 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
 
         $scope.puede_guardar = false;
 
-        //AvahiFactory.reiniciar_servicio_publicado();
         PreferenciasFactory.nombre = $scope.nombre;
         PreferenciasFactory.frase = $scope.frase;
     }

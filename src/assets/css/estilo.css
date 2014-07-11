@@ -296,3 +296,9 @@ input, textarea /*.contenteditable?*/ {
     color:gray;
     margin-bottom: 15px;
 }
+
+
+div.barra-depuracion {
+  float: right;
+  padding-right: 10px;
+}

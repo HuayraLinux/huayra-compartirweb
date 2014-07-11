@@ -6,77 +6,83 @@ app.factory('AvahiFactory', function(AmigosFactory) {
   var cliente = null;  // proceso para publicar el servicio en la red.
 
   obj.iniciar = function() {
-      proceso = spawn('avahi-browse', ['-a', '-r', '-p'])
-      var last = '';
-
-      proceso.stderr.on('data', function(data) {
-        console.log("stderr", data);
-      });
-
-      proceso.stdout.on('data', function(chunk) {
-        var lines, i;
-
-        lines = (last+chunk).split("\n");
-
-        for (i=0; i<lines.length-1; i++) {
-          var mensaje = lines[i].split(';');
-
-          var tipo = mensaje[0];
-          var nombre = mensaje[3];
-          var id = '';
-          var puerto = '';
-          var ip = '';
-
-
-          if (/huayracompartir/.test(nombre)) {
-            console.log(mensaje);
-
-            id = nombre.split('_')[1].split('_')[0];
-
-            if (tipo == '+') {
-              var servicio = {
-                id: id,
-                name: 'huayra-compartir',
-                nombre: "...",
-                frase: "...",
-              };
-            }
-
-
-            if (tipo == '-') {
-              AmigosFactory.desconectar_amigo(id);
-            }
-
-            if (tipo == '=') {
-              puerto = mensaje[8];
-              ip = mensaje[9].replace('ip=', '').replace('"', '').replace('"', '');
-
-              var servicio = {
-                id: id,
-                name: 'huayra-compartir',
-                nombre: "...",
-                frase: "...",
-                ip: ip,
-                port: puerto
-              };
-
-              AmigosFactory.agregar_amigo(servicio);
-            }
-
-          }
-        }
-
-        last = lines[i];
-      });
-
-      proceso.on('error', function(codigo) {
-        console.error("ERROR: no se puede ejecutar avahi-browse", codigo);
-      });
-
-      proceso.on('exit', function(codigo) {
-        console.log("Error, el comando retorno: " + codigo);
-      })
+    obj.iniciar_proceso_descubrimiento();
   }
+
+  obj.iniciar_proceso_descubrimiento = function() {
+    proceso = spawn('avahi-browse', ['-a', '-r', '-p'])
+    var last = '';
+
+    proceso.stderr.on('data', function(data) {
+      console.log("stderr", data);
+    });
+
+    proceso.stdout.on('data', function(chunk) {
+      var lines, i;
+      
+      lines = (last+chunk).split("\n");
+
+      for (i=0; i<lines.length-1; i++) {
+        var mensaje = lines[i].split(';');
+
+        var tipo = mensaje[0];
+        var nombre = mensaje[3];
+        var id = '';
+        var puerto = '';
+        var ip = '';
+
+        if (/huayracompartir/.test(nombre)) {
+          console.log(mensaje);
+
+          id = nombre.split('_')[1].split('_')[0];
+
+          if (tipo == '+') {
+            var servicio = {
+              id: id,
+              name: 'huayra-compartir',
+              nombre: "...",
+              frase: "...",
+            };
+          }
+
+
+          if (tipo == '-') {
+            AmigosFactory.desconectar_amigo(id);
+          }
+
+          if (tipo == '=') {
+            puerto = mensaje[8];
+            ip = mensaje[9].replace('ip=', '').replace('"', '').replace('"', '');
+
+            var servicio = {
+              id: id,
+              name: 'huayra-compartir',
+              nombre: "...",
+              frase: "...",
+              ip: ip,
+              port: puerto
+            };
+
+            AmigosFactory.agregar_amigo(servicio);
+          }
+
+        }
+      }
+
+      last = lines[i];
+    });
+
+    proceso.on('error', function(codigo) {
+      console.error("ERROR: no se puede ejecutar avahi-browse", codigo);
+    });
+
+    proceso.on('exit', function(codigo) {
+      console.log("Error, el comando retorno: " + codigo);
+      });
+  }
+
+
+
 
   obj.reiniciar_servicio_publicado = function() {
     if (cliente)
@@ -84,6 +90,14 @@ app.factory('AvahiFactory', function(AmigosFactory) {
 
     obj.publicar_servicio_en_la_red(obj.id, obj.ip, obj.puerto);
   }
+
+  obj.reiniciar_servicio_descubrimiento = function() {
+    if (proceso)
+      proceso.kill('SIGTERM');
+
+    obj.iniciar_proceso_descubrimiento();
+  }
+
 
   obj.publicar_servicio_en_la_red = function(id, ip, puerto) {
     obj.id = id;
