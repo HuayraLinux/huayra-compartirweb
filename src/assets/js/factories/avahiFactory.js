@@ -1,6 +1,6 @@
 var app = angular.module('app');
 
-app.factory('AvahiFactory', function(AmigosFactory) {
+app.factory('AvahiFactory', function(AmigosFactory, RedFactory) {
   var obj = {};
   var proceso = null;  // proceso browse, para descubrir equipos en la red.
   var cliente = null;  // proceso para publicar el servicio en la red.
@@ -65,7 +65,6 @@ app.factory('AvahiFactory', function(AmigosFactory) {
 
             AmigosFactory.agregar_amigo(servicio);
           }
-
         }
       }
 
@@ -88,7 +87,7 @@ app.factory('AvahiFactory', function(AmigosFactory) {
     if (cliente)
       cliente.kill('SIGTERM');
 
-    obj.publicar_servicio_en_la_red(obj.id, obj.ip, obj.puerto);
+    obj.publicar_servicio_en_la_red(obj.id, RedFactory.obtener_ip(), obj.puerto);
   }
 
   obj.reiniciar_servicio_descubrimiento = function() {

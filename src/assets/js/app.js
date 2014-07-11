@@ -61,7 +61,7 @@ app.config(['$routeProvider', function($routeProvider) { $routeProvider.
 
 
 
-app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servidor, Descargas, Eventos, AmigosFactory, $timeout, PreferenciasFactory) {
+app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servidor, Descargas, Eventos, AmigosFactory, $timeout, PreferenciasFactory, RedFactory) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
     var data_preferencias = {};
     $scope.notificaciones = [];
@@ -212,7 +212,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
                   Servidor.reiniciar_polo();
                 }
                   $scope.base = Servidor.base_url();
-                  $scope.mi_ip = Servidor.obtener_ip();
+                  $scope.mi_ip = RedFactory.obtener_ip();
                   $scope.puerto = Servidor.obtener_puerto();
               }
 
@@ -225,7 +225,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
 
           actualizar_notificador_modo_offline();
           $scope.base = Servidor.base_url();
-          $scope.mi_ip = Servidor.obtener_ip();
+          $scope.mi_ip = RedFactory.obtener_ip();
           $scope.puerto = Servidor.obtener_puerto();
         });
 

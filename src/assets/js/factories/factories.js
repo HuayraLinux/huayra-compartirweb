@@ -20,7 +20,7 @@ app.factory("Descargas", function() {
     return descargas;
 });
 
-app.factory('Servidor', function(AmigosFactory, AvahiFactory, PreferenciasFactory) {
+app.factory('Servidor', function(AmigosFactory, AvahiFactory, PreferenciasFactory, RedFactory) {
 
   function Servidor() {
 
@@ -44,21 +44,7 @@ app.factory('Servidor', function(AmigosFactory, AvahiFactory, PreferenciasFactor
     }
 
     this.obtener_ip = function() {
-        var ip = 'localhost';
-        var interfaces = os.networkInterfaces();
-
-        for (var nombre in interfaces) {
-
-            for (var i=0; i<interfaces[nombre].length; i++) {
-                var elemento = interfaces[nombre][i];
-
-                if (elemento.family == 'IPv4' && elemento.internal == false)
-                    ip = elemento.address;
-            }
-
-        }
-
-        return ip;
+        return RedFactory.obtener_ip();
     }
 
     this.obtener_puerto = function() {

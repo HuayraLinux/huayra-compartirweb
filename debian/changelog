@@ -1,3 +1,9 @@
+huayra-compartir (0.42) unstable; urgency=low
+
+  * Agregando botones para depurar el modo avahi. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Jul 2014 15:15:27 +0200
+
 huayra-compartir (0.41) unstable; urgency=low
 
   * Eliminando el reinicio de avahi. 
