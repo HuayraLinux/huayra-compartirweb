@@ -301,4 +301,5 @@ input, textarea /*.contenteditable?*/ {
 div.barra-depuracion {
   float: right;
   padding-right: 10px;
+  display: none;
 }
