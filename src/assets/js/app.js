@@ -210,6 +210,7 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
 
                 if (! $scope.offline) {
                   Servidor.reiniciar_polo();
+                  AvahiFactory.reiniciar_servicio_publicado();
                 }
                   $scope.base = Servidor.base_url();
                   $scope.mi_ip = RedFactory.obtener_ip();
