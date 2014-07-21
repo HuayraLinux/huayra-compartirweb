@@ -62,8 +62,6 @@ app.factory('AmigosFactory', function($http) {
     if (amigo.id === obj.id || amigo.ip === obj.id)
       return;
 
-    console.log("amigo.id === obj.id || amigo.ip === obj.ip", amigo.ip, obj.id);
-
     /* Evita duplicados */
     if (obj.existe_referencia(amigo.id))
       return

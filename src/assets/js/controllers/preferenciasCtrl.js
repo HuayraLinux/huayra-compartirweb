@@ -5,11 +5,12 @@ var exec = require('child_process').exec;
 var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
 var ruta_avatar = process.env.HOME + '/.huayra-compartir_avatar';
 
-app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, PreferenciasFactory) {
+app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, PreferenciasFactory, VersionFactory) {
     var preferencias = new Object();
 
     $scope.url_avatar = 'http://localhost:' + $scope.puerto + '/avatar';
     $scope.puede_guardar = true;
+    $scope.version = VersionFactory.obtener_version;
 
     $scope.cambiar_imagen_de_perfil = function() {
         var el = document.getElementById('fileDialog');
