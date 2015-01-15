@@ -328,10 +328,10 @@ app.factory("Menu", function(AvahiFactory) {
 
       comando.stdout.on('data', function (data) {
         data = data.toString().trim().replace(/\'/g, '');
-        var path = "/usr/share/icons/" + data + '/16x16/status/';
-        var path_icon_idle = "/usr/share/icons/" + data + '/16x16/status/hcompartir-idle.png';
-        var path_icon_transfer1 = "/usr/share/icons/" + data + '/16x16/status/hcompartir-transfer1.png';
-        var path_icon_transfer2 = "/usr/share/icons/" + data + '/16x16/status/hcompartir-transfer2.png';
+        var path = "/usr/share/icons/" + data + '/22x22/status/';
+        var path_icon_idle = "/usr/share/icons/" + data + '/22x22/status/hcompartir-idle.png';
+        var path_icon_transfer1 = "/usr/share/icons/" + data + '/22x22/status/hcompartir-transfer1.png';
+        var path_icon_transfer2 = "/usr/share/icons/" + data + '/22x22/status/hcompartir-transfer2.png';
 
         var exists = fs.existsSync(path_icon_idle) && fs.existsSync(path_icon_transfer1) && fs.existsSync(path_icon_transfer2);
 

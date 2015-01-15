@@ -1,3 +1,9 @@
+huayra-compartir (0.51) unstable; urgency=low
+
+  * Cambiando el tamaño de los iconos a 22x22
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 15 Jan 2015 18:23:39 +0100
+
 huayra-compartir (0.50) unstable; urgency=low
 
   * Haciendo que la aplicación tome el ícono del tema actual.
