@@ -319,21 +319,71 @@ app.factory("Menu", function(AvahiFactory) {
         }
     }
 
+    /**
+     * Retorna la ruta completa al directorio de temas.
+     */
+    function obtener_prefijo_iconos(callback) {
+
+      var comando = spawn('gsettings', ['get', 'org.mate.interface', 'icon-theme']);
+
+      comando.stdout.on('data', function (data) {
+        data = data.toString().trim().replace(/\'/g, '');
+        var path = "/usr/share/icons/" + data + '/16x16/status/';
+        var path_icon_idle = "/usr/share/icons/" + data + '/16x16/status/hcompartir-idle.png';
+        var path_icon_transfer1 = "/usr/share/icons/" + data + '/16x16/status/hcompartir-transfer1.png';
+        var path_icon_transfer2 = "/usr/share/icons/" + data + '/16x16/status/hcompartir-transfer2.png';
+
+        var exists = fs.existsSync(path_icon_idle) && fs.existsSync(path_icon_transfer1) && fs.existsSync(path_icon_transfer2);
+
+        if (exists) {
+          //console.log("Se encontro el icono correctamente");
+          callback(null, path);
+        } else {
+          //console.log("No se encontro icono en " + path);
+          callback({error: "No se encontro alguno de los iconos en " + path + ". Usando iconos por omision."}, null);
+        }
+      });
+
+      comando.stderr.on('data', function (reason) {
+        callback(reason, null);
+      });
+
+      comando.on('close', function (code) {
+      });
+
+    }
+
     function crear() {
-        tray = new gui.Tray({title: '', icon: 'assets/img/icono_4.png' });
+        var prefix = 'assets/img/'
         var numero = 1;
 
-        setInterval(function() {
-            if (animar_icono) {
-                numero = numero + 1;
+        tray = new gui.Tray({title: '', icon: prefix + 'hcompartir-idle.png' });
 
-                if (numero > 3)
-                    numero = 1;
+        function update_image() {
 
-                tray.icon = "assets/img/icono_" + numero + ".png";
-            }
+          obtener_prefijo_iconos(function(err, data) {
+            if (err)
+              prefix = "assets/img/";
+            else
+              prefix = data;
+          });
 
-        }, 1000);
+          if (animar_icono) {
+            if (numero === 1)
+              numero = 2;
+            else
+              numero = 1;
+            tray.icon = prefix + "hcompartir-transfer" + numero + ".png";
+          } else {
+            tray.icon = prefix + "hcompartir-idle.png";
+          }
+
+          //console.log(tray.icon);
+
+          setTimeout(update_image, 2000);
+        }
+
+        update_image();
 
         menu = new gui.Menu();
 
