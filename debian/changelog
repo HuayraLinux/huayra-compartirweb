@@ -1,3 +1,9 @@
+huayra-compartir (0.52) unstable; urgency=low
+
+  * Arreglos menores. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 16 Jan 2015 20:52:49 +0100
+
 huayra-compartir (0.51) unstable; urgency=low
 
   * Cambiando el tamaño de los iconos a 22x22
