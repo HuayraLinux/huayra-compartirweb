@@ -15,8 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-ui-bootstrap-bower": "~0.10.0",
-    "angular-route": "~1.2.9",
-    "angular-animate": "~1.2.9"
+    "angular-ui-bootstrap-bower": "0.10.0",
+    "angular-route": "1.2.9",
+    "angular-animate": "1.2.9"
   }
 }

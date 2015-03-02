@@ -77,5 +77,13 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
 
         PreferenciasFactory.nombre = $scope.nombre;
         PreferenciasFactory.frase = $scope.frase;
-    }
+    };
+
+    
+    $scope.crear_red_adhoc = function() {
+        exec('nm-adhoc-dialog', function(err, stdout, stderror) {
+            console.error(err);
+            console.log({stdout: stdout, stderror: stderror});
+        });
+    };
 });

@@ -5,11 +5,11 @@
     "single-instance": false,
     "window": {
         "toolbar": false,
-        "show": false,
+        "show": true,
         "min_width": 750,
-        "min_height": 510,
+        "min_height": 590,
         "width": 750,
-        "height": 510,
+        "height": 590,
         "icon": "huayra-compartir.png",
         "position": "center"
     }

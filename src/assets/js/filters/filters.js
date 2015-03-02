@@ -1,3 +1,5 @@
+app = angular.module('app');
+
 app.filter('bytes', function() {
     return function(bytes, precision) {
         if (bytes==0) return '...';
