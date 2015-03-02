@@ -10,7 +10,7 @@ Homepage: https://github.com/HuayraLinux/huayra-compartirweb
 
 Package: huayra-compartir
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, node-webkit, avahi-utils, graphicsmagick, libglib2.0-bin 
+Depends: ${shlibs:Depends}, ${misc:Depends}, node-webkit, avahi-utils, graphicsmagick, libglib2.0-bin, nm-adhoc-dialog
 Description: Permite compartir archivos en una red local.
  Huayra-compartir permite intercambiar archivos y notificaciones
  dentro del aula.
