@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Configuracion punto a punto</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/fuentes.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.min.css">
+
+	<script type="text/javascript">
+		var exec = require('child_process').exec;
+
+		function abrir_dialogo() {
+			exec('nm-adhoc-dialog', function(err, stdout, stderror) {
+	            console.error(err);
+	            console.log({stdout: stdout, stderror: stderror});
+	        });
+		}
+
+	        
+	</script>
+
+	<style>
+		.ontop {
+			padding-top: 0 !important;
+		}
+	</style>
+</head>
+<body class='ontop'>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-12">
+
+		<h1>Configuracion punto a punto</h1>
+
+		<p>Mediante un asistente de red, se puede configurar huayra-compartir
+		para ...</p>
+
+
+		<p>
+		<button class='btn btn-info' onclick='abrir_dialogo()'>Abrir configuracion</button>
+		</p>
+
+	</div>
+
+  </div>
+</div>
+</body>
+</html>

@@ -81,9 +81,26 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
 
     
     $scope.crear_red_adhoc = function() {
-        exec('nm-adhoc-dialog', function(err, stdout, stderror) {
-            console.error(err);
-            console.log({stdout: stdout, stderror: stderror});
-        });
+
+        if (window.win !== undefined) {
+            window.win.focus();
+        } else {
+
+            var win = gui.Window.open('app://src/ayuda.html', {
+              width: 600,
+              height: 800,
+              toolbar: false,
+            });
+
+            win.on('close', function() {
+                win.close(true);
+                delete window.win;
+            });
+
+            window.win = win;
+
+            setTimeout(function() {win.focus();}, 10);
+        }
+
     };
 });
