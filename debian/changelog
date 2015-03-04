@@ -1,3 +1,9 @@
+huayra-compartir (1:0.5.5) unstable; urgency=low
+
+  * Comenzando a implementar la ayuda. 
+
+ -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 04 Mar 2015 20:51:23 +0100
+
 huayra-compartir (1:0.5.4) unstable; urgency=low
 
   * Agregando boton para crear red adhoc.
