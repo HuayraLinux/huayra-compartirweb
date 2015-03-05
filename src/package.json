@@ -5,7 +5,7 @@
     "single-instance": false,
     "window": {
         "toolbar": false,
-        "show": true,
+        "show": false,
         "min_width": 750,
         "min_height": 590,
         "width": 750,
