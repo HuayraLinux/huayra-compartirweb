@@ -1,6 +1,12 @@
+huayra-compartir (1:0.5.6) unstable; urgency=medium
+
+  * Huayra Compartir incia en modo minimizado.
+
+ -- Ignacio Juan Martín Benedetti <tranceway@gmail.com>  Thu, 05 Mar 2015 11:52:45 -0300
+
 huayra-compartir (1:0.5.5) unstable; urgency=low
 
-  * Comenzando a implementar la ayuda. 
+  * Comenzando a implementar la ayuda.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 04 Mar 2015 20:51:23 +0100
 
@@ -12,7 +18,7 @@ huayra-compartir (1:0.5.4) unstable; urgency=low
 
 huayra-compartir (0.52) unstable; urgency=low
 
-  * Arreglos menores. 
+  * Arreglos menores.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 16 Jan 2015 20:52:49 +0100
 
@@ -30,7 +36,7 @@ huayra-compartir (0.50) unstable; urgency=low
 
 huayra-compartir (0.46) unstable; urgency=low
 
-  * Agregando indicador de versión dentro de la sección preferencias. 
+  * Agregando indicador de versión dentro de la sección preferencias.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 21 Jul 2014 21:40:58 +0200
 
@@ -42,31 +48,31 @@ huayra-compartir (0.45) unstable; urgency=low
 
 huayra-compartir (0.44) unstable; urgency=low
 
-  * republicando automaticamente luego de cambiar la red. 
+  * republicando automaticamente luego de cambiar la red.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Jul 2014 17:14:46 +0200
 
 huayra-compartir (0.43) unstable; urgency=low
 
-  * Modularizando la forma de obtener la ip del equipo. 
+  * Modularizando la forma de obtener la ip del equipo.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Jul 2014 16:13:43 +0200
 
 huayra-compartir (0.42) unstable; urgency=low
 
-  * Agregando botones para depurar el modo avahi. 
+  * Agregando botones para depurar el modo avahi.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Jul 2014 15:15:27 +0200
 
 huayra-compartir (0.41) unstable; urgency=low
 
-  * Eliminando el reinicio de avahi. 
+  * Eliminando el reinicio de avahi.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 21:22:18 +0200
 
 huayra-compartir (0.40) unstable; urgency=low
 
-  * Arreglos menores. 
+  * Arreglos menores.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 20:54:06 +0200
 
@@ -78,7 +84,7 @@ huayra-compartir (0.39) unstable; urgency=low
 
 huayra-compartir (0.38) unstable; urgency=low
 
-  * Cambiando la forma de terminar el proceso avahi-publish-service. 
+  * Cambiando la forma de terminar el proceso avahi-publish-service.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 19:34:01 +0200
 
@@ -98,19 +104,19 @@ huayra-compartir (0.36) unstable; urgency=low
 
 huayra-compartir (0.35) unstable; urgency=low
 
-  * Primer implementación usando avahi como backend para descubrir la red. 
+  * Primer implementación usando avahi como backend para descubrir la red.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 10 Jul 2014 15:52:36 +0200
 
 huayra-compartir (0.34) unstable; urgency=low
 
-  * Actualizando icono del lanzador. 
+  * Actualizando icono del lanzador.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Apr 2014 23:25:44 +0200
 
 huayra-compartir (0.33) unstable; urgency=low
 
-  * Agregando marca de agua y nuevos iconos. 
+  * Agregando marca de agua y nuevos iconos.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 11 Apr 2014 23:04:40 +0200
 
@@ -122,7 +128,7 @@ huayra-compartir (0.32) unstable; urgency=low
 
 huayra-compartir (0.31) unstable; urgency=low
 
-  * Arreglos en el sistema de red polo. 
+  * Arreglos en el sistema de red polo.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 09 Apr 2014 20:46:33 +0200
 
@@ -134,7 +140,7 @@ huayra-compartir (0.30) unstable; urgency=low
 
 huayra-compartir (0.29) unstable; urgency=low
 
-  * Convirtiendo el modulo servidor en un servicio. 
+  * Convirtiendo el modulo servidor en un servicio.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 07 Apr 2014 18:43:11 +0200
 
@@ -153,7 +159,7 @@ huayra-compartir (0.27) unstable; urgency=low
 
 huayra-compartir (0.26) unstable; urgency=low
 
-  * Arreglos menores. 
+  * Arreglos menores.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Thu, 20 Mar 2014 17:59:48 +0100
 
@@ -168,25 +174,25 @@ huayra-compartir (0.25) unstable; urgency=low
 
 huayra-compartir (0.24) unstable; urgency=low
 
-  * Arreglos menores. 
+  * Arreglos menores.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Mon, 17 Mar 2014 18:30:47 +0100
 
 huayra-compartir (0.23) unstable; urgency=low
 
-  * Arreglos generales. 
+  * Arreglos generales.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 14 Mar 2014 20:46:24 +0100
 
 huayra-compartir (0.22) unstable; urgency=low
 
-  * Configurando el menú para ubicar la aplicación en Internet. 
+  * Configurando el menú para ubicar la aplicación en Internet.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 12 Feb 2014 20:58:34 +0100
 
 huayra-compartir (0.21) unstable; urgency=low
 
-  * Quitando el modulo resizer y otros arreglos. 
+  * Quitando el modulo resizer y otros arreglos.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 12 Feb 2014 17:37:02 +0100
 
@@ -228,19 +234,19 @@ huayra-compartir (0.16) unstable; urgency=low
 
 huayra-compartir (0.15) unstable; urgency=low
 
-  * Actualizaciones generales. 
+  * Actualizaciones generales.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 05 Feb 2014 19:10:49 +0100
 
 huayra-compartir (0.14) unstable; urgency=low
 
-  * mejorando la vista amigos. 
+  * mejorando la vista amigos.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 31 Jan 2014 17:05:52 +0100
 
 huayra-compartir (0.13) unstable; urgency=low
 
-  * Agregando icono y acceso desde el menu. 
+  * Agregando icono y acceso desde el menu.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 31 Jan 2014 16:46:00 +0100
 
@@ -281,7 +287,7 @@ huayra-compartir (0.8) unstable; urgency=low
 
 huayra-compartir (0.7) unstable; urgency=low
 
-  * Agregando pre-compilados de mdns. 
+  * Agregando pre-compilados de mdns.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Wed, 29 Jan 2014 20:06:19 +0100
 
@@ -305,7 +311,7 @@ huayra-compartir (0.3) unstable; urgency=low
 
 huayra-compartir (0.2) unstable; urgency=low
 
-  * Actualizando dependencias. 
+  * Actualizando dependencias.
 
  -- Hugo Ruscitti <hugoruscitti@gmail.com>  Fri, 24 Jan 2014 16:23:47 +0100
 
