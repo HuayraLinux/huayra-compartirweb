@@ -1,3 +1,9 @@
+huayra-compartir (1:0.5.7) unstable; urgency=medium
+
+  * Ayuda para crear red AdHoc
+
+ -- Ignacio Juan Martín Benedetti <tranceway@gmail.com>  Fri, 06 Mar 2015 13:34:12 -0300
+
 huayra-compartir (1:0.5.6) unstable; urgency=medium
 
   * Huayra Compartir incia en modo minimizado.
