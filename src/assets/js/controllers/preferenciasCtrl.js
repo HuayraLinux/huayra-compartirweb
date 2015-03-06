@@ -79,7 +79,7 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
         PreferenciasFactory.frase = $scope.frase;
     };
 
-    
+
     $scope.crear_red_adhoc = function() {
 
         if (window.win !== undefined) {
@@ -87,8 +87,8 @@ app.controller("PreferenciasCtrl", function($scope, $http, AvahiFactory, Prefere
         } else {
 
             var win = gui.Window.open('app://src/ayuda.html', {
-              width: 600,
-              height: 800,
+              width: 650,
+              height: 700,
               toolbar: false,
             });
 
