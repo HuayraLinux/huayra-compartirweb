@@ -1,3 +1,9 @@
+huayra-compartir (1:0.5.8) UNRELEASED; urgency=medium
+
+  * Se pueden tirar (drag & drop) archivos en la sección de archivos)
+
+ -- Gonzalo Gluzman <dggluz@gmail.com>  Thu, 09 Apr 2015 16:00:51 -0300
+
 huayra-compartir (1:0.5.7) unstable; urgency=medium
 
   * Ayuda para crear red AdHoc
