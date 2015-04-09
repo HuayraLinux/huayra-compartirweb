@@ -1,3 +1,9 @@
+huayra-compartir (1:0.5.9) unstable; urgency=medium
+
+  * Nueva versión (error en la última)
+
+ -- Gonzalo Gluzman <dggluz@gmail.com>  Thu, 09 Apr 2015 16:20:21 -0300
+
 huayra-compartir (1:0.5.8) unstable; urgency=medium
 
   * Se pueden tirar (drag & drop) archivos en la sección de archivos)
