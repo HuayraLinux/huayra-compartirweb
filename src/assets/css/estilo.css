@@ -303,3 +303,20 @@ div.barra-depuracion {
   padding-right: 10px;
   display: none;
 }
+
+
+.copy-files {
+  position: relative;
+}
+
+.copy-files::after {
+  content: '+';
+  position: absolute;
+  z-index: 999;
+  right: 0.5em;
+  top: 0em;
+  font-size: 13em;
+  font-weight: bold;
+  color: green;
+  text-shadow: 0px 0px 3px black;
+}

@@ -1,12 +1,12 @@
 /* Botón en la barra superior para recargar toda la aplicación. */
 window.actualizar = function() {
     document.location.reload();
-}
+};
 
 /* Botón en la barra superior para mostrar las herramientas de desarrollo. */
 window.mostrar_herramientas_de_desarrollo = function() {
     gui.Window.get().showDevTools();
-}
+};
 
 window.guardar_preferencias = function(preferencias) {
     var ruta_preferencias = process.env.HOME + '/.huayra-compartir';
@@ -16,7 +16,7 @@ window.guardar_preferencias = function(preferencias) {
             alert("error");
         }
     });
-}
+};
 
 
 
@@ -24,6 +24,7 @@ var gui = require('nw.gui');
 var path = require('path');
 var uuid = require('node-uuid');
 var events = require('events');
+var fs = require('fs');
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
@@ -90,14 +91,14 @@ app.controller("MainCtrl", function($scope, $location, $http, Singleton, Servido
             else
                 return "";
         }
-    }
+    };
 
     $scope.esPaginaPrincipal = function() {
         if ($location.path() === "/principal")
         	return "view-principal";
         else
         	return "";
-    }
+    };
 
 
     Eventos.on('inicia', function(data) {
@@ -238,5 +239,21 @@ app.controller("PrincipalCtrl", function($scope) {
 
     $scope.abrir_carpeta_compartida = function() {
         gui.Shell.openItem(ruta_compartidos);
-    }
+    };
+
+
+    // prevent default behavior from changing page on dropped file
+    window.ondragover = function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+      return false;
+    };
+    window.ondragleave = function() {
+      return false;
+    };
+
+    window.ondrop = function (e) {
+      e.preventDefault();
+      return false;
+    };
 });

@@ -14,28 +14,29 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
 
     $scope.abrir_directorio = function() {
         gui.Shell.openItem(ruta_descargas);
-    }
+    };
 
     $scope.abrir_item = function(item) {
         gui.Shell.openItem(ruta_descargas + item.name);
-    }
+    };
 
     $scope.limpiar_completados = function() {
-        var lista_limpia = [];
+        var lista_limpia = [], i;
 
-        for (var i=0; i<$scope.Descargas.length; i++) {
-            if (Descargas[i].bajando)
+        for (i=0; i<$scope.Descargas.length; i++) {
+            if (Descargas[i].bajando) {
                 lista_limpia.push(Descargas[i]);
+            }
         }
 
         while ($scope.Descargas.length > 0) {
             Descargas.pop();
         }
 
-        for (var i=0; i<lista_limpia.length; i++) {
+        for (i=0; i<lista_limpia.length; i++) {
             $scope.Descargas.push(lista_limpia[i]);
         }
-    }
+    };
 
     console.log("iniciando timer para actualizar progreso de las descargas.");
     actualizar_listado();
@@ -44,5 +45,4 @@ app.controller("DescargasCtrl", function($scope, Descargas, $timeout) {
         $timeout.cancel(timer);
         console.log("cancelando el timer de actualización");
     });
-
 });

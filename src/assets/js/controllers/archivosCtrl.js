@@ -1,5 +1,7 @@
 var fs = require('fs');
 var http = require('http');
+var chokidar = require('chokidar');
+var ncp = require('ncp');
 
 app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, Descargas) {
     $scope.esta_en_directorio_raiz = true;
@@ -9,7 +11,8 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
     $scope.mi_ip = $scope.$parent.mi_ip;
     $scope.es_vista_mis_archivos = true;
 
-    var path = "";
+    var path,
+        relative_path;
 
     var ruta_descargas = process.env.HOME + '/Descargas/';
 
@@ -19,21 +22,19 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 
     if ($routeParams.url === undefined) {
         var base_path = $scope.$parent.base;
-        var relative_path = "obtener/";
-        var path = base_path + '/' +  relative_path;
+        relative_path = 'obtener/';
+        path = base_path + '/' +  relative_path;
         $scope.path = '/';
     }
     else {
-        var relative_path = $routeParams.url;
-        var path = 'http://' +  relative_path;
+        relative_path = $routeParams.url;
+        path = 'http://' +  relative_path;
         $scope.path = relative_path.split('obtener/')[1];
 
         if (! $scope.path) {
           $scope.path = '/';
         }
     }
-
-
 
     function actualizar_listado() {
         if ($routeParams.url) {
@@ -53,7 +54,7 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 
     $scope.actualizar = function() {
       actualizar_listado();
-    }
+    };
 
     $scope.descargar = function(archivo) {
         var objeto_descarga = archivo;
@@ -90,13 +91,13 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
             fs.unlink(ruta_descargas + archivo.name);
         });
 
-    }
+    };
 
     $scope.abrir = function(archivo) {
         var ruta_con_dominio = archivo.url.replace('http://', '');
         $location.path('/archivos/' + ruta_con_dominio);
         $scope.filtro = '';
-    }
+    };
 
     //$scope.$watch('directorio', function() {
     //    $scope.esta_en_directorio_raiz = /\/ls$/.test($scope.directorio);
@@ -104,14 +105,64 @@ app.controller("ArchivosCtrl", function($scope, $http, $routeParams, $location, 
 
     $scope.regresar = function() {
         history.back();
-    }
+    };
 
     var gui = require('nw.gui');
     var ruta_compartidos = process.env.HOME + '/Compartido/';
 
     $scope.abrir_carpeta_compartida = function() {
         gui.Shell.openItem(ruta_compartidos);
-    }
+    };
 
     actualizar_listado();
+
+    // ignora .dotfiles
+    chokidar.watch(ruta_compartidos, {
+        ignored: /[\/\\]\./
+    }).on('all', actualizar_listado);
+
+    (function(draggableElement) {
+        var entro;
+
+        draggableElement.ondrop = function (e) {
+          e.preventDefault();
+          entro = false;
+          draggableElement.className = draggableElement.className.replace(/(^|\s+)copy\-files/ig, '');
+
+          if(e.dataTransfer.files) {
+            Array.prototype.forEach.call(e.dataTransfer.files, function(aFile) {
+              ncp(aFile.path, ruta_compartidos + aFile.name, function(err) {
+                if(err) {
+                  console.warn(err);
+                }
+                else {
+                  console.log('archivo compartido');
+                }
+              });
+            });                    
+          }
+          return false;
+        };
+
+        draggableElement.ondragover = function(e) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'copy';
+
+          entro = true;
+
+          draggableElement.className += ' copy-files';
+
+          return false;
+        };
+        draggableElement.ondragleave = function() {
+            entro = false;
+            setTimeout(function() {
+                if(!entro) {
+                    draggableElement.className = draggableElement.className.replace(/(^|\s+)copy\-files/ig, '');
+                }
+            }, 200);
+
+          return false;
+        };
+    })(document.getElementById('files-drop'));
 });
