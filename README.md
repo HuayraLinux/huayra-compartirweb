@@ -12,6 +12,13 @@ de archivos dentro de una red local.
 Este software forma parte del proyecto Huayra Gnu/Linux, es software libre y
 se distribuye instalado en las netbooks del Programa Conectar Igualdad en Argentina.
 
+## Tecnologías utilizadas
+
+* nodewebkit
+* angularjs
+* socket.io
+* express.js
+
 
 Instalación
 -----------
