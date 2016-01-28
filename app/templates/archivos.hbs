@@ -1,3 +1,11 @@
 <h2>Archivos</h2>
 
 {{outlet}}
+
+{{log model.archivos}}
+
+{{#each model.archivos as |item|}}
+  {{huayra-archivo archivo=item}}
+{{else}}
+  <p>No hay archivos para mostrar...</p>
+{{/each}}
