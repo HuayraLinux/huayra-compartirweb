@@ -22,7 +22,7 @@
               </tr>
 
               {{#each model.archivos as |item|}}
-                {{huayra-archivo archivo=item tagName=""}}
+                {{huayra-archivo archivo=item tagName="" ctrl=this}}
               {{else}}
                 <tr>
                   <td colspan=5 class='text-center text-danger'>No hay archivos para mostrar...</td>

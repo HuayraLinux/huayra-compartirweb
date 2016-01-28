@@ -17,9 +17,9 @@
       <ul class="sidebar-menu">
         <li class="header">NAVIGATION</li>
 
-
         <li>{{#link-to "index"}}index{{/link-to}}</li>
-        <li>{{#link-to "archivos" "localhost"}}mis archivos{{/link-to}}</li>
+        <li>{{#link-to "archivos" (query-params host="localhost" path="Ceferino" )}}mis archivos{{/link-to}}</li>
+        <li>{{#link-to "archivos" (query-params host="" path="")}}test{{/link-to}}</li>
 
       </ul>
     </section>

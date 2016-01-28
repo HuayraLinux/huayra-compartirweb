@@ -6,7 +6,9 @@
     <td class='text-center'>
       DIRECTORIO
     </td>
-    <td> </td>
+    <td>
+      <button class="btn btn-xs btn-primary" {{action "abrir"}}>Abrir</button>
+     </td>
   {{else}}
     <td>
       {{archivo.name}}
@@ -14,6 +16,10 @@
     <td class='text-center'>
       ARCHIVO
     </td>
-    <td> </td>
+    <td>
+      <button class="btn btn-xs btn-success" {{action "descargar"}}>Descargar</button>
+
+
+    </td>
   {{/if}}
 </tr>

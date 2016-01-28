@@ -7,5 +7,5 @@ var Router = Ember.Router.extend({
 
 export default Router.map(function() {
   this.route('tips');
-  this.route('archivos', {path: "archivos/:host"});
+  this.route('archivos');
 });
