@@ -1,34 +1,41 @@
 {
   "name": "huayra-compartirweb",
-  "version": "0.0.1",
-  "description": "Una herramienta para compatir archivos",
-  "main": "index.js",
+  "version": "0.0.0",
+  "description": "Small description for huayra-compartirweb goes here",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ember build",
+    "start": "ember server",
+    "test": "ember test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/HuayraLinux/huayra-compartirweb.git"
+  "repository": "",
+  "engines": {
+    "node": ">= 0.10.0"
   },
-  "author": "Hugo Ruscitti",
-  "license": "GPLv3",
-  "bugs": {
-    "url": "https://github.com/HuayraLinux/huayra-compartirweb/issues"
-  },
-  "dependencies": {
-    "grunt-cli": "~0.1.11",
-    "grunt": "~0.4.2",
-    "grunt-node-webkit-builder": "~0.1.14",
-    "grunt-shell": "~0.6.1",
-    "shelljs": "~0.2.6",
-    "bower": "~1.2.8",
-    "express": "~3.4.8",
-    "mime": "~1.2.11",
-    "polo": "~0.5.6",
-    "request-progress": "~0.3.1",
-    "request": "~2.33.0",
-    "node-uuid": "~1.4.1",
-    "chokidar": "*",
-    "ncp": "*"
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "broccoli-asset-rev": "^2.2.0",
+    "ember-ajax": "0.7.1",
+    "ember-cli": "2.3.0-beta.1",
+    "ember-cli-app-version": "^1.0.0",
+    "ember-cli-babel": "^5.1.5",
+    "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-htmlbars": "^1.0.1",
+    "ember-cli-htmlbars-inline-precompile": "^0.3.1",
+    "ember-cli-inject-live-reload": "^1.3.1",
+    "ember-cli-qunit": "^1.2.1",
+    "ember-cli-release": "0.2.8",
+    "ember-cli-sri": "^2.0.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-data": "^2.3.0",
+    "ember-disable-proxy-controllers": "^1.0.1",
+    "ember-export-application-global": "^1.0.4",
+    "ember-resolver": "2.0.3"
   }
 }

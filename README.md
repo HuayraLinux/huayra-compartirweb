@@ -15,9 +15,8 @@ se distribuye instalado en las netbooks del Programa Conectar Igualdad en Argent
 ## Tecnologías utilizadas
 
 * nodewebkit
-* angularjs
-* socket.io
-* express.js
+* emberjs
+* huayra-mu
 
 
 Instalación
@@ -26,14 +25,13 @@ Instalación
 Si querés probar esta aplicación directamente desde este repositorio, tenés
 que seguir estos pasos:
 
-- clonar el repositorio.
-- instalalar nodejs.
-- instalar `bower` de forma global con el comando `sudo npm install -g bower`.
-- ejecutar `make init` en el directorio del proyecto para instalar todas las dependencias.
-- ejecutar `make test_mac` o `make test_linux` dependiendo de tu sistema operativo.
+- clonar el repositorio con: 'git clone git@github.com:HuayraLinux/huayra-compartirweb.git'
+- ingresar en el directorio: 'cd huayra-compartirweb'
+- instalar dependencias: 'make iniciar'
+- y ejecutar: 'make compilar; make ejecutar_linux'
 
 
 ¿Cómo funciona?
 ---------------
 
-- [Presentando huayra-compartir (en http://examplelab.com.ar)](http://examplelab.com.ar/presentanto-huayra-compartir)
+- [Presentando huayra-compartir versión 1 (en http://examplelab.com.ar)](http://examplelab.com.ar/presentanto-huayra-compartir)

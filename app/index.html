@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>huayra-compartirweb</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- AGREGADOS PARA NODEWEBKIT -->
+    <script src='js/reemplazar-require-paso-1.js'></script>
+    <script src='js/atajo-inspector.js'></script>
+
+    {{content-for "head"}}
+
+    <!-- AGREGADOS POR EMBERCLI -->
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/huayra-compartirweb.css">
+    {{content-for "head-footer"}}
+
+  </head>
+  <body>
+    {{content-for "body"}}
+
+    <script src="assets/vendor.js"></script>
+    <script src="assets/huayra-compartirweb.js"></script>
+
+    {{content-for "body-footer"}}
+
+    <!-- AGREGADOS PARA NODEWEBKIT -->
+    <script src='js/fix-menu-osx.js'></script>
+    <script src='js/livereload.js'></script>
+
+  </body>
+</html>

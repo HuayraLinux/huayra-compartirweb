@@ -1,47 +1,97 @@
+VERSION=0.0.1
+NOMBRE="huayra-compartirweb"
+
 N=[0m
-V=[01;32m
-VERSION=`git name-rev --name-only --tags HEAD | sed 's/\^.*//'`
+G=[01;32m
+Y=[01;33m
+B=[01;34m
 
-all:
+comandos:
 	@echo ""
-	@echo " $(V)init$(N)         Instala todas las bibliotecas necesarias para comenzar."
-	@echo " $(V)test_mac$(N)     Prueba la aplicacion usando nodewebkit en mac osx."
-	@echo " $(V)test_linux$(N)   Prueba la aplicacion usando nodewebkit en linux."
-	@echo " $(V)build$(N)        Genera las versiones compiladas."
-	@echo " $(V)version$(N)      Informa el numero de version."
+	@echo "${B}Comandos disponibles para ${G}huayra-compartirweb${N}"
+	@echo ""
+	@echo "  ${Y}Para desarrolladores${N}"
+	@echo ""
+	@echo "    ${G}iniciar${N}         Instala dependencias."
+	@echo "    ${G}compilar${N}        Genera los archivos compilados."
+	@echo "    ${G}compilar_live${N}   Compila de forma contínua."
+	@echo ""
+	@echo "    ${G}ejecutar_linux${N}  Prueba la aplicacion sobre Huayra."
+	@echo "    ${G}ejecutar_mac${N}    Prueba la aplicacion sobre OSX."
+	@echo ""
+	@echo "    ${G}actualizar_tema${N} Descargar e inyecta el tema de huayra."
+	@echo ""
+	@echo "  ${Y}Para distribuir${N}"
+	@echo ""
+	@echo "    ${G}version${N}         Genera una nueva versión."
+	@echo "    ${G}subir_version${N}   Sube version generada al servidor."
+	@echo "    ${G}log${N}             Muestra los cambios desde el ultimo tag."
+	@echo "    ${G}publicar${N}        Publica el cambio para el paquete deb."
+	@echo "    ${G}crear_deb${N}       Genera el paquete deb para huayra."
 	@echo ""
 
-.dependencias:
-	@sh verificar_dependencias.sh
 
+iniciar:
+	npm install --no-option
+	./node_modules/bower/bin/bower install
+
+dist: compilar
+
+ejecutar_linux: 
+	nw dist
+
+ejecutar_mac:
+	/Applications/nwjs.app/Contents/MacOS/nwjs dist
+
+test_mac: ejecutar_mac
+
+build: compilar
+
+publicar:
+	dch -i
+
+crear_deb:
+	dpkg-buildpackage -us -uc
+
+compilar:
+	./node_modules/ember-cli/bin/ember build
+
+compilar_live:
+	./node_modules/ember-cli/bin/ember build --watch
 
 version:
-	@echo $(VERSION)
+	# patch || minor
+	@bumpversion patch --current-version ${VERSION} package.json public/package.json Makefile --list
+	make build
+	@echo "Es recomendable escribir el comando que genera los tags y sube todo a github:"
+	@echo ""
+	@echo "make subir_version"
 
-build: .dependencias
-	clear
-	@echo "$(V)Borrando archivos de releases anteriores.$(N)"
-	rm -f -r webkitbuilds/releases/
-	@echo "$(V)Creando binarios para Windows, MAC y GNU/Linux.$(N)"
-	@echo "$(V)-- Esto demora varios minutos --$(N)"
-	grunt nodewebkit
+ver_sync: subir_version
 
-init: .dependencias
-	@echo "$(V)Instalando dependencias de nodejs en ./node_modules/ ... $(N)"
-	npm install
-	@echo "$(V)Instalando dependencias frontend con bower en ./src/bower_components/ ... $(N)"
-	cd ./src/; bower install
+subir_version:
+	git commit -am 'release ${VERSION}'
+	git tag '${VERSION}'
+	git push
+	git push --all
+	git push --tags
 
-test_mac:
-	@echo "Cuidado - se está usando la version de nodewebkit del sistema."
-	open -a /Applications/node-webkit.app src
+actualizar_tema:
+	@echo "${G}Actualizando el tema${N}"
+	@rm -r -f master.zip
+	@wget https://github.com/hugoruscitti/huayra-bootstrap-liso/archive/master.zip
+	@unzip master.zip -d tmp_theme
+	@rm -r -f public/libs
+	@rm -r -f public/img
+	@rm -r -f public/fonts
+	@mv tmp_theme/huayra-bootstrap-liso-master/destino/libs public/
+	@mv tmp_theme/huayra-bootstrap-liso-master/destino/img public/
+	@mv tmp_theme/huayra-bootstrap-liso-master/destino/fonts public/
+	@mv tmp_theme/huayra-bootstrap-liso-master/destino/huayra-bootstrap.css public/
+	@rm -r -f master.zip
+	@rm -r -f tmp_theme
 
-test_linux: .dependencias
-	nw src
+log:
+	git log ${VERSION}...HEAD --graph --oneline --decorate
 
-
-test:
-	echo "..."
-
-install:
-	echo "..."
+.PHONY: dist
