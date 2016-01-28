@@ -1,7 +1,19 @@
-{{yield}}
-
-{{#if esDirectorio}}
-  <p> DIR: {{archivo.name}} </p>
-{{else}}
-  <p> FILE: {{archivo.name}} </p>
-{{/if}}
+<tr>
+  {{#if esDirectorio}}
+    <td>
+      <p> {{archivo.name}} </p>
+    </td>
+    <td class='text-center'>
+      DIRECTORIO
+    </td>
+    <td> </td>
+  {{else}}
+    <td>
+      {{archivo.name}}
+    </td>
+    <td class='text-center'>
+      ARCHIVO
+    </td>
+    <td> </td>
+  {{/if}}
+</tr>

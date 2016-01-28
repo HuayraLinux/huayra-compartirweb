@@ -6,5 +6,9 @@ export default Ember.Route.extend({
     var host = params.host;
     return $.getJSON(`http://${host}:9919/obtener/`);
   },
-
+  actions: {
+    actualizar() {
+      this.refresh();
+    }
+  }
 });

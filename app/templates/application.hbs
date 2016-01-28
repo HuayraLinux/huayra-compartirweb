@@ -1,7 +1,34 @@
-<h2>huayra-compartir</h2>
+<div class="wrapper">
 
-<p>
- {{#link-to "index"}}index{{/link-to}} | {{#link-to "archivos" "localhost"}}mis archivos{{/link-to}}
-</p>
+  <header class="main-header">
 
-{{outlet}}
+    {{#link-to "index" class="logo"}}
+    <span class="logo-mini"><b>huayra</b> compartir</span>
+    <span class="logo-lg"><b>huayra</b> compartir</span>
+    {{/link-to}}
+
+    <nav class="navbar navbar-static-top" role="navigation">
+
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
+    <section class="sidebar" style="height: auto;">
+      <ul class="sidebar-menu">
+        <li class="header">NAVIGATION</li>
+
+
+        <li>{{#link-to "index"}}index{{/link-to}}</li>
+        <li>{{#link-to "archivos" "localhost"}}mis archivos{{/link-to}}</li>
+
+      </ul>
+    </section>
+  </aside>
+
+  <div class="content-wrapper" style="min-height: 400px;">
+
+    {{outlet}}
+
+  </div>
+
+</div>
