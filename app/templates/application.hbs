@@ -14,14 +14,14 @@
 
   <aside class="main-sidebar">
     <section class="sidebar" style="height: auto;">
+
       <ul class="sidebar-menu">
-        <li class="header">NAVIGATION</li>
+        <li class="header">Secciones</li>
 
-        <li>{{#link-to "index"}}index{{/link-to}}</li>
-        <li>{{#link-to "archivos" (query-params host="localhost" path="Ceferino" )}}mis archivos{{/link-to}}</li>
-        <li>{{#link-to "archivos" (query-params host="" path="")}}test{{/link-to}}</li>
-
+        {{#link-to "index" tagName="li" class="conAccion" current-when="index"}}<a>{{fa-icon "fa-television"}} Principal</a>{{/link-to}}
+        {{#link-to "archivos" (query-params host="localhost" path="") tagName="li" class="conAccion" current-when="archivos"}}<a>{{fa-icon "fa-clone"}} Mis Archivos</a>{{/link-to}}
       </ul>
+
     </section>
   </aside>
 

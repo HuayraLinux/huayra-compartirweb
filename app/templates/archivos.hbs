@@ -1,5 +1,11 @@
 <section class="content-header">
-  <h1> Archivos <small> ... </small> </h1>
+  <h1> Archivos
+    {{#if esLocalhost}}
+      de mi equipo
+    {{else}}
+      de {{host}}
+    {{/if}}
+  </h1>
 </section>
 
 <section class="content">
@@ -7,8 +13,13 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <div class="padding">
-        <button class="btn btn-success" {{action "actualizar"}}>Actualizar</button>
+      <div class="padding-bottom">
+        <button class="btn btn-default" disabled={{no_puede_volver_atras}} {{action "volver"}}>{{fa-icon "arrow-left"}} Volver atrás</button>
+        <button class="btn btn-default" {{action "actualizar"}}>{{fa-icon "refresh"}} Recargar</button>
+      </div>
+
+      <div class="padding-bottom">
+        {{huayra-ruta path=path}}
       </div>
 
       <div class="box">
@@ -17,8 +28,8 @@
             <tbody>
               <tr>
                 <th>Nombre</th>
-                <th class='text-center'>Tipo</th>
-                <th class='text-center'>Acciones</th>
+                <th class='text-right' style="width: 140px">Tamaño</th>
+                <th class='text-center' style="width: 140px">Acciones</th>
               </tr>
 
               {{#each model.archivos as |item|}}

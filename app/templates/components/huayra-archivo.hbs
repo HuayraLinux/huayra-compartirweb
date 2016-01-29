@@ -1,25 +1,22 @@
 <tr>
   {{#if esDirectorio}}
-    <td>
-      <p> {{archivo.name}} </p>
+    <td class="conAccion" {{action "abrir"}}>
+      {{fa-icon "folder" class="text-yellow padding-right"}} <span class="text-yellow">{{archivo.name}}</span>
     </td>
     <td class='text-center'>
-      DIRECTORIO
     </td>
-    <td>
+    <td class="text-center">
       <button class="btn btn-xs btn-primary" {{action "abrir"}}>Abrir</button>
      </td>
   {{else}}
-    <td>
-      {{archivo.name}}
+    <td class="conAccion" {{action "descargar"}}>
+      {{fa-icon icon="file" class="text-aqua padding-right"}} {{archivo.name}}
     </td>
-    <td class='text-center'>
-      ARCHIVO
+    <td class='text-right'>
+      <span class="small">{{size}}</span>
     </td>
-    <td>
+    <td class="text-center">
       <button class="btn btn-xs btn-success" {{action "descargar"}}>Descargar</button>
-
-
     </td>
   {{/if}}
 </tr>

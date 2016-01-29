@@ -8,6 +8,6 @@ export default Ember.Controller.extend({
           e.preventDefault();
       }
     });
-  }.on('init')
+  }.on('init'),
 
 });

@@ -4,7 +4,9 @@ export default Ember.Route.extend({
   queryParams: {
     path: {
       refreshModel: true,
-      host: true,
+    },
+    host: {
+      refreshModel: true,
     }
   },
 
@@ -13,6 +15,9 @@ export default Ember.Route.extend({
   },
 
   actions: {
+    volver() {
+      window.history.back();
+    },
     actualizar() {
       this.refresh();
     }
