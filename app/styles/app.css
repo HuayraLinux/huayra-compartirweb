@@ -43,3 +43,20 @@ aside.main-sidebar {
 .skin-purple-light .sidebar-menu>li.active>a {
     background: #EDEDFF;
 }
+
+
+.spinner {
+  color: white;
+  font-size: x-large;
+  margin-right: 6px;
+  margin-top: 5px;
+  opacity: 1;
+  -webkit-transition: opacity 0.8s;
+  -moz-transition: opacity 0.8s;
+  transition: opacity 0.8s;
+}
+
+
+.opacity0 {
+  opacity: 0;
+}

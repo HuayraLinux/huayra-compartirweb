@@ -8,4 +8,5 @@ var Router = Ember.Router.extend({
 export default Router.map(function() {
   this.route('tips');
   this.route('archivos');
+  this.route('equipos');
 });

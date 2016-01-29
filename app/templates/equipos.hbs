@@ -1,0 +1,39 @@
+<section class="content-header">
+  <h1> Equipos en la red </h1>
+</section>
+
+<section class="content">
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="padding-bottom">
+        <button class="btn btn-default" {{action "vincular"}}>{{fa-icon "code-fork"}}  Vincular por IP</button>
+      </div>
+
+      <div class="box">
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>Dirección IP del equipo</th>
+              </tr>
+
+              {{#each model as |ip|}}
+              <tr>
+                <td>{{#link-to "archivos" (query-params host=ip.ip path="")}}{{ip.ip}}{{/link-to}}</td>
+              </tr>
+              {{else}}
+                <tr>
+                  <td class='text-center text-danger'>No hay equipos visibles ...</td>
+                </tr>
+              {{/each}}
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

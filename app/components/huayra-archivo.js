@@ -28,7 +28,7 @@ export default Ember.Component.extend({
     },
     abrir() {
       var partes = this.get('archivo.contenido').split('/obtener/');
-      var host = 'localhost'; //partes[0]; TODO: obtener el path desde esta ruta.
+      var host = this.get('host');
       var path = partes[1];
 
       this.get('ctrl').transitionToRoute('archivos', {queryParams: {host, path}});
