@@ -12,8 +12,8 @@ export default Ember.Component.extend({
         return 0;
       }
 
-      return ( size / Math.pow(1024, i) ).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
-    };
+      return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+    }
 
     return humanFileSize(this.get('archivo.size'));
   }),

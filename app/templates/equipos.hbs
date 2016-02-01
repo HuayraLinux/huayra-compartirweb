@@ -9,6 +9,7 @@
 
       <div class="padding-bottom">
         <button class="btn btn-default" {{action "vincular"}}>{{fa-icon "code-fork"}}  Vincular por IP</button>
+        <button class="btn btn-default" {{action "actualizar"}}>{{fa-icon "refresh"}} Recargar </button>
       </div>
 
       <div class="box">
@@ -17,11 +18,13 @@
             <tbody>
               <tr>
                 <th>Dirección IP del equipo</th>
+                <th>Identificador del equipo</th>
               </tr>
 
-              {{#each model as |ip|}}
+              {{#each model.equipos as |ip|}}
               <tr>
-                <td>{{#link-to "archivos" (query-params host=ip.ip path="")}}{{ip.ip}}{{/link-to}}</td>
+                <td>{{#link-to "archivos" (query-params host=ip.host path="")}}{{ip.host}}{{/link-to}}</td>
+                <td>{{ip.id}}</td>
               </tr>
               {{else}}
                 <tr>
