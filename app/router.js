@@ -9,4 +9,5 @@ export default Router.map(function() {
   this.route('tips');
   this.route('archivos');
   this.route('equipos');
+  this.route('preferencias');
 });
