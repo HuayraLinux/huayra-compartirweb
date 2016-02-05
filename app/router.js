@@ -10,4 +10,5 @@ export default Router.map(function() {
   this.route('archivos');
   this.route('equipos');
   this.route('preferencias');
+  this.route('descargas');
 });
