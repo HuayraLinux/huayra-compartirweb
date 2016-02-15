@@ -38,5 +38,11 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-resolver": "2.0.3"
+  },
+  "main": "app://dist/index.html",
+  "window": {
+    "toolbar": false,
+    "width": 960,
+    "height": 600
   }
 }
