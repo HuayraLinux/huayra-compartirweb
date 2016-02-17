@@ -8,15 +8,7 @@
     {{/link-to}}
 
     <nav class="navbar navbar-static-top" role="navigation">
-    {{huayra-globalspinner}}
-
-      {{#if apiStatus}}
-      <span class="services-status pull-right">API: {{ fa-icon "check-circle" }}</span>
-      {{/if}}
-
-      {{#if avahiStatus}}
-      <span class="services-status pull-right">Avahi: {{ fa-icon "check-circle" }}</span>
-      {{/if}}
+        {{huayra-globalspinner}}
     </nav>
   </header>
 
@@ -32,6 +24,22 @@
         {{#link-to "equipos" tagName="li" class="conAccion" current-when="equipos"}}<a>{{fa-icon "map-o"}} Equipos</a>{{/link-to}}
         {{#link-to "preferencias" tagName="li" class="conAccion" current-when="preferencias"}}<a>{{fa-icon "gears"}} Preferencias</a>{{/link-to}}
       </ul>
+
+      <div class="services-status-block">
+        <span class="services-status pull-left">Status: </span>
+
+        <span class="services-status pull-right">API:
+        {{#if apiStatus}} {{ fa-icon "check-circle" }}
+        {{ else }} {{ fa-icon "circle" }}
+        {{/if}}
+        </span>
+
+        <span class="services-status pull-right">Avahi:
+        {{#if avahiStatus}} {{ fa-icon "check-circle" }}
+        {{ else }} {{ fa-icon "circle" }}
+        {{/if}}
+        </span>
+      </div>
 
     </section>
   </aside>
