@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
 var gui = window.requireNode('nw.gui');
+var ventana = gui.Window.get();
 
 export default Ember.Service.extend({
-  // ventana aplicacion
-  ventana: gui.Window.get(),
   // menu principal
   menu: new gui.Menu(),
   // traybar
@@ -17,20 +16,18 @@ export default Ember.Service.extend({
   init(){
     var self = this;
     var prefix = 'img/';
+    var appController = this.controllerFor("application");
 
     var mostrar_ventana = function(){
-      var ventana = self.get('ventana');
       ventana.show();
       ventana.restore();
     };
 
     var esconder_ventana = function(){
-      var ventana = self.get('ventana');
       ventana.hide();
     };
 
     var toggle_ventana = function(){
-      var ventana = self.get('ventana');
       var hidden = self.get('hidden');
 
       if( hidden ){ mostrar_ventana(); hidden = false; }
@@ -55,6 +52,7 @@ export default Ember.Service.extend({
     var salir = new gui.MenuItem({
       label: 'Salir',
       click: function() {
+        appController.captureClose();
         gui.App.closeAllWindows();
       },
       enabled: true

@@ -5,6 +5,7 @@ const ESTADO_ESPERANDO = "esperando";
 const ESTADO_ERROR = "error";
 
 export default Ember.Service.extend({
+  api: Ember.inject.service(),
   items: [],
 
   iniciar: Ember.on('init', function() {
