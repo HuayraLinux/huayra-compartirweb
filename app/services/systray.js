@@ -16,7 +16,6 @@ export default Ember.Service.extend({
   init(){
     var self = this;
     var prefix = 'img/';
-    var appController = this.controllerFor("application");
 
     var mostrar_ventana = function(){
       ventana.show();
@@ -52,7 +51,6 @@ export default Ember.Service.extend({
     var salir = new gui.MenuItem({
       label: 'Salir',
       click: function() {
-        appController.captureClose();
         gui.App.closeAllWindows();
       },
       enabled: true

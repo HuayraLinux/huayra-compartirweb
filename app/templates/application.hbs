@@ -8,7 +8,15 @@
     {{/link-to}}
 
     <nav class="navbar navbar-static-top" role="navigation">
-      {{huayra-globalspinner}}
+    {{huayra-globalspinner}}
+
+      {{#if apiStatus}}
+      <span class="services-status pull-right">API: {{ fa-icon "check-circle" }}</span>
+      {{/if}}
+
+      {{#if avahiStatus}}
+      <span class="services-status pull-right">Avahi: {{ fa-icon "check-circle" }}</span>
+      {{/if}}
     </nav>
   </header>
 
