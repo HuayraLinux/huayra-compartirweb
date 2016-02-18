@@ -7,7 +7,7 @@ var ventana = window.requireNode('nw.gui').Window.get();
 
 
 export default Ember.Service.extend({
-  checkInterval: 23000,
+  checkInterval: 5000,
   isAlive: false,
   child: null,
   iniciar(){
@@ -37,7 +37,7 @@ export default Ember.Service.extend({
     var child = this.get('child');
     var alive = true;
 
-    try{ process.kill(child.pid, 0); }
+    try{ process.kill(-child.pid, 0); }
     catch(e){ alive = false; }
 
     this.set('isAlive', alive);
