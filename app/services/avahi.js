@@ -7,6 +7,8 @@ var ventana = window.requireNode('nw.gui').Window.get();
 
 
 export default Ember.Service.extend({
+  checkInterval: 23000,
+  isAlive: false,
   child: null,
   iniciar(){
     if (this.get('child') !== null){ return; }
@@ -27,11 +29,25 @@ export default Ember.Service.extend({
         console.log('AVAHI CLOSE');
         self.closeChild();
       });
+
+      self.checkStatus();
     }
+  },
+  stillAlive(){
+    var child = this.get('child');
+    var alive = true;
+
+    try{ process.kill(child.pid, 0); }
+    catch(e){ alive = false; }
+
+    this.set('isAlive', alive);
+  },
+  checkStatus(){
+    var self = this;
+    setInterval(function(){ self.stillAlive(); }, this.get('checkInterval') );
   },
   closeChild(){
     var child = this.get('child');
-    console.log(child.pid);
     try{
       process.kill(-child.pid, 'SIGTERM');
     }

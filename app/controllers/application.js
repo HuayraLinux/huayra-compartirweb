@@ -5,18 +5,14 @@ var gui = window.requireNode('nw.gui');
 export default Ember.Controller.extend({
   api: Ember.inject.service(),
   avahi: Ember.inject.service(),
-  apiStatus: false,
-  avahiStatus: false,
+  apiStatus: Ember.computed.reads('api.isAlive'),
+  avahiStatus: Ember.computed.reads('avahi.isAlive'),
   init(){
     var api = this.get('api');
     var avahi = this.get('avahi');
 
     api.iniciar();
     avahi.iniciar();
-
-    // notificamos a la interfaz
-    this.send('setApiStatus');
-    this.send('setAvahiStatus');
 
     this.disableBackSpace.call(true);
   },
@@ -35,13 +31,4 @@ export default Ember.Controller.extend({
       gui.App.closeAllWindows();
     });
   },
-
-  actions:{
-    setApiStatus: function(){
-      this.set('apiStatus', this.get('api').child.pid !== undefined);
-    },
-    setAvahiStatus: function(){
-      this.set('avahiStatus', this.get('avahi').child.pid !== undefined);
-    }
-  }
 });

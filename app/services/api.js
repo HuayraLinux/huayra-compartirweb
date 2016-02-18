@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var HARDCODED_API_PATH = "/tmp/huayra-compartir-api/";
+var HARDCODED_API_PATH = "/tmp/huayra-compartir-api/bin/www";
 
 var spawn = window.requireNode('child_process').spawn;
 var ventana = window.requireNode('nw.gui').Window.get();
@@ -16,12 +16,14 @@ export default Ember.Service.extend({
     equipos: '/equipos/',
     obtener: '/obtener/'
   },
+  checkInterval: 23000,
+  isAlive: false,
   child: null,
   iniciar(){
     if(this.get('child') !== null){ return; }
     else{
       var self = this;
-      var cmd = '_PATH_bin/www'.replace('_PATH_', HARDCODED_API_PATH);
+      var cmd = '_BIN_PATH_'.replace('_BIN_PATH_', HARDCODED_API_PATH);
       var child = spawn(cmd, [],
                         {
                           env: process.env,
@@ -36,11 +38,25 @@ export default Ember.Service.extend({
         console.log('API CLOSE');
         self.closeChild();
       });
+
+      self.checkStatus();
     }
+  },
+  stillAlive(){
+    var child = this.get('child');
+    var alive = true;
+
+    try{ process.kill(child.pid, 0); }
+    catch(e){ alive = false; }
+
+    this.set('isAlive', alive);
+  },
+  checkStatus(){
+    var self = this;
+    setInterval(function(){ self.stillAlive(); }, this.get('checkInterval') );
   },
   closeChild(){
     var child = this.get('child');
-    console.log(child.pid);
     try{
       process.kill(-child.pid, 'SIGTERM');
     }
