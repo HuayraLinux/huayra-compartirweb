@@ -18,12 +18,12 @@ aside.main-sidebar {
   margin-bottom: 1em;
 }
 
-.conAccion {
-  cursor: pointer;
-}
-
 .padding-right {
   padding-right: 7px;
+}
+
+.skin-purple-light .sidebar a {
+    color:#ccc;
 }
 
 .skin-purple-light .sidebar-menu>li>a {
@@ -35,13 +35,27 @@ aside.main-sidebar {
 }
 
 
-.skin-purple-light .sidebar-menu>li:hover>a {
-    background: #E7E7FD;
+/*.skin-purple-light .sidebar-menu>li:hover>a {    background: #E7E7FD; }
+.skin-purple-light .sidebar-menu>li.active>a {    background: #EDEDFF; }*/
 
+.skin-purple-light .sidebar-menu>li:hover>a {
+    color: #ccc;
 }
 
-.skin-purple-light .sidebar-menu>li.active>a {
+.skin-purple-light .sidebar-menu>li.conAccion:hover>a {
+    color: #000 !important;
+    background: #E7E7FD;
+}
+
+.skin-purple-light .sidebar-menu>li.conAccion.active>a {
+    color: #000 !important;
     background: #EDEDFF;
+}
+
+.conAccion,
+.skin-purple-light .sidebar-menu>li.conAccion>a{
+  cursor: pointer;
+  color:#444 !important;
 }
 
 .services-status{

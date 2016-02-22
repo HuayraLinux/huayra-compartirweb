@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   avahi: Ember.inject.service(),
   apiStatus: Ember.computed.reads('api.isAlive'),
   avahiStatus: Ember.computed.reads('avahi.isAlive'),
+  notApiStatus: Ember.computed.not('api.isAlive'),
+  notAvahiStatus: Ember.computed.not('avahi.isAlive'),
   init(){
     var api = this.get('api');
     var avahi = this.get('avahi');
