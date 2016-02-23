@@ -8,6 +8,9 @@ export default Ember.Route.extend({
     var menu = this.get('menu');
     var appController = this.controllerFor("application");
     appController.captureClose();
+
+    menu.itemServicios.click = function(){ appController.send('goToServicios'); }
+    menu.itemServicios.enabled = true;
   }
 });
 

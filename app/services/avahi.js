@@ -55,5 +55,6 @@ export default Ember.Service.extend({
       console.log("No he podido matar al proceso _PID_. Existe?".replace('_PID_', child.pid))
     }
     console.log("compartir-avahi cerrado.");
+    this.set('child', null);
   }
 });

@@ -11,4 +11,5 @@ export default Router.map(function() {
   this.route('equipos');
   this.route('preferencias');
   this.route('descargas');
+  this.route('servicios');
 });

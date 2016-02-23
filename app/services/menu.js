@@ -76,26 +76,16 @@ export default Ember.Service.extend({
     this.set('itemSeparador', separador);
 
     var menu_archivo = this.get('menuArchivo');
-    menu_archivo.append(misArchivos);
     menu_archivo.append(servicios);
     menu_archivo.append(separador);
     menu_archivo.append(salir);
 
-
-    var menu_opciones = this.get('menuOpciones');
-    menu_opciones.append(preferencias);
-
-    var menu_ver = this.get('menuVer');
-    menu_ver.append(descargas);
-    menu_ver.append(equipos);
 
     var menu_ayuda = this.get('menuAyuda');
     menu_ayuda.append(acercaDe);
 
     var menubar = this.get('menubar');
     menubar.append(new gui.MenuItem({ label: 'Archivo', submenu: menu_archivo}));
-    menubar.append(new gui.MenuItem({ label: 'Opciones', submenu: menu_opciones}));
-    menubar.append(new gui.MenuItem({ label: 'Ver', submenu: menu_ver}));
     menubar.append(new gui.MenuItem({ label: 'Ayuda', submenu: menu_ayuda}));
 
     gui.Window.get().menu = menubar;

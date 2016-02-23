@@ -33,4 +33,11 @@ export default Ember.Controller.extend({
       gui.App.closeAllWindows();
     });
   },
+
+  actions:{
+    goToServicios() {
+      this.transitionToRoute('servicios');
+    },
+
+  }
 });
