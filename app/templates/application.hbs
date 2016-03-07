@@ -28,6 +28,12 @@
       <div class="services-status-block">
         <span class="services-status pull-left">Status: </span>
 
+        <span class="services-status pull-right">onLine:
+        {{#if onLine}} {{ fa-icon "check-circle" }}
+        {{ else }} {{ fa-icon "circle" }}
+        {{/if}}
+        </span>
+
         <span class="services-status pull-right">API:
         {{#if apiStatus}} {{ fa-icon "check-circle" }}
         {{ else }} {{ fa-icon "circle" }}
