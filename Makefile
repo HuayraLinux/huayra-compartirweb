@@ -8,7 +8,7 @@ B=[01;34m
 
 comandos:
 	@echo ""
-	@echo "${B}Comandos disponibles para ${G}huayra-compartirweb${N}"
+	@echo "${B}Comandos disponibles para ${G}huayra-compartirweb${N}${B} - ${VERSION}"
 	@echo ""
 	@echo "  ${Y}Para desarrolladores${N}"
 	@echo ""
