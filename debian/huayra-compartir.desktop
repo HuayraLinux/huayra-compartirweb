@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Huayra Compartir
-Comment=Herramienta para compartir archivos en el aula
-Exec=/usr/bin/huayra-compartir
-Terminal=false
-Type=Application
-Icon=huayra-compartir
-Categories=GNOME;GTK;Huayra;Network;
