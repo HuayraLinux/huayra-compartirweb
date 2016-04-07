@@ -23,7 +23,8 @@ comandos:
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
 	@echo ""
-	@echo "    ${G}version${N}         Genera una nueva versión."
+	@echo "    ${G}version_patch${N}   Genera una nueva versión."
+	@echo "    ${G}version_minor${N}   Genera una nueva versión."
 	@echo "    ${G}subir_version${N}   Sube version generada al servidor."
 	@echo "    ${G}log${N}             Muestra los cambios desde el ultimo tag."
 	@echo "    ${G}publicar${N}        Publica el cambio para el paquete deb."
@@ -59,9 +60,15 @@ compilar:
 compilar_live:
 	./node_modules/ember-cli/bin/ember build --watch
 
-version:
-	# patch || minor
+version_patch:
 	@bumpversion patch --current-version ${VERSION} Makefile --list
+	make build
+	@echo "Es recomendable escribir el comando que genera los tags y sube todo a github:"
+	@echo ""
+	@echo "make subir_version"
+
+version_minor:
+	@bumpversion minor --current-version ${VERSION} Makefile --list
 	make build
 	@echo "Es recomendable escribir el comando que genera los tags y sube todo a github:"
 	@echo ""
