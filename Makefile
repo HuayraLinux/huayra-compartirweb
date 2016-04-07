@@ -1,4 +1,4 @@
-VERSION=0.0.1
+VERSION=2.0.0
 NOMBRE="huayra-compartirweb"
 
 N=[0m
@@ -61,7 +61,7 @@ compilar_live:
 
 version:
 	# patch || minor
-	@bumpversion patch --current-version ${VERSION} package.json public/package.json Makefile --list
+	@bumpversion patch --current-version ${VERSION} Makefile --list
 	make build
 	@echo "Es recomendable escribir el comando que genera los tags y sube todo a github:"
 	@echo ""
