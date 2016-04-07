@@ -28,22 +28,28 @@
       <div class="services-status-block">
         <span class="services-status pull-left">Status: </span>
 
-        <span class="services-status pull-right">onLine:
-        {{#if onLine}} {{ fa-icon "check-circle" }}
-        {{ else }} {{ fa-icon "circle" }}
-        {{/if}}
+        <span class="services-status pull-right">online:
+          {{#if onLine}}
+            {{ fa-icon "check-circle" }}
+          {{ else }}
+            {{ fa-icon "circle" }}
+          {{/if}}
         </span>
 
-        <span class="services-status pull-right">API:
-        {{#if apiStatus}} {{ fa-icon "check-circle" }}
-        {{ else }} {{ fa-icon "circle" }}
-        {{/if}}
+        <span class="services-status pull-right">api:
+          {{#if apiStatus}}
+            {{ fa-icon "check-circle" }}
+          {{ else }}
+            {{ fa-icon "circle" }}
+          {{/if}}
         </span>
 
-        <span class="services-status pull-right">Avahi:
-        {{#if avahiStatus}} {{ fa-icon "check-circle" }}
-        {{ else }} {{ fa-icon "circle" }}
-        {{/if}}
+        <span class="services-status pull-right">avahi:
+          {{#if avahiStatus}}
+            {{ fa-icon "check-circle" }}
+          {{ else }}
+            {{ fa-icon "circle" }}
+          {{/if}}
         </span>
       </div>
 
