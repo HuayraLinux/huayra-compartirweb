@@ -1,0 +1,14 @@
+{
+  "main": "app://localhost/index.html",
+  "name": "huayra-compartirweb",
+  "version": "0.0.1",
+  "window": {
+    "title": "huayra-compartirweb",
+    "width": 800,
+    "height": 500,
+    "min_width": 800,
+    "min_height": 500,
+    "toolbar": true,
+    "position": "center"
+  }
+}

@@ -1,0 +1,40 @@
+<section class="content-header">
+  <h1> Estado de los Servicios </h1>
+</section>
+
+<section class="content">
+
+
+
+  <div class="row">
+    <div class="col-xs-12">
+
+
+      <div class="services-status-block">
+
+        <p>
+        API
+        {{#if apiStatus}} {{ fa-icon "check-circle" }}
+        {{ else }} {{ fa-icon "circle" }}
+        {{/if}}
+        <br>
+        <small>Este <em>servicio</em> permite comunicarte con las otras computadoras que esten utilizando <strong>huayra-compartir</strong></small>
+        </p>
+
+        <p>
+        Avahi
+        {{#if avahiStatus}} {{ fa-icon "check-circle" }}
+        {{ else }} {{ fa-icon "circle" }}
+        {{/if}}
+        <br>
+        <small>Este <em>servicio</em> te permite anunciar en la red que estas compartiendo archivos</small>
+        </p>
+      </div>
+    <br>
+
+    <button class="btn btn-default" {{ action "reiniciarApi" }}>Reiniciar API</button>
+    <button class="btn btn-default" {{ action "reiniciarAvahi" }}>Reiniciar Avahi</button>
+
+    </div>
+  </div>
+</section>

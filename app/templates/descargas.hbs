@@ -1,0 +1,41 @@
+<section class="content-header">
+  <h1> Descargas </h1>
+</section>
+
+<section class="content">
+
+
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="padding-bottom">
+        <button disabled class="btn btn-default">{{fa-icon "folder"}} Abrir carpeta de descargas</button>
+      </div>
+
+      <div class="box">
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>Nombre</th>
+                <th class='text-center' style="width: 140px">Estado</th>
+                <th class='text-center' style="width: 140px">Acciones</th>
+              </tr>
+
+              {{#each descargas.items as |item|}}
+                {{huayra-descarga item=item tagName="" ctrl=this}}
+              {{else}}
+                <tr>
+                  <td colspan=3 class='text-center text-danger'>No hay descargas activas ...</td>
+                </tr>
+              {{/each}}
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<tr>
+  <td class="conAccion">
+    <span>{{item.nombre}}</span>
+  </td>
+  <td class='text-center'>
+
+    {{#if esta_bajando}}
+      {{item.progreso}} % {{fa-icon "spinner" pulse=true}}
+    {{else if esta_esperando}}
+      <span class="text-aqua">esperando ... {{fa-icon "time"}}</span>
+    {{else if ha_fallado}}
+      <span class="text-red">{{fa-icon "remove"}}</span>
+    {{else}}
+      <span class="text-green">Ok {{fa-icon "ok"}}</span>
+    {{/if}}
+
+  </td>
+  <td class="text-center">
+    <!--
+      <button class="btn btn-xs btn-primary" {{action "abrir"}}>Abrir</button>
+    -->
+   </td>
+</tr>
