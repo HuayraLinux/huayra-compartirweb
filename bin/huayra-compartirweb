@@ -1,2 +1,2 @@
 #!/bin/bash
-nw /usr/share/huayra-compartirweb/dist
+nw /usr/share/huayra-compartir/dist
