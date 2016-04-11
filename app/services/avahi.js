@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var HARDCODED_AVAHI_PATH = "/tmp/huayra-compartir-avahi/huayra-compartir-avahi.py";
+var HARDCODED_AVAHI_PATH = "/usr/bin/huayra-compartir-avahi.py";
 
 var spawn = window.requireNode('child_process').spawn;
 var ventana = window.requireNode('nw.gui').Window.get();
