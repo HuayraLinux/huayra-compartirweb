@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var HARDCODED_API_PATH = "/usr/bin/compartir-api";
+var HARDCODED_API_PATH = "/usr/bin/huayra-compartir-api";
 
 var spawn = window.requireNode('child_process').spawn;
 var ventana = window.requireNode('nw.gui').Window.get();
