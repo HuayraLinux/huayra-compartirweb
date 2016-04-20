@@ -12,7 +12,7 @@ export default Ember.Service.extend({
   equipos: null,
   subscribe(equipos){
     this.set('equipos', equipos);
-  }
+  },
   iniciar(){
     this.checkStatus();
   },
