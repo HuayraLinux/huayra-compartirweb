@@ -9,12 +9,6 @@ export default Ember.Service.extend({
   items: [],
 
   iniciar: Ember.on('init', function() {
-
-    this.agregar_descarga("falll 123.png", "http://localhost:9919/deasdadsasdscargar/Ceferino/fondos/123.png");
-    this.agregar_descarga("123.png", "http://localhost:9919/descargar/Ceferino/fondos/123.png");
-    this.agregar_descarga("archivo.iso", "http://localhost:9919/descargar/windows 8.iso");
-    this.agregar_descarga("123.png", "http://localhost:9919/descargar/Ceferino/fondos/123.png");
-
     this.procesar();
   }),
 
