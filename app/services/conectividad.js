@@ -22,7 +22,7 @@ export default Ember.Service.extend({
       var oldState = this.get('onLine');
       var newState = child.toString().trim() === this.get('CONNECTED');
 
-      if( oldState != newState ){
+      if( oldState !== newState ){
         if ( this.get('equipos') !== null ){
            this.get('equipos').refresh();
         }

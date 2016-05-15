@@ -51,18 +51,21 @@ export default Ember.Service.extend({
 
     this.set('isAlive', alive);
   },
-  checkStatus(){
-    var self = this;
-    setInterval(function(){ self.stillAlive(); }, this.get('checkInterval') );
+  checkStatus() {
+    setInterval(() => {
+      this.stillAlive();
+    }, this.get('checkInterval'));
   },
-  closeChild(){
+  closeChild() {
     var child = this.get('child');
-    try{
+    try {
       process.kill(-child.pid, 'SIGTERM');
     }
-    catch(e){
-      console.log("No he podido matar al proceso _PID_. Existe?".replace('_PID_', child.pid))
+
+    catch(e) {
+      console.log(`No he podido matar al proceso ${child.pid}. Existe?`);
     }
+    
     console.log("compartir-api cerrado.");
     this.set('child', null);
   }

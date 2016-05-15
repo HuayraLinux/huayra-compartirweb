@@ -79,7 +79,7 @@ export default Ember.Service.extend({
 
       res.on('end', () => {
 
-        if (res.statusCode != 200) {
+        if (res.statusCode !== 200) {
           Ember.set(item, "activo", false);
           Ember.set(item, "estado", ESTADO_ERROR);
           this.procesar();
