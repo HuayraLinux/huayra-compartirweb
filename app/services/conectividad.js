@@ -32,7 +32,8 @@ export default Ember.Service.extend({
     }
   },
   checkStatus(){
-    var self = this;
-    setInterval(function(){ self.status(); }, this.get('checkInterval') );
+    setInterval(() => {
+      this.status();
+    }, this.get('checkInterval'));
   }
 });
