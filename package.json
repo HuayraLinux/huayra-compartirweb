@@ -39,6 +39,9 @@
     "ember-export-application-global": "^1.0.4",
     "ember-resolver": "2.0.3"
   },
+  "dependencies": {
+    "nwjs-hack": "iglosiggio/nwjs-hack"
+  },
   "main": "app://dist/index.html",
   "window": {
     "toolbar": false,
