@@ -1,9 +1,15 @@
 src/* usr/share/huayra-compartir/src
 bin/huayra-compartir usr/bin/
+
 node_modules/express/* usr/share/huayra-compartir/node_modules/express
 node_modules/mime/* usr/share/huayra-compartir/node_modules/mime
 node_modules/polo/* usr/share/huayra-compartir/node_modules/polo
 node_modules/node-uuid/* usr/share/huayra-compartir/node_modules/node-uuid
+node_modules/request/* usr/share/huayra-compartir/node_modules/request
+node_modules/request-progress/* usr/share/huayra-compartir/node_modules/request-progress
+node_modules/chokidar/* usr/share/huayra-compartir/node_modules/chokidar
+node_modules/ncp/* usr/share/huayra-compartir/node_modules/ncp
+
 debian/huayra-compartir.desktop /usr/share/applications
 debian/huayra-compartir.desktop etc/xdg/autostart
 debian/huayra-compartir.svg /usr/share/icons/hicolor/scalable/apps
