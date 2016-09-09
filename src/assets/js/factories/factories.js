@@ -9,6 +9,7 @@ var polo = require('polo');
 var crypto = require('crypto');
 var uuid = require('node-uuid');
 var spawn = require('child_process').spawn;
+var isWM_CLASSset = false;
 
 
 var POLO_HABILITADO = false;
@@ -308,6 +309,12 @@ app.factory("Menu", function(AvahiFactory) {
         var ventana = gui.Window.get();
         ventana.show();
         ventana.restore();
+
+        if(!isWM_CLASSset) {
+          /* HACK para setear WM_CLASS */
+          require('nwjs-hack').set_wmclass('huayra-compartir', true);
+          isWM_CLASSset = true;
+        }
     }
 
     function animar_icono(estado) {
@@ -411,5 +418,6 @@ app.factory("Menu", function(AvahiFactory) {
 
 
     return {crear: crear,
-            animar_icono: animar_icono};
+            animar_icono: animar_icono,
+            mostrar_ventana: mostrar_ventana};
 });

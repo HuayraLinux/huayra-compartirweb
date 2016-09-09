@@ -18,8 +18,6 @@ window.guardar_preferencias = function(preferencias) {
     });
 };
 
-
-
 var gui = require('nw.gui');
 var path = require('path');
 var uuid = require('node-uuid');

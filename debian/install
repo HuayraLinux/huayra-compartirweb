@@ -1,6 +1,7 @@
 src/* usr/share/huayra-compartir/src
 bin/huayra-compartir usr/bin/
 
+node_modules/nwjs-hack/* usr/share/huayra-compartir/node_modules/nwjs_hack
 node_modules/express/* usr/share/huayra-compartir/node_modules/express
 node_modules/mime/* usr/share/huayra-compartir/node_modules/mime
 node_modules/polo/* usr/share/huayra-compartir/node_modules/polo
