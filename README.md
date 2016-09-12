@@ -12,6 +12,15 @@ de archivos dentro de una red local.
 Este software forma parte del proyecto Huayra Gnu/Linux, es software libre y
 se distribuye instalado en las netbooks del Programa Conectar Igualdad en Argentina.
 
+
+# IMPORTANTE !!!
+
+Esta aplicación está en proceso de refactorización, así que tenemos dos branch para
+seguir el desarrollo. Mirá la siguiente página para conocer más al respecto:
+
+
+- https://github.com/HuayraLinux/huayra-compartirweb/wiki/Clarificaci%C3%B3n-de-versiones
+
 ## Tecnologías utilizadas
 
 * nodewebkit
