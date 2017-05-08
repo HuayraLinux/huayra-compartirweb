@@ -46,7 +46,7 @@ app.factory('AmigosFactory', function($http) {
       $http.get(tmp_url).success(function(data) {
         amigo.data = data;
         console.log("responde", data);
-        //obj.amigos.push(amigo);
+        obj.amigos[i] = amigo;
       });
 
     }
