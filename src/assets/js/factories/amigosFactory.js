@@ -39,16 +39,25 @@ app.factory('AmigosFactory', function($http) {
     console.log('forzando actualizado');
 
     for (var i in obj.amigos) {
-      var amigo = obj.amigos[i];
+      /* Voy a hacer una IIFE (inmediately invoked function expression)
+       * ¿Por qué? Para poder capturar el valor de `i` que cambia en cada
+       *           vuelta del for
+       * ¿Qué conseguís con eso? Evitar algunos bugs de timing que ocurren
+       *                         cuando una request termina antes de lo esperado
+       * Esto es horrible.
+       * Si tenés quejas mandame un mail (iglosiggio en gmail.com)
+       *
+       * También es así como se hacen los polyfill de let en JS moderno
+       */
+       (function() {
+         var amigo = obj.amigos[i];
+         var tmp_url = "http://" + amigo.ip + ":" + amigo.port;
 
-      var tmp_url = "http://" + amigo.ip + ":" + amigo.port;
-
-      $http.get(tmp_url).success(function(data) {
-        amigo.data = data;
-        console.log("responde", data);
-        obj.amigos[i] = amigo;
-      });
-
+        $http.get(tmp_url).success(function(data) {
+          amigo.data = data;
+          console.log("responde", data);
+        });
+       })();
     }
 
   }

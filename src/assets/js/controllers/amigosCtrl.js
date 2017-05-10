@@ -13,9 +13,12 @@ app.controller("AmigosCtrl", function($scope, $location, $modal, $timeout, Amigo
 
       $timeout(function() {
         $scope.actualizar_deshabilitado = false;
+        $scope.now = Math.random();
       }, 1000);
 
     }
+
+    $scope.now = Math.random();
 
     var ModalAgregarCtrl = function($scope, $modalInstance, test) {
         $scope.ip_valida = false;

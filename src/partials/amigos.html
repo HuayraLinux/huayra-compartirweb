@@ -30,7 +30,7 @@
 
         <!-- Bloque mostrando toda la información del amigo -->
         <td ng-show='a.data.nombre' class='td-avatar'>
-            <a href ng-click='abrir_descargas_de(a)'><img src='{{a.data.avatar}}'></a>
+            <a href ng-click='abrir_descargas_de(a)'><img src='{{a.data.avatar + "?" + now}}'></a>
         </td>
 
         <!-- Bloque mostrando que se están por cargar detalles -->
