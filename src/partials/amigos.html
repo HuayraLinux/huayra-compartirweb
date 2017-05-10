@@ -5,7 +5,7 @@
 <div class="container">
   <div class='barra-botones'>
       <button ng-disabled='actualizar_deshabilitado' ng-click='actualizar()' class='btn btn-success'><i class='icon icon-refresh'></i> Actualizar</button>
-		<!-- 
+		<!--
       // Deshabilitando temporalmente el botón "agregar amigo".
 
       <button ng-click='agregar()' class='btn btn-success'><i class='icon icon-plus'></i> Agregar</button>
@@ -30,7 +30,7 @@
 
         <!-- Bloque mostrando toda la información del amigo -->
         <td ng-show='a.data.nombre' class='td-avatar'>
-            <a href ng-click='abrir_descargas_de(a)'><img src='http://{{ a.ip }}:{{a.port}}/avatar'></a>
+            <a href ng-click='abrir_descargas_de(a)'><img src='{{a.data.avatar + "?" + now}}'></a>
         </td>
 
         <!-- Bloque mostrando que se están por cargar detalles -->
