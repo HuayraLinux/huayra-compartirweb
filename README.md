@@ -5,8 +5,8 @@ Huayra-Compartir es una herramienta diseñada para compartir distintos tipos
 de archivos dentro de una red local.
 
 
-![](imagenes/preview_3.png)
-![](imagenes/preview_4.png)
+![Imagen de huayra-compartir en funcionamiento](imagenes/preview_3.png)
+![Imagen de huyara-compartir en funcionamiento](imagenes/preview_4.png)
 
 
 Este software forma parte del proyecto Huayra Gnu/Linux, es software libre y
@@ -19,11 +19,17 @@ Instalación
 Si querés probar esta aplicación directamente desde este repositorio, tenés
 que seguir estos pasos:
 
-- clonar el repositorio.
-- instalalar nodejs.
-- instalar `bower` de forma global con el comando `sudo npm install -g bower`.
-- ejecutar `make init` en el directorio del proyecto para instalar todas las dependencias.
-- ejecutar `make test_mac` o `make test_linux` dependiendo de tu sistema operativo.
+1. Clonar el repositorio.
+2. Pasarse a esta branch (estable).
+3. Instalalar nodejs (y npm, generalmente vienen juntos).
+4. ejecutar `make` en el directorio del proyecto para instalar todas las dependencias.
+5. ejecutar `make test_mac` o `make test_linux` dependiendo de tu sistema operativo.
+
+#### ¿Más simple?
+
+```sh
+git clone https://github.com/HuayraLinux/huayra-compartirweb && cd huayra-compartirweb && git checkout estable && make && make test_linux
+```
 
 
 ¿Cómo funciona?

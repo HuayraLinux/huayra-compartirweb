@@ -20,7 +20,6 @@ Primero tienes que instalar node-js y npm con los comandos:
     sudo apt-get update
     sudo apt-get install node nodejs-legacy npm libudev1
     npm config set strict-ssl false
-    sudo npm install grunt grunt-shell -g
 
 Por último hay que instalar node-webkit y reparar udev, pero teniendo
 en cuenta si tu equipo es de 32 o 64 bits:

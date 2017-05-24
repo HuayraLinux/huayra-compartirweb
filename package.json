@@ -16,13 +16,7 @@
     "url": "https://github.com/HuayraLinux/huayra-compartirweb/issues"
   },
   "dependencies": {
-    "nwjs-hack": "iglosiggio/nwjs-hack",
-    "grunt-cli": "~0.1.11",
-    "grunt": "~0.4.2",
-    "grunt-node-webkit-builder": "~0.1.14",
-    "grunt-shell": "~0.6.1",
-    "shelljs": "~0.2.6",
-    "bower": "~1.2.8",
+    "nwjs-hack": "git+https://github.com/iglosiggio/nwjs-hack",
     "express": "~3.4.8",
     "mime": "~1.2.11",
     "polo": "~0.5.6",
@@ -31,5 +25,8 @@
     "node-uuid": "~1.4.1",
     "chokidar": "*",
     "ncp": "*"
+  },
+  "devDependencies": {
+    "bower": "*"
   }
 }
